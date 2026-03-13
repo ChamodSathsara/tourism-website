@@ -4,189 +4,17 @@ import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { MapPinIcon, ChevronRightIcon, GlobeIcon } from "lucide-react";
-import img1 from "../../assest/Packages/1.jpg";
-import img2 from "../../assest/Packages/2.jpg";
+
 import img3 from "../../assest/Packages/3.jpg";
-import img4 from "../../assest/Packages/4.jpg";
-import img5 from "../../assest/Packages/5.jpg";
-import img6 from "../../assest/Packages/6.jpg";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Destination {
-  id: string;
-  name: string;
-  description: string;
-  tags: string[];
-  image: StaticImageData;
-}
+import type { Destination } from "../../dataConfig/types";
+import { destinations } from "../../dataConfig/dtaConfig";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
 
-const destinations: Destination[] = [
-  {
-    id: "dest-1",
-    name: "Sigiriya",
-    description:
-      "The legendary rock fortress (5th century AD), a 200m monolithic rock rising from jungle — often called the Eighth Wonder of the World. Climb past ancient frescoes, mirror wall, lion paws, and water gardens to summit ruins with panoramic views.",
-    tags: ["Cultural Triangle", "Iconic"],
-    image: img1,
-  },
-  {
-    id: "dest-2",
-    name: "Mirissa",
-    description:
-      "The jewel of southern Sri Lanka's coast, offering world-class whale watching (blue whales Dec–Apr), excellent surfing, golden beaches, and stilt fishermen views. Fresh seafood and sunset cocktails make it perfect for beach lovers.",
-    tags: ["South Coast", "Beach"],
-    image: img2,
-  },
-  {
-    id: "dest-3",
-    name: "Ella",
-    description:
-      "A misty highland village surrounded by jaw-dropping panoramic views of mountains, valleys, waterfalls, and endless tea plantations. Highlights include the iconic Nine Arch Bridge, Ella Rock hike, and Ravana Falls.",
-    tags: ["Hill Country", "Scenic Views"],
-    image: img3,
-  },
-  {
-    id: "dest-4",
-    name: "Yala",
-    description:
-      "Sri Lanka's most popular national park (over 1,000 sq km), home to the world's highest leopard density plus elephants, crocodiles, sloth bears, and hundreds of bird species. A must for big cat and elephant spotting.",
-    tags: ["Wildlife", "Safari"],
-    image: img4,
-  },
-  {
-    id: "dest-5",
-    name: "Galle",
-    description:
-      "Sri Lanka's historic maritime gem and UNESCO World Heritage Site. The 16th-century Galle Fort features ramparts, cobblestone streets, boutique shops, cafes, and stunning ocean views — stroll the walls at sunset for pure magic.",
-    tags: ["South Coast", "Historical"],
-    image: img5,
-  },
-  {
-    id: "dest-6",
-    name: "Kandy",
-    description:
-      "Sri Lanka's sacred cultural capital in the hills, home to the iconic Temple of the Tooth Relic. Surrounds include Kandy Lake, botanical gardens, cultural dance shows, and vibrant markets — the gateway to hill country.",
-    tags: ["Hill Country", "Cultural"],
-    image: img6,
-  },
-  {
-    id: "dest-7",
-    name: "Nuwara Eliya",
-    description:
-      "Known as 'Little England,' this cool highland hill station features rolling hills, colonial buildings, rose gardens, and world-famous tea estates. Gregory Lake boating, tea tastings, and misty walks await.",
-    tags: ["Hill Country", "Colonial/Tea"],
-    image: img1,
-  },
-  {
-    id: "dest-8",
-    name: "Arugam Bay",
-    description:
-      "The undisputed surf capital of Sri Lanka — a picturesque bay on the southeast coast with world-class point breaks, yoga retreats, laid-back beach shacks, and nearby national parks. Best May–Sep for east coast swells.",
-    tags: ["East Coast", "Surfing"],
-    image: img2,
-  },
-  {
-    id: "dest-9",
-    name: "Anuradhapura",
-    description:
-      "The first ancient capital of Sri Lanka (from 4th century BC) — a UNESCO sacred city with massive stupas, the sacred Bo Tree, ancient tanks, palaces, and monasteries. Profound history and spiritual serenity.",
-    tags: ["Cultural Triangle", "Ancient"],
-    image: img3,
-  },
-  {
-    id: "dest-10",
-    name: "Bentota",
-    description:
-      "The jewel of Sri Lanka's southwest coast, boasting pristine golden beaches backed by coconut palms and a wide biodiverse lagoon. Popular for water sports, river safaris, turtle hatcheries, and Ayurveda spas.",
-    tags: ["South Coast", "Beach"],
-    image: img4,
-  },
-  {
-    id: "dest-11",
-    name: "Polonnaruwa",
-    description:
-      "A well-preserved UNESCO medieval capital with royal palaces, monumental Buddha statues (Gal Vihara rock carvings), and vast irrigation tanks. Cycle or explore ruins amid monkeys and birds.",
-    tags: ["Cultural Triangle", "Historical"],
-    image: img5,
-  },
-  {
-    id: "dest-12",
-    name: "Kitulgala",
-    description:
-      "Sri Lanka's premier adventure hub nestled in thick jungles along the Kelani River. Famous for white-water rafting (Grade 3–4), canyoning, waterfall abseiling, mountain biking, and canopy walks.",
-    tags: ["Adventure", "Nature"],
-    image: img6,
-  },
-  {
-    id: "dest-13",
-    name: "Jaffna",
-    description:
-      "Sri Lanka's northernmost peninsula and cultural heart of Tamil heritage. Explore ancient Hindu temples, the Dutch Fort, colorful markets, and nearby islands like Delft with wild ponies. Spicy cuisine and unique culture.",
-    tags: ["Northern", "Cultural"],
-    image: img1,
-  },
-  {
-    id: "dest-14",
-    name: "Negombo",
-    description:
-      "A lively coastal town just minutes from the airport — perfect as a first or last stop. Wide sandy beaches, a Dutch canal system, a famous fish market, and colonial fort remnants make it a relaxed introduction.",
-    tags: ["West Coast", "Gateway"],
-    image: img2,
-  },
-  {
-    id: "dest-15",
-    name: "Wilpattu",
-    description:
-      "Sri Lanka's largest and oldest national park (over 1,300 sq km), renowned for unique natural lakes ('villus') that attract leopards, elephants, sloth bears, crocodiles, and over 200 bird species in an uncrowded setting.",
-    tags: ["Wildlife", "Safari"],
-    image: img3,
-  },
-  {
-    id: "dest-16",
-    name: "Haputale",
-    description:
-      "A hidden mountainous town perched at the southern edge of hill country with sweeping valley views. Lipton's Seat tea estate lookout, Adisham Bungalow colonial mansion, and misty treks — less crowded than Ella.",
-    tags: ["Hill Country", "Scenic"],
-    image: img4,
-  },
-  {
-    id: "dest-17",
-    name: "Weligama",
-    description:
-      "Weligama — 'sandy village' — boasts one of the south coast's largest crescent bays with calm, beginner-friendly coves. The ultimate surf mecca with consistent waves, whale watching, yoga retreats, and relaxed beach cafes.",
-    tags: ["South Coast", "Surfing"],
-    image: img5,
-  },
-  {
-    id: "dest-18",
-    name: "Dambulla",
-    description:
-      "Home to the magnificent Golden Temple — a UNESCO-listed cave complex with over 150 Buddha statues, intricate murals, and centuries-old golden statues. Blends spiritual depth with natural beauty; often paired with Sigiriya.",
-    tags: ["Cultural Triangle", "Spiritual"],
-    image: img6,
-  },
-  {
-    id: "dest-19",
-    name: "Hatton",
-    description:
-      "An emerald-green gateway to tea country, blanketed in rolling plantations, dense forests, and thundering waterfalls. A base for Adam's Peak pilgrimages, Horton Plains hikes, scenic train rides, and fresh high-grown tea tastings.",
-    tags: ["Hill Country", "Tea Estates"],
-    image: img1,
-  },
-  {
-    id: "dest-20",
-    name: "Colombo",
-    description:
-      "The bustling seaside capital blending colonial architecture, modern skyscrapers, temples, mosques, and vibrant Pettah market. Stroll Galle Face Green, visit Gangaramaya Temple, and explore street food and nightlife.",
-    tags: ["West Coast", "City"],
-    image: img2,
-  },
-];
 
-// ─── Destination Card ─────────────────────────────────────────────────────────
+
+// ─── Destination Card 
 
 function DestinationCard({
   destination,
@@ -250,7 +78,7 @@ function DestinationCard({
   );
 }
 
-// ─── Destinations Section ─────────────────────────────────────────────────────
+// ─── Destinations Section 
 
 export function FullDestinationsSection() {
   return (

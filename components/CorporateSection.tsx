@@ -10,8 +10,13 @@ import {
   GlassWaterIcon,
 } from "lucide-react";
 import img from "../assest/testimonials/1.jpg";
+import { useRouter } from "next/navigation";
 
 export function CorporateSection() {
+    const router = useRouter();
+    const clickbtn = () => {
+        router.push("/partnership");
+      }
   return (
     <section className="py-20 lg:py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,7 +76,9 @@ export function CorporateSection() {
               ))}
             </div>
 
-            <button className="bg-tropical-900 hover:bg-tropical-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button
+            onClick={clickbtn}
+            className="bg-tropical-900 hover:bg-tropical-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
               Request a Proposal
             </button>
           </motion.div>

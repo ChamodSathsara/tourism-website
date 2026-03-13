@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ClockIcon, ChevronRightIcon } from "lucide-react";
@@ -11,69 +11,22 @@ import img4 from "../assest/packages/4.jpg";
 import img5 from "../assest/packages/5.jpg";
 import img6 from "../assest/packages/6.jpg";
 import { useRouter, usePathname } from "next/navigation";
-
-const packages = [
-  {
-    id: 1,
-    title: "Cultural Triangle Explorer",
-    duration: "7 Days",
-    price: "$899",
-    description:
-      "Discover ancient kingdoms, majestic stupas, and the iconic Sigiriya Rock Fortress.",
-    image: img1,
-  },
-  {
-    id: 2,
-    title: "Coastal Paradise",
-    duration: "5 Days",
-    price: "$649",
-    description:
-      "Relax on pristine southern beaches, surf in Weligama, and explore historic Galle Fort.",
-    image: img2,
-  },
-  {
-    id: 3,
-    title: "Hill Country Escape",
-    duration: "4 Days",
-    price: "$549",
-    description:
-      "Journey through misty tea plantations, cascading waterfalls, and take the famous Ella train ride.",
-    image: img3,
-  },
-  {
-    id: 4,
-    title: "Wildlife Safari Adventure",
-    duration: "6 Days",
-    price: "$799",
-    description:
-      "Spot elusive leopards in Yala, elephants in Minneriya, and diverse birdlife across national parks.",
-    image: img4,
-  },
-  {
-    id: 5,
-    title: "Romantic Honeymoon",
-    duration: "8 Days",
-    price: "$1,299",
-    description:
-      "Luxury boutique hotels, private candlelit dinners, and unforgettable couples experiences.",
-    image: img5,
-  },
-  {
-    id: 6,
-    title: "Complete Sri Lanka",
-    duration: "14 Days",
-    price: "$1,899",
-    description:
-      "The ultimate grand tour covering culture, nature, wildlife, and beaches in one epic journey.",
-    image: img6,
-  },
-];
+import { specialPackages } from "../dataConfig/dtaConfig";
+import type { Package } from "../dataConfig/types";
+import { useState, useEffect } from "react";
 
 export function PackagesSection() {
-    const route = useRouter();
-    const clickbtn = (id: number) => () => {
-        route.push(`/packages/${id}`);
-    };
+  const route = useRouter();
+  const [packages, setPackages] = useState<Package[]>([]);
+
+  useEffect(() => {
+    // Get only first 6 packages
+    setPackages(specialPackages.slice(0, 6));
+  }, []);
+
+  const clickbtn = (id: string) => () => {
+    route.push(`/packages/${id}`);
+  };
   return (
     <section id="packages" className="py-20 lg:py-28 bg-sand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -138,7 +91,10 @@ export function PackagesSection() {
                   {pkg.description}
                 </p>
 
-                <button onClick={clickbtn(pkg.id)} className="w-full py-3 px-4 border border-tropical-200 rounded-lg text-tropical-700 font-medium flex items-center justify-center gap-2 group-hover:bg-tropical-700 group-hover:text-white transition-colors duration-300">
+                <button
+                  onClick={clickbtn(pkg.id)}
+                  className="w-full py-3 px-4 border border-tropical-200 rounded-lg text-tropical-700 font-medium flex items-center justify-center gap-2 group-hover:bg-tropical-700 group-hover:text-white transition-colors duration-300"
+                >
                   View Itinerary
                   <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>

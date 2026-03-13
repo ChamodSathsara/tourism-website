@@ -9,93 +9,41 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react";
-import img1 from "../assest/DayTours/1.jpg";
-import img2 from "../assest/DayTours/2.jpg";
-import img3 from "../assest/DayTours/3.jpg";
-import img4 from "../assest/DayTours/4.jpg";
-import img5 from "../assest/DayTours/5.jpg";
-import img6 from "../assest/DayTours/6.jpg";
-import img7 from "../assest/DayTours/7.jpg";
 
-const dayTours = [
-  {
-    id: 1,
-    title: "Sigiriya Rock Fortress",
-    duration: "Full Day",
-    price: "$85",
-    rating: 5.0,
-    image: img1,
-  },
-  {
-    id: 2,
-    title: "Kandy Temple Tour",
-    duration: "Half Day",
-    price: "$45",
-    rating: 4.8,
-    image: img2,
-  },
-  {
-    id: 3,
-    title: "Galle Fort Walk",
-    duration: "Half Day",
-    price: "$35",
-    rating: 4.9,
-    image: img3,
-  },
-  {
-    id: 4,
-    title: "Yala Safari",
-    duration: "Full Day",
-    price: "$120",
-    rating: 4.9,
-    image: img4,
-  },
-  {
-    id: 5,
-    title: "Ella Train Ride",
-    duration: "Full Day",
-    price: "$65",
-    rating: 5.0,
-    image: img5,
-  },
-  {
-    id: 6,
-    title: "Whale Watching Mirissa",
-    duration: "Half Day",
-    price: "$75",
-    rating: 4.7,
-    image: img6,
-  },
-  {
-    id: 7,
-    title: "Nuwara Eliya Tea Country",
-    duration: "Full Day",
-    price: "$90",
-    rating: 4.8,
-    image: img7,
-  },
-];
-
-// duplicate list so infinite scroll feels seamless
-const TOURS = [...dayTours, ...dayTours];
-
-const CARD_WIDTH = 340; // px — matches min-w below
-const GAP = 24; // px — gap-6
-const SCROLL_SPEED = 0.6; // px per animation frame (~36px/s at 60fps)
+import { destinations } from "@/dataConfig/dtaConfig";
+import type { Destination } from "@/dataConfig/types";
+import { useRouter } from "next/navigation";
 
 export function DayToursSection() {
+  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
   const pausedRef = useRef(false); // paused while user hovers or manually scrolls
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [dayTours, setDayTours] = useState<Destination[]>();
+  // duplicate list so infinite scroll feels seamless
+  const TOURS: Destination[] = [...(dayTours ?? []), ...(dayTours ?? [])];
+  const CARD_WIDTH = 340; // px — matches min-w below
+  const GAP = 24; // px — gap-6
+  const SCROLL_SPEED = 0.6; // px per animation frame (~36px/s at 60fps)
+
+  useEffect(() => {
+    setDayTours(destinations);
+  }, []);
+
+  const clickCard = (id: string) => {
+    console.log("Clicked tour with id:", id);
+    // Here you can add navigation logic, e.g., using Next.js router to go to the tour details page
+    router.push(`/destinations/${id}`);
+  };
 
   // ── auto-scroll loop ────────────────────────────────────────────────────
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    const singleSetWidth = dayTours.length * (CARD_WIDTH + GAP);
+    const singleSetWidth = (dayTours?.length ?? 0) * (CARD_WIDTH + GAP);
 
     const tick = () => {
       if (!pausedRef.current && el) {
@@ -198,6 +146,7 @@ export function DayToursSection() {
           >
             {TOURS.map((tour, index) => (
               <div
+                onClick={() => clickCard(tour.id)}
                 key={`${tour.id}-${index}`}
                 className="shrink-0  group cursor-pointer"
                 style={{ width: CARD_WIDTH }}
@@ -206,7 +155,7 @@ export function DayToursSection() {
                 <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl transition-all duration-300">
                   <Image
                     src={tour.image}
-                    alt={tour.title}
+                    alt={tour.name}
                     fill
                     className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                     sizes="340px"
@@ -215,23 +164,19 @@ export function DayToursSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
 
                   {/* rating badge */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-xl flex items-center gap-1 text-sm font-bold text-gray-900">
+                  {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-xl flex items-center gap-1 text-sm font-bold text-gray-900">
                     <StarIcon className="w-4 h-4 fill-sand-400 text-sand-400" />
-                    {tour.rating}
-                  </div>
+                    {tour.description}
+                  </div> */}
 
                   {/* bottom info */}
                   <div className="absolute bottom-0 left-0 right-0 p-5">
                     <h3 className="text-xl font-serif font-bold text-white mb-3 group-hover:text-sand-200 transition-colors">
-                      {tour.title}
+                      {tour.name}
                     </h3>
                     <div className="flex justify-between items-center text-white/90 text-sm">
-                      <div className="flex items-center gap-1.5">
-                        <ClockIcon className="w-4 h-4" />
-                        {tour.duration}
-                      </div>
                       <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full font-semibold text-white">
-                        {tour.price}
+                        {tour.tags.join(" | ")}
                       </div>
                     </div>
                   </div>

@@ -23,6 +23,7 @@ import img3 from "../../assest/Packages/3.jpg";
 import img4 from "../../assest/Packages/4.jpg";
 import img5 from "../../assest/Packages/5.jpg";
 import img6 from "../../assest/Packages/6.jpg";
+import { useRouter } from "next/navigation";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -241,7 +242,7 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const thumbsRef = useRef<HTMLDivElement>(null);
-//   const AUTOPLAY_MS = 4000;
+  //   const AUTOPLAY_MS = 4000;
 
   const goTo = useCallback(
     (index: number) => {
@@ -516,6 +517,10 @@ export default function PackageDetailPage({
   params: { id: string };
 }) {
   const pkg = packages.find((p) => p.id === params.id) ?? packages[0];
+  const router = useRouter();
+  const clickBack = () => {
+    router.back();
+  };
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -535,8 +540,11 @@ export default function PackageDetailPage({
         {/* Back button */}
         <div className="absolute top-6 left-6 z-20">
           <Link
-            href="/packages"
-            className="flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full"
+            href="#"
+            onClick={() => {
+              clickBack();
+            }}
+            className="cursor-pointer flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full"
           >
             <ArrowLeftIcon className="w-4 h-4" />
             Back to Packages
