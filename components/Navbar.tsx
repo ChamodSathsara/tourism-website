@@ -1,43 +1,43 @@
-'use client'
+"use client";
 
-import React, { useEffect, useState } from 'react'
-import { MenuIcon, XIcon, GlobeIcon, ChevronDownIcon } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useEffect, useState } from "react";
+import { MenuIcon, XIcon, GlobeIcon, ChevronDownIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLangOpen, setIsLangOpen] = useState(false)
-  const [currentLang, setCurrentLang] = useState('EN')
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState("EN");
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Packages', href: '#packages' },
-    { name: 'Destinations', href: '#destinations' },
-    { name: 'Experiences', href: '#experiences' },
-    { name: 'Hotels', href: '#hotels' },
-    { name: 'About', href: '#about' },
-  ]
+    { name: "Home", href: "/home" },
+    { name: "Packages", href: "/packages" },
+    { name: "Destinations", href: "/destinations" },
+    { name: "Experiences", href: "/experiences" },
+    { name: "Hotels", href: "/hotels" },
+    { name: "About", href: "/about" },
+  ];
 
   const languages = [
-    { code: 'EN', flag: '🇬🇧', name: 'English' },
-    { code: 'FR', flag: '🇫🇷', name: 'Français' },
-    { code: 'DE', flag: '🇩🇪', name: 'Deutsch' },
-    { code: 'JP', flag: '🇯🇵', name: '日本語' },
-  ]
+    { code: "EN", flag: "🇬🇧", name: "English" },
+    { code: "FR", flag: "🇫🇷", name: "Français" },
+    { code: "DE", flag: "🇩🇪", name: "Deutsch" },
+    { code: "JP", flag: "🇯🇵", name: "日本語" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
+        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +46,7 @@ export function Navbar() {
           <a href="#home" className="flex items-center gap-2 z-50">
             <span
               className={`font-serif text-2xl font-bold tracking-tight transition-colors ${
-                isScrolled ? 'text-tropical-900' : 'text-white'
+                isScrolled ? "text-tropical-900" : "text-white"
               }`}
             >
               Magical Paradise
@@ -60,7 +60,7 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-medium transition-colors hover:text-sand-400 ${
-                  isScrolled ? 'text-gray-700' : 'text-white/90'
+                  isScrolled ? "text-gray-700" : "text-white/90"
                 }`}
               >
                 {link.name}
@@ -75,7 +75,7 @@ export function Navbar() {
               <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
                 className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                  isScrolled ? "text-gray-700" : "text-white"
                 }`}
               >
                 <GlobeIcon className="w-4 h-4" />
@@ -95,8 +95,8 @@ export function Navbar() {
                       <button
                         key={lang.code}
                         onClick={() => {
-                          setCurrentLang(lang.code)
-                          setIsLangOpen(false)
+                          setCurrentLang(lang.code);
+                          setIsLangOpen(false);
                         }}
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-sand-50 hover:text-tropical-700 flex items-center gap-2"
                       >
@@ -112,8 +112,8 @@ export function Navbar() {
               href="#contact"
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl ${
                 isScrolled
-                  ? 'bg-tropical-700 text-white hover:bg-tropical-800'
-                  : 'bg-white text-tropical-900 hover:bg-sand-50'
+                  ? "bg-tropical-700 text-white hover:bg-tropical-800"
+                  : "bg-white text-tropical-900 hover:bg-sand-50"
               }`}
             >
               Start Planning
@@ -123,7 +123,9 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             className={`lg:hidden z-50 p-2 rounded-md ${
-              isScrolled || isMobileMenuOpen ? 'text-tropical-900' : 'text-white'
+              isScrolled || isMobileMenuOpen
+                ? "text-tropical-900"
+                : "text-white"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -141,7 +143,7 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100vh' }}
+            animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             className="fixed inset-0 bg-white z-40 lg:hidden pt-24 px-6"
           >
@@ -162,11 +164,11 @@ export function Navbar() {
                     <button
                       key={lang.code}
                       onClick={() => {
-                        setCurrentLang(lang.code)
-                        setIsMobileMenuOpen(false)
+                        setCurrentLang(lang.code);
+                        setIsMobileMenuOpen(false);
                       }}
                       className={`text-2xl ${
-                        currentLang === lang.code ? 'opacity-100' : 'opacity-50'
+                        currentLang === lang.code ? "opacity-100" : "opacity-50"
                       }`}
                     >
                       {lang.flag}
@@ -186,5 +188,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </nav>
-  )
+  );
 }
