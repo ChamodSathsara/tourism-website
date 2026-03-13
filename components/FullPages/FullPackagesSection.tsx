@@ -21,6 +21,7 @@ import img3 from "../../assest/Packages/3.jpg";
 import img4 from "../../assest/Packages/4.jpg";
 import img5 from "../../assest/Packages/5.jpg";
 import img6 from "../../assest/Packages/6.jpg";
+import { useRouter, usePathname } from "next/navigation";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -396,7 +397,88 @@ const maldivesPackages: Package[] = [
   },
 ];
 
+const specialPackages: Package[] = [
+  {
+    id: "d1",
+    title: "Magical Romance",
+    duration: "14 Day",
+    price: "$89",
+    badge: "Most Popular",
+    tags: ["Romance", "Luxury"],
+    description:
+      "Magical Paradise takes pride in carefully selecting the most romantic and charming locations possible for the Magical Romance tour itinerary in Sri Lanka. A day by day itinerary highlight is given below.",
+    image: img1,
+  },
+  {
+    id: "d2",
+    title: "Wild and Wooly",
+    duration: "13 Day",
+    price: "$85",
+    badge: "Adventure",
+    tags: ["Wildlife", "Adventure"],
+    description:
+      "Careful consideration has been given to including the best possible locations for a 13 day tour that will help heighten the ‘Wild and Wooly’ spark for adventurous travelers and provide a wonderful learning experience about what Sri Lanka offers the intrepid traveller.",
+    image: img2,
+  },
+  {
+    id: "d3",
+    title: "A Walk of Life",
+    duration: "14 Day",
+    price: "$82",
+    badge: "Cultural",
+    tags: ["Culture", "Heritage"],
+    description:
+      "A Walk of Life tour package offers a unique opportunity to explore the cultural richness, traditions, and historical beauty of Sri Lanka with a carefully designed day by day itinerary.",
+    image: img3,
+  },
+  {
+    id: "d4",
+    title: "Shades of Blue",
+    duration: "14 Day",
+    price: "$88",
+    badge: "Beach Escape",
+    tags: ["Beach", "Relax"],
+    description:
+      "The Shades of Blue tour package is carefully designed to cover many of the must see coastal and natural wonders in Sri Lanka while enjoying the island’s beautiful beaches and ocean views.",
+    image: img4,
+  },
+  {
+    id: "d5",
+    title: "Magical Big Five",
+    duration: "7 Day",
+    price: "$79",
+    badge: "Wildlife",
+    tags: ["Safari", "Nature"],
+    description:
+      "The Magical Big Five tour package centers around wildlife and the awe inspiring mammals of the open seas encircling Sri Lanka. It highlights observing the Asian Elephant, Leopard, Sloth Bear, Blue Whale, and Sperm Whale in their natural habitat.",
+    image: img5,
+  },
+  {
+    id: "d6",
+    title: "Magical Highlights",
+    duration: "8 Day",
+    price: "$75",
+    badge: "Best Value",
+    tags: ["History", "Nature"],
+    description:
+      "The Magical Highlights tour package is carefully designed to cover many of the must see historical and natural wonders in Sri Lanka within a short time frame.",
+    image: img6,
+  },
+  {
+    id: "d7",
+    title: "Magical Sri Lanka",
+    duration: "14 Day",
+    price: "$90",
+    badge: "Top Tour",
+    tags: ["Culture", "Nature"],
+    description:
+      "The Magical Sri Lanka tour package is carefully designed to cover many of the must see historical and natural wonders in Sri Lanka with a detailed day by day itinerary.",
+    image: img1,
+  },
+];
+
 const allPackages: Package[] = [
+  ...specialPackages,
   ...dayPackages,
   ...couplePackages,
   ...morePackages,
@@ -411,6 +493,14 @@ const tabs: Tab[] = [
     label: "All Packages",
     icon: LayoutGridIcon,
     data: allPackages,
+    color: "violet",
+    heading: "Every Experience We Offer",
+  },
+  {
+    key: "special",
+    label: "Special Offers",
+    icon: StarIcon,
+    data: specialPackages,
     color: "violet",
     heading: "Every Experience We Offer",
   },
@@ -501,6 +591,12 @@ const colorConfig: Record<
 
 function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
   const c = colorConfig[accentColor];
+  const router = useRouter();
+
+  const clickButton = (id: string) => () => {
+    alert(`Clicked on package with id: ${id}`);
+    router.push(`/packages/${id}`);
+  };
 
   return (
     <motion.div
@@ -555,6 +651,7 @@ function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
 
         <button
           className={`w-full py-3 px-4 border rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${c.btn}`}
+          onClick={clickButton(pkg.id)}
         >
           View Itinerary
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

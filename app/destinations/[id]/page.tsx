@@ -1,13 +1,13 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
-import { FullExperienceSection } from "@/components/FullPages/FullExperienceSection";
 import { Footer } from "@/components/Footer";
+import DestinationDetailPage from "@/components/Destinations/destination";
 
-function page() {
+function page({ params }: { params: { id: string } }) {
   return (
     <div>
       <Navbar />
-      <FullExperienceSection />
+      <DestinationDetailPage params={params} />
       <Footer />
     </div>
   );

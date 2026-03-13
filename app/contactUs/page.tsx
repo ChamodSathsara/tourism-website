@@ -1,13 +1,13 @@
-import { Footer } from "@/components/Footer";
-import { FullAboutUsSection } from "@/components/FullPages/FullAboutSection";
-import { Navbar } from "@/components/Navbar";
 import React from "react";
+import ContactUsPage from "@/components/FullPages/ContactUs";
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 function page() {
   return (
     <div>
       <Navbar />
-      <FullAboutUsSection />
+      <ContactUsPage />
       <Footer />
     </div>
   );

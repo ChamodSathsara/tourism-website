@@ -3,8 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { MenuIcon, XIcon, GlobeIcon, ChevronDownIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
 
 export function Navbar() {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -34,6 +38,11 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (href: string) => {
+    router.push(href);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -43,7 +52,10 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 z-50">
+          <button
+            onClick={() => handleNavClick("/home")}
+            className="flex items-center gap-2 z-50"
+          >
             <span
               className={`font-serif text-2xl font-bold tracking-tight transition-colors ${
                 isScrolled ? "text-tropical-900" : "text-white"
@@ -51,20 +63,26 @@ export function Navbar() {
             >
               Magical Paradise
             </span>
-          </a>
+          </button>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
+                onClick={() => handleNavClick(link.href)}
                 className={`text-sm font-medium transition-colors hover:text-sand-400 ${
-                  isScrolled ? "text-gray-700" : "text-white/90"
+                  pathname === link.href
+                    ? isScrolled
+                      ? "text-tropical-700 font-semibold"
+                      : "text-white font-semibold underline underline-offset-4"
+                    : isScrolled
+                      ? "text-gray-700"
+                      : "text-white/90"
                 }`}
               >
                 {link.name}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -108,8 +126,8 @@ export function Navbar() {
               </AnimatePresence>
             </div>
 
-            <a
-              href="#contact"
+            <button
+              onClick={() => handleNavClick("/contactUs")}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl ${
                 isScrolled
                   ? "bg-tropical-700 text-white hover:bg-tropical-800"
@@ -117,7 +135,7 @@ export function Navbar() {
               }`}
             >
               Start Planning
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -149,14 +167,17 @@ export function Navbar() {
           >
             <div className="flex flex-col space-y-6">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-serif text-tropical-900 border-b border-gray-100 pb-4"
+                  onClick={() => handleNavClick(link.href)}
+                  className={`text-2xl font-serif text-left border-b border-gray-100 pb-4 ${
+                    pathname === link.href
+                      ? "text-tropical-700 font-bold"
+                      : "text-tropical-900"
+                  }`}
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
               <div className="pt-6 flex flex-col gap-4">
                 <div className="flex gap-4">
@@ -175,13 +196,12 @@ export function Navbar() {
                     </button>
                   ))}
                 </div>
-                <a
-                  href="#contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <button
+                  onClick={() => handleNavClick("/contact")}
                   className="w-full text-center bg-tropical-700 text-white py-4 rounded-full font-semibold text-lg mt-4"
                 >
                   Start Planning
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>

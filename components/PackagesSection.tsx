@@ -10,6 +10,7 @@ import img3 from "../assest/packages/3.jpg";
 import img4 from "../assest/packages/4.jpg";
 import img5 from "../assest/packages/5.jpg";
 import img6 from "../assest/packages/6.jpg";
+import { useRouter, usePathname } from "next/navigation";
 
 const packages = [
   {
@@ -69,6 +70,10 @@ const packages = [
 ];
 
 export function PackagesSection() {
+    const route = useRouter();
+    const clickbtn = (id: number) => () => {
+        route.push(`/packages/${id}`);
+    };
   return (
     <section id="packages" className="py-20 lg:py-28 bg-sand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,7 +138,7 @@ export function PackagesSection() {
                   {pkg.description}
                 </p>
 
-                <button className="w-full py-3 px-4 border border-tropical-200 rounded-lg text-tropical-700 font-medium flex items-center justify-center gap-2 group-hover:bg-tropical-700 group-hover:text-white transition-colors duration-300">
+                <button onClick={clickbtn(pkg.id)} className="w-full py-3 px-4 border border-tropical-200 rounded-lg text-tropical-700 font-medium flex items-center justify-center gap-2 group-hover:bg-tropical-700 group-hover:text-white transition-colors duration-300">
                   View Itinerary
                   <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
