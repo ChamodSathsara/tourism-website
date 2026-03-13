@@ -1,26 +1,61 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Tropical (green) ── */
+  --color-tropical-50:  #f0fdf4;
+  --color-tropical-100: #dcfce7;
+  --color-tropical-200: #bbf7d0;
+  --color-tropical-300: #86efac;
+  --color-tropical-400: #4ade80;
+  --color-tropical-500: #22c55e;
+  --color-tropical-600: #16a34a;
+  --color-tropical-700: #15803d;
+  --color-tropical-800: #166534;
+  --color-tropical-900: #14532d;
+  --color-tropical-950: #052e16;
+
+  /* ── Sand (warm gold) ── */
+  --color-sand-50:  #fdfaf3;
+  --color-sand-100: #faf3e0;
+  --color-sand-200: #f5e6c0;
+  --color-sand-300: #edd494;
+  --color-sand-400: #e2b95a;
+  --color-sand-500: #d4a032;
+
+  /* ── Ocean (blue) ── */
+  --color-ocean-50:  #eff8ff;
+  --color-ocean-100: #dbeffe;
+  --color-ocean-200: #bfe3fd;
+  --color-ocean-300: #93cffc;
+  --color-ocean-400: #60b2f8;
+  --color-ocean-500: #3b92f3;
+  --color-ocean-600: #2474e7;
+  --color-ocean-700: #1c5fd4;
+  --color-ocean-800: #1d4dab;
+  --color-ocean-900: #1d4387;
+  --color-ocean-950: #172a53;
+
+  /* ── Typography — TW4 uses --font-family-* namespace ── */
+  --font-family-serif: Georgia, "Times New Roman", serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Custom keyframes ── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.1); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
