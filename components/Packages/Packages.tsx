@@ -538,17 +538,16 @@ export default function PackageDetailPage({
         <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
 
         {/* Back button */}
-        <div className="absolute top-6 left-6 z-20">
-          <Link
-            href="#"
-            onClick={() => {
-              clickBack();
-            }}
-            className="cursor-pointer flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full"
-          >
+        <div
+          className="absolute top-6 left-6 z-20"
+          onClick={() => {
+            clickBack();
+          }}
+        >
+          <div className="cursor-pointer flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full">
             <ArrowLeftIcon className="w-4 h-4" />
             Back to Packages
-          </Link>
+          </div>
         </div>
 
         <div className="absolute inset-0 flex items-end">
