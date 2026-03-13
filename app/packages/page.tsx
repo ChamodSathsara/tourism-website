@@ -1,12 +1,14 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
-import { PackagesSection } from "@/components/PackagesSection";
+import FullPackagesSection from "@/components/FullPages/FullPackagesSection";
+import { Footer } from "@/components/Footer";
 
 function page() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <PackagesSection />
+      <FullPackagesSection />
+      <Footer />
     </div>
   );
 }

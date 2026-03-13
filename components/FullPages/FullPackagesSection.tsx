@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image, { StaticImageData } from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ClockIcon,
@@ -10,12 +11,20 @@ import {
   MapPinIcon,
   StarIcon,
   SparklesIcon,
+  LayoutGridIcon,
+  WavesIcon,
   type LucideIcon,
 } from "lucide-react";
+import img1 from "../../assest/Packages/1.jpg";
+import img2 from "../../assest/Packages/2.jpg";
+import img3 from "../../assest/Packages/3.jpg";
+import img4 from "../../assest/Packages/4.jpg";
+import img5 from "../../assest/Packages/5.jpg";
+import img6 from "../../assest/Packages/6.jpg";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type AccentColor = "amber" | "rose" | "emerald";
+type AccentColor = "amber" | "rose" | "emerald" | "sky" | "violet";
 
 interface Package {
   id: string;
@@ -25,7 +34,7 @@ interface Package {
   badge: string | null;
   tags: string[];
   description: string;
-  image: string;
+  image: StaticImageData;
 }
 
 interface Tab {
@@ -34,6 +43,7 @@ interface Tab {
   icon: LucideIcon;
   data: Package[];
   color: AccentColor;
+  heading: string;
 }
 
 interface PackageCardProps {
@@ -42,9 +52,9 @@ interface PackageCardProps {
   accentColor: AccentColor;
 }
 
-// ─── Package Data ────────────────────────────────────────────────────────────
+// ─── Package Data ─────────────────────────────────────────────────────────────
 
-const dayPackages = [
+const dayPackages: Package[] = [
   {
     id: "d1",
     title: "Sigiriya & Dambulla Day Tour",
@@ -54,7 +64,7 @@ const dayPackages = [
     tags: ["Culture", "History"],
     description:
       "Climb the legendary Lion Rock fortress and explore the stunning Dambulla Cave Temple in a single epic day.",
-    image: "/assest/packages/1.jpg",
+    image: img1,
   },
   {
     id: "d2",
@@ -65,7 +75,7 @@ const dayPackages = [
     tags: ["Culture", "Spiritual"],
     description:
       "Visit the sacred Temple of the Tooth Relic, Kandy Lake, and the botanical gardens in Sri Lanka's hill capital.",
-    image: "/assest/packages/3.jpg",
+    image: img3,
   },
   {
     id: "d3",
@@ -76,7 +86,7 @@ const dayPackages = [
     tags: ["City", "Shopping"],
     description:
       "Discover colonial architecture, vibrant markets, seaside promenades, and the best street food in Colombo.",
-    image: "/assest/packages/2.jpg",
+    image: img2,
   },
   {
     id: "d4",
@@ -87,7 +97,7 @@ const dayPackages = [
     tags: ["Wildlife", "Nature"],
     description:
       "Track leopards, elephants, and exotic birds in Yala National Park on an exhilarating early morning safari.",
-    image: "/assest/packages/4.jpg",
+    image: img4,
   },
   {
     id: "d5",
@@ -98,7 +108,7 @@ const dayPackages = [
     tags: ["Adventure", "Scenic"],
     description:
       "Hike Little Adam's Peak, photograph the iconic Nine Arch Bridge, and sip fresh tea at a hilltop estate.",
-    image: "/assest/packages/5.jpg",
+    image: img5,
   },
   {
     id: "d6",
@@ -109,7 +119,7 @@ const dayPackages = [
     tags: ["Ocean", "Wildlife"],
     description:
       "Set sail at dawn to witness majestic blue whales and playful dolphins off Sri Lanka's southern coast.",
-    image: "/assest/packages/6.jpg",
+    image: img6,
   },
   {
     id: "d7",
@@ -120,7 +130,7 @@ const dayPackages = [
     tags: ["History", "Culture"],
     description:
       "Wander through cobblestone streets of the UNESCO-listed Dutch Galle Fort and its charming boutiques.",
-    image: "/assest/packages/1.jpg",
+    image: img1,
   },
   {
     id: "d8",
@@ -131,11 +141,11 @@ const dayPackages = [
     tags: ["Nature", "Tea"],
     description:
       "Tour a working tea factory, stroll through emerald green estates, and enjoy high tea at a colonial bungalow.",
-    image: "/assest/packages/3.jpg",
+    image: img3,
   },
 ];
 
-const couplePackages = [
+const couplePackages: Package[] = [
   {
     id: "c1",
     title: "Romantic Honeymoon Escape",
@@ -145,7 +155,7 @@ const couplePackages = [
     tags: ["Luxury", "Honeymoon"],
     description:
       "Luxury boutique hotels, private candlelit dinners, and unforgettable couples experiences across the island.",
-    image: "/assest/packages/5.jpg",
+    image: img5,
   },
   {
     id: "c2",
@@ -156,7 +166,7 @@ const couplePackages = [
     tags: ["Beach", "Romance"],
     description:
       "Private beach dinners, sunset catamaran cruises, and couple spa rituals along the golden southern coast.",
-    image: "/assest/packages/2.jpg",
+    image: img2,
   },
   {
     id: "c3",
@@ -167,7 +177,7 @@ const couplePackages = [
     tags: ["Scenic", "Adventure"],
     description:
       "Misty mountains, scenic train rides, and cozy heritage bungalows — romance woven into every moment.",
-    image: "/assest/packages/3.jpg",
+    image: img3,
   },
   {
     id: "c4",
@@ -178,7 +188,7 @@ const couplePackages = [
     tags: ["Culture", "Luxury"],
     description:
       "Ancient temples by day, rooftop dining and infinity pool evenings in boutique heritage hotels by night.",
-    image: "/assest/packages/1.jpg",
+    image: img1,
   },
   {
     id: "c5",
@@ -189,7 +199,7 @@ const couplePackages = [
     tags: ["Luxury", "Private"],
     description:
       "Exclusive private villa with pool, personal chef, couples yoga, and custom island excursions on demand.",
-    image: "/assest/packages/6.jpg",
+    image: img6,
   },
   {
     id: "c6",
@@ -200,11 +210,11 @@ const couplePackages = [
     tags: ["Ocean", "Romance"],
     description:
       "Sail with whales at sunrise, snorkel coral gardens, and unwind at a beachfront couples resort.",
-    image: "/assest/packages/4.jpg",
+    image: img4,
   },
 ];
 
-const morePackages = [
+const morePackages: Package[] = [
   {
     id: "m1",
     title: "Cultural Triangle Explorer",
@@ -214,7 +224,7 @@ const morePackages = [
     tags: ["Culture", "Heritage"],
     description:
       "Discover ancient kingdoms, majestic stupas, and the iconic Sigiriya Rock Fortress on this heritage circuit.",
-    image: "/assest/packages/1.jpg",
+    image: img1,
   },
   {
     id: "m2",
@@ -225,7 +235,7 @@ const morePackages = [
     tags: ["Beach", "Surf"],
     description:
       "Relax on pristine southern beaches, surf in Weligama, and explore historic Galle Fort.",
-    image: "/assest/packages/2.jpg",
+    image: img2,
   },
   {
     id: "m3",
@@ -236,7 +246,7 @@ const morePackages = [
     tags: ["Wildlife", "Safari"],
     description:
       "Spot elusive leopards in Yala, elephants in Minneriya, and diverse birdlife across national parks.",
-    image: "/assest/packages/4.jpg",
+    image: img4,
   },
   {
     id: "m4",
@@ -247,7 +257,7 @@ const morePackages = [
     tags: ["All-inclusive", "Epic"],
     description:
       "The ultimate grand tour covering culture, nature, wildlife, and beaches in one unforgettable journey.",
-    image: "/assest/packages/6.jpg",
+    image: img6,
   },
   {
     id: "m5",
@@ -258,7 +268,7 @@ const morePackages = [
     tags: ["Family", "Kids"],
     description:
       "Kid-friendly safaris, ancient forts, beach days, and cultural workshops designed for the whole family.",
-    image: "/assest/packages/5.jpg",
+    image: img5,
   },
   {
     id: "m6",
@@ -269,7 +279,7 @@ const morePackages = [
     tags: ["Wellness", "Spa"],
     description:
       "Rejuvenate with authentic Ayurvedic treatments, meditation retreats, and organic cuisine at serene wellness centers.",
-    image: "/assest/packages/3.jpg",
+    image: img3,
   },
   {
     id: "m7",
@@ -280,7 +290,7 @@ const morePackages = [
     tags: ["Budget", "Adventure"],
     description:
       "Experience the real Sri Lanka on a budget — hostels, tuk-tuks, local food, and off-the-beaten-path gems.",
-    image: "/assest/packages/1.jpg",
+    image: img1,
   },
   {
     id: "m8",
@@ -291,19 +301,126 @@ const morePackages = [
     tags: ["Photography", "Scenic"],
     description:
       "Golden hour safaris, mist-soaked highlands, ancient ruins — a landscape photographer's dream itinerary.",
-    image: "/assest/packages/2.jpg",
+    image: img2,
   },
 ];
+
+const maldivesPackages: Package[] = [
+  {
+    id: "mv1",
+    title: "Maldives Overwater Bliss",
+    duration: "5 Days",
+    price: "$2,199",
+    badge: "Best Seller",
+    tags: ["Luxury", "Overwater"],
+    description:
+      "Wake up above the turquoise lagoon in a stunning overwater bungalow with private deck and direct ocean access.",
+    image: img2,
+  },
+  {
+    id: "mv2",
+    title: "Maldives Diving & Snorkel",
+    duration: "7 Days",
+    price: "$1,899",
+    badge: null,
+    tags: ["Diving", "Marine Life"],
+    description:
+      "Explore vibrant coral reefs, swim with manta rays and whale sharks across some of the world's clearest waters.",
+    image: img4,
+  },
+  {
+    id: "mv3",
+    title: "Romantic Maldives Escape",
+    duration: "6 Days",
+    price: "$2,599",
+    badge: "Honeymoon",
+    tags: ["Romance", "Luxury"],
+    description:
+      "Private candlelit dinners on the beach, couple spa treatments, and sunset cruises on a traditional dhoni.",
+    image: img5,
+  },
+  {
+    id: "mv4",
+    title: "Maldives Family Resort",
+    duration: "7 Days",
+    price: "$2,999",
+    badge: "Family",
+    tags: ["Family", "Resort"],
+    description:
+      "All-inclusive family resort with kids clubs, dolphin watching, glass-bottom kayaking, and beachside fun.",
+    image: img6,
+  },
+  {
+    id: "mv5",
+    title: "Sri Lanka & Maldives Combo",
+    duration: "12 Days",
+    price: "$3,299",
+    badge: "Popular",
+    tags: ["Combo", "Epic"],
+    description:
+      "The ultimate dual-destination journey: explore Sri Lanka's cultural gems, then unwind in Maldivian paradise.",
+    image: img1,
+  },
+  {
+    id: "mv6",
+    title: "Maldives Budget Getaway",
+    duration: "4 Days",
+    price: "$899",
+    badge: "Budget",
+    tags: ["Budget", "Beach"],
+    description:
+      "Experience the magic of the Maldives without breaking the bank — local guesthouses, snorkeling, and sandbanks.",
+    image: img3,
+  },
+  {
+    id: "mv7",
+    title: "Maldives Liveaboard Cruise",
+    duration: "8 Days",
+    price: "$2,499",
+    badge: "Adventure",
+    tags: ["Cruise", "Diving"],
+    description:
+      "Sail through remote atolls, dive unexplored reefs, and sleep under a sky full of stars on a luxury liveaboard.",
+    image: img2,
+  },
+  {
+    id: "mv8",
+    title: "Private Island Retreat",
+    duration: "5 Days",
+    price: "$4,499",
+    badge: "Ultra Luxury",
+    tags: ["Private", "Exclusive"],
+    description:
+      "Exclusive buyout of a private island resort — your own piece of paradise with a personal butler and chef.",
+    image: img5,
+  },
+];
+
+const allPackages: Package[] = [
+  ...dayPackages,
+  ...couplePackages,
+  ...morePackages,
+  ...maldivesPackages,
+].map((pkg, i) => ({ ...pkg, id: `all-${i}` }));
 
 // ─── Tab Config ───────────────────────────────────────────────────────────────
 
 const tabs: Tab[] = [
+  {
+    key: "all",
+    label: "All Packages",
+    icon: LayoutGridIcon,
+    data: allPackages,
+    color: "violet",
+    heading: "Every Experience We Offer",
+  },
   {
     key: "day",
     label: "Day Packages",
     icon: SunIcon,
     data: dayPackages,
     color: "amber",
+    heading: "Perfect Single-Day Adventures",
   },
   {
     key: "couple",
@@ -311,6 +428,7 @@ const tabs: Tab[] = [
     icon: HeartIcon,
     data: couplePackages,
     color: "rose",
+    heading: "Romantic Escapes for Two",
   },
   {
     key: "more",
@@ -318,96 +436,125 @@ const tabs: Tab[] = [
     icon: SparklesIcon,
     data: morePackages,
     color: "emerald",
+    heading: "Extended Island Experiences",
+  },
+  {
+    key: "maldives",
+    label: "Maldives",
+    icon: WavesIcon,
+    data: maldivesPackages,
+    color: "sky",
+    heading: "Maldives Paradise Escapes",
   },
 ];
+
+// ─── Color Config ─────────────────────────────────────────────────────────────
+
+const colorConfig: Record<
+  AccentColor,
+  {
+    tabActive: string;
+    tabShadow: string;
+    price: string;
+    btn: string;
+    badge: string;
+  }
+> = {
+  amber: {
+    tabActive: "bg-amber-600 text-white",
+    tabShadow: "shadow-amber-200",
+    price: "text-amber-700",
+    btn: "border-amber-200 text-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700",
+    badge: "bg-amber-100 text-amber-800",
+  },
+  rose: {
+    tabActive: "bg-rose-600 text-white",
+    tabShadow: "shadow-rose-200",
+    price: "text-rose-700",
+    btn: "border-rose-200 text-rose-700 hover:bg-rose-700 hover:text-white hover:border-rose-700",
+    badge: "bg-rose-100 text-rose-800",
+  },
+  emerald: {
+    tabActive: "bg-emerald-600 text-white",
+    tabShadow: "shadow-emerald-200",
+    price: "text-emerald-700",
+    btn: "border-emerald-200 text-emerald-700 hover:bg-emerald-700 hover:text-white hover:border-emerald-700",
+    badge: "bg-emerald-100 text-emerald-800",
+  },
+  sky: {
+    tabActive: "bg-sky-600 text-white",
+    tabShadow: "shadow-sky-200",
+    price: "text-sky-700",
+    btn: "border-sky-200 text-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700",
+    badge: "bg-sky-100 text-sky-800",
+  },
+  violet: {
+    tabActive: "bg-violet-600 text-white",
+    tabShadow: "shadow-violet-200",
+    price: "text-violet-700",
+    btn: "border-violet-200 text-violet-700 hover:bg-violet-700 hover:text-white hover:border-violet-700",
+    badge: "bg-violet-100 text-violet-800",
+  },
+};
 
 // ─── Package Card ─────────────────────────────────────────────────────────────
 
 function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
-  const colorMap: Record<
-    AccentColor,
-    { badge: string; btn: string; price: string }
-  > = {
-    amber: {
-      badge: "bg-amber-100 text-amber-800",
-      btn: "border-amber-300 text-amber-800 hover:bg-amber-700",
-      price: "text-amber-700",
-    },
-    rose: {
-      badge: "bg-rose-100 text-rose-800",
-      btn: "border-rose-300 text-rose-800 hover:bg-rose-700",
-      price: "text-rose-700",
-    },
-    emerald: {
-      badge: "bg-emerald-100 text-emerald-800",
-      btn: "border-emerald-300 text-emerald-800 hover:bg-emerald-700",
-      price: "text-emerald-700",
-    },
-  };
-  const c = colorMap[accentColor];
+  const c = colorConfig[accentColor];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.45, delay: index * 0.07 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.07 }}
       className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col"
     >
       {/* Image */}
-      <div className="relative h-56 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent z-10 group-hover:from-black/30 transition-all" />
-        <img
+      <div className="relative h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
+        <Image
           src={pkg.image}
           alt={pkg.title}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+          fill
+          className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Duration pill */}
-        <div className="absolute top-3 right-3 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 text-xs font-semibold text-gray-800 shadow">
-          <ClockIcon className="w-3 h-3" />
+        <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 text-sm font-semibold text-gray-800 shadow-sm">
+          <ClockIcon className="w-4 h-4" />
           {pkg.duration}
         </div>
         {/* Badge */}
         {pkg.badge && (
           <div
-            className={`absolute top-3 left-3 z-20 px-2 py-0.5 rounded-full text-xs font-bold ${c.badge}`}
+            className={`absolute top-4 left-4 z-20 px-2.5 py-0.5 rounded-full text-xs font-bold ${c.badge}`}
           >
             {pkg.badge}
           </div>
         )}
-        {/* Tags at bottom of image */}
-        <div className="absolute bottom-3 left-3 z-20 flex gap-1.5">
-          {pkg.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 bg-black/40 backdrop-blur-sm text-white text-xs rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Body */}
-      <div className="p-5 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-3 gap-2">
-          <h3 className="text-base font-bold text-gray-900 leading-snug">
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-serif font-bold text-gray-900 leading-tight pr-4">
             {pkg.title}
           </h3>
           <div className="text-right shrink-0">
-            <span className="block text-[10px] text-gray-400 uppercase tracking-wider">
+            <span className="block text-xs text-gray-500 uppercase tracking-wider">
               From
             </span>
-            <span className={`text-base font-extrabold ${c.price}`}>
-              {pkg.price}
-            </span>
+            <span className={`text-lg font-bold ${c.price}`}>{pkg.price}</span>
           </div>
         </div>
-        <p className="text-sm text-gray-500 mb-5 flex-grow leading-relaxed">
+
+        <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
           {pkg.description}
         </p>
+
         <button
-          className={`w-full py-2.5 px-4 border rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-300 group-hover:text-white ${c.btn}`}
+          className={`w-full py-3 px-4 border rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${c.btn}`}
         >
           View Itinerary
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -420,25 +567,24 @@ function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function PackagesPage() {
-  const [activeTab, setActiveTab] = useState<string>("day");
+  const [activeTab, setActiveTab] = useState<string>("all");
 
   const currentTab = tabs.find((t) => t.key === activeTab) as Tab;
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans">
-      {/* ── Hero Section ── */}
-      <div className="relative h-[60vh] min-h-[420px] flex items-center justify-center overflow-hidden">
-        {/* Background image */}
-        <img
-          src="/assest/packages/1.jpg"
-          alt="Sri Lanka"
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-          style={{ filter: "brightness(0.45) saturate(1.2)" }}
+    <div className="min-h-screen bg-stone-50">
+      {/* ── Hero ── */}
+      <div className="relative h-[62vh] min-h-[440px] flex items-center justify-center overflow-hidden">
+        <Image
+          src={img1}
+          alt="Sri Lanka Travel"
+          fill
+          priority
+          className="object-cover scale-105"
+          style={{ filter: "brightness(0.42) saturate(1.2)" }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-stone-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-stone-50" />
 
-        {/* Hero content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -448,27 +594,28 @@ export default function PackagesPage() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <MapPinIcon className="w-5 h-5 text-amber-400" />
             <span className="text-amber-300 text-sm font-semibold uppercase tracking-[0.2em]">
-              Sri Lanka
+              Sri Lanka & Maldives
             </span>
           </div>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-4 leading-tight drop-shadow-2xl">
             Travel Packages
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
             Handcrafted itineraries for every kind of traveller — from
             sunrise-to-sunset day trips to grand island escapes.
           </p>
 
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-8 mt-8">
-            {[
-              ["50+", "Packages"],
-              ["4.9★", "Rating"],
-              ["2000+", "Happy Guests"],
-            ].map(([val, label]) => (
+          <div className="flex items-center justify-center gap-10 mt-10">
+            {(
+              [
+                ["50+", "Packages"],
+                ["4.9★", "Rating"],
+                ["2,000+", "Happy Guests"],
+              ] as [string, string][]
+            ).map(([val, label]) => (
               <div key={label} className="text-center">
                 <div className="text-2xl font-bold text-white">{val}</div>
-                <div className="text-xs text-white/60 uppercase tracking-wider">
+                <div className="text-xs text-white/60 uppercase tracking-wider mt-0.5">
                   {label}
                 </div>
               </div>
@@ -477,32 +624,32 @@ export default function PackagesPage() {
         </motion.div>
       </div>
 
-      {/* ── Tab Navigation ── */}
-      <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+      {/* ── Sticky Tab Nav ── */}
+      <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-1 py-2 overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.key;
-              const activeColors: Record<AccentColor, string> = {
-                amber: "bg-amber-600 text-white shadow-amber-200",
-                rose: "bg-rose-600 text-white shadow-rose-200",
-                emerald: "bg-emerald-600 text-white shadow-emerald-200",
-              };
+              const cc = colorConfig[tab.color];
               return (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
                     isActive
-                      ? `${activeColors[tab.color]} shadow-lg`
+                      ? `${cc.tabActive} shadow-lg ${cc.tabShadow}`
                       : "text-gray-500 hover:text-gray-800 hover:bg-stone-100"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   {tab.label}
                   <span
-                    className={`text-xs px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/20" : "bg-stone-200 text-gray-600"}`}
+                    className={`text-xs px-1.5 py-0.5 rounded-full ${
+                      isActive
+                        ? "bg-white/25 text-white"
+                        : "bg-stone-200 text-gray-600"
+                    }`}
                   >
                     {tab.data.length}
                   </span>
@@ -513,42 +660,47 @@ export default function PackagesPage() {
         </div>
       </div>
 
-      {/* ── Package Grid ── */}
+      {/* ── Grid Section ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        {/* Section header */}
-        <motion.div
-          key={activeTab + "-header"}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="flex items-end justify-between mb-10"
-        >
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              {(() => {
-                const Icon = currentTab.icon;
-                return <Icon className="w-5 h-5 text-gray-400" />;
-              })()}
-              <span className="text-xs uppercase tracking-widest text-gray-400 font-semibold">
-                {currentTab.label}
-              </span>
+        {/* Section heading */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab + "-heading"}
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 16 }}
+            transition={{ duration: 0.35 }}
+            className="flex items-end justify-between mb-10"
+          >
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                {(() => {
+                  const Icon = currentTab.icon;
+                  return <Icon className="w-5 h-5 text-gray-400" />;
+                })()}
+                <span className="text-xs uppercase tracking-widest text-gray-400 font-semibold">
+                  {currentTab.label}
+                </span>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                {currentTab.heading}
+              </h2>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
-              {activeTab === "day" && "Perfect Single-Day Adventures"}
-              {activeTab === "couple" && "Romantic Escapes for Two"}
-              {activeTab === "more" && "Extended Island Experiences"}
-            </h2>
-          </div>
-          <p className="hidden md:block text-gray-400 text-sm text-right max-w-xs">
-            {currentTab.data.length} curated packages available
-          </p>
-        </motion.div>
+            <p className="hidden md:block text-gray-400 text-sm text-right">
+              {currentTab.data.length} curated packages
+            </p>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Cards */}
+        {/* Cards grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {currentTab.data.map((pkg, index) => (
               <PackageCard
@@ -561,19 +713,20 @@ export default function PackagesPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* CTA Strip */}
+        {/* ── CTA Banner ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 relative rounded-3xl overflow-hidden"
+          className="mt-24 relative rounded-3xl overflow-hidden min-h-[280px]"
         >
-          <img
-            src="/assest/packages/6.jpg"
+          <Image
+            src={img6}
             alt="Custom Tour"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: "brightness(0.35) saturate(1.1)" }}
+            fill
+            className="object-cover"
+            style={{ filter: "brightness(0.32) saturate(1.1)" }}
           />
           <div className="relative z-10 py-16 px-8 text-center">
             <StarIcon className="w-8 h-8 text-amber-400 mx-auto mb-4" />
