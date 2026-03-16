@@ -9,13 +9,13 @@ import {
   useTransform,
 } from "framer-motion";
 import { XIcon, ZoomInIcon } from "lucide-react";
-import img1 from "../assest/Gallery/1.jpg";
-import img2 from "../assest/Gallery/2.jpg";
-import img3 from "../assest/Gallery/3.jpg";
-import img4 from "../assest/Gallery/4.jpg";
-import img5 from "../assest/Gallery/5.jpg";
-import img6 from "../assest/Gallery/6.jpg";
-import img7 from "../assest/Gallery/7.jpg";
+import img1 from "../assest/gallery/1.jpg";
+import img2 from "../assest/gallery/2.jpg";
+import img3 from "../assest/gallery/3.jpg";
+import img4 from "../assest/gallery/4.jpg";
+import img5 from "../assest/gallery/5.jpg";
+import img6 from "../assest/gallery/6.jpg";
+import img7 from "../assest/gallery/7.jpg";
 
 // ─── Replace these with your local imports once you have images ───────────────
 // import g1 from '../assest/Gallery/1.jpg'  etc.
