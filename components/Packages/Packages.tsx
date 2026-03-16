@@ -538,7 +538,7 @@ export default function PackageDetailPage({
         <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
 
         {/* Back button */}
-        <div
+        {/* <div
           className="absolute top-6 left-6 z-20"
           onClick={() => {
             clickBack();
@@ -548,7 +548,7 @@ export default function PackageDetailPage({
             <ArrowLeftIcon className="w-4 h-4" />
             Back to Packages
           </div>
-        </div>
+        </div> */}
 
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-14">

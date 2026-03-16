@@ -4,99 +4,12 @@ import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { SparklesIcon, ChevronRightIcon } from "lucide-react";
-import img1 from "../../assest/Packages/1.jpg";
-import img2 from "../../assest/Packages/2.jpg";
-import img3 from "../../assest/Packages/3.jpg";
-import img4 from "../../assest/Packages/4.jpg";
-import img5 from "../../assest/Packages/5.jpg";
+
 import img6 from "../../assest/Packages/6.jpg";
+import { Experience } from "@/dataConfig/types";
+import { experiencesList as experiences } from "@/dataConfig/dtaConfig";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Experience {
-  id: string;
-  name: string;
-  description: string;
-  tags: string[];
-  image: StaticImageData;
-}
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const experiences: Experience[] = [
-  {
-    id: "exp-1",
-    name: "Yoga & Meditation",
-    description:
-      "Sri Lanka offers authentic yoga and meditation experiences influenced by ancient Vedic traditions and Buddhist mindfulness practices. Sessions take place in serene settings — hill country retreats, beachside pavilions, or jungle ashrams — combining asanas, pranayama, guided meditation, and mindfulness walks amid tea estates or ocean views.",
-    tags: ["Wellness", "Spiritual"],
-    image: img3,
-  },
-  {
-    id: "exp-2",
-    name: "Weddings in the Sun",
-    description:
-      "Sri Lanka ranks among the world's most exotic wedding destinations — ceremonies on golden beaches under palm trees, in lush jungle clearings, colonial villas, or atop misty hills. Options include traditional Kandyan rituals with drummers and dancers, barefoot beach vows, or intimate Ayurveda-inspired wellness weddings.",
-    tags: ["Romantic", "Luxury"],
-    image: img5,
-  },
-  {
-    id: "exp-3",
-    name: "Ayurveda & Spa Therapy",
-    description:
-      "With credentials dating back thousands of years, Sri Lankan Ayurveda blends ancient Indian principles with indigenous herbal knowledge. Treatments include Shirodhara, herbal steam baths, body wraps, massages, and personalized dosha-balancing programs — renowned for detoxification, rejuvenation, and stress reduction.",
-    tags: ["Wellness", "Healing"],
-    image: img2,
-  },
-  {
-    id: "exp-4",
-    name: "Shopping Sprees",
-    description:
-      "Sri Lanka delights shoppers with precious gemstones (world-famous Ceylon sapphires and rubies), hand-blocked batiks, vibrant textiles, intricate Buddha statues, aromatic spices, pure Ceylon tea, and eco-friendly handicrafts. Markets in Colombo, Galle Fort boutiques, and roadside stalls offer bargains and authentic souvenirs.",
-    tags: ["Shopping", "Markets"],
-    image: img4,
-  },
-  {
-    id: "exp-5",
-    name: "Delish Culinary",
-    description:
-      "Sri Lankan cuisine bursts with exotic, aromatic flavors influenced by Southeast Asian, Indian, and Dutch elements. Rice and curry, hoppers, kottu roti, fresh seafood, lamprais, and street food await. Cooking classes, spice garden visits, and farm-to-table experiences let you taste the island's bold spiced, coconut-rich authenticity.",
-    tags: ["Culinary", "Local Cuisine"],
-    image: img6,
-  },
-  {
-    id: "exp-6",
-    name: "Traditional Arts & Crafts",
-    description:
-      "Rooted in one of the world's oldest civilizations, Sri Lankan arts and crafts showcase intricate skills passed through generations — mask carving, Kandyan dance, batik printing, Dumbara mat weaving, silver filigree jewelry, and temple murals. Visit artisan villages, watch live demonstrations, or join hands-on workshops.",
-    tags: ["Cultural", "Workshops"],
-    image: img1,
-  },
-  {
-    id: "exp-7",
-    name: "Sporting Breaks",
-    description:
-      "Sri Lanka's diverse terrain sets the stage for thrilling sports year-round — surfing the south and east coasts, white-water rafting at Kitulgala, hiking Ella Rock or Adam's Peak, mountain biking, scuba diving, golf on colonial courses, and adventure sports like zip-lining or canyoning. Suits all levels.",
-    tags: ["Adventure", "Sports"],
-    image: img4,
-  },
-  {
-    id: "exp-8",
-    name: "Colourful Culture",
-    description:
-      "Steeped in Buddhism since the 3rd century BC, Sri Lankan culture blends ancient rituals, festivals, and daily life. Experience temple poojas, Kandyan dance and drumming, elephant processions (Perahera festival), vesak lanterns, and multicultural vibrancy — immersive insights into harmony, devotion, and living heritage.",
-    tags: ["Cultural", "Festivals"],
-    image: img1,
-  },
-  {
-    id: "exp-9",
-    name: "Exhilarating Adventures",
-    description:
-      "Dense jungles, towering mountains, giant rock fortresses, balmy oceans, and rolling hills create a paradise for adrenaline seekers. Wildlife safaris (leopards in Yala, elephants in Udawalawe), hot air ballooning over ancient cities, whale watching, kayaking lagoons, and multi-day treks combine thrills with breathtaking natural beauty.",
-    tags: ["Adventure", "Nature"],
-    image: img5,
-  },
-];
 
 // ─── Experience Card ──────────────────────────────────────────────────────────
 

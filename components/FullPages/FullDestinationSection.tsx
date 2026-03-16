@@ -7,14 +7,11 @@ import { MapPinIcon, ChevronRightIcon, GlobeIcon } from "lucide-react";
 
 import img3 from "../../assest/Packages/3.jpg";
 
-
 import type { Destination } from "../../dataConfig/types";
 import { destinations } from "../../dataConfig/dtaConfig";
+import { useRouter } from "next/navigation";
 
-
-
-
-// ─── Destination Card 
+// ─── Destination Card
 
 function DestinationCard({
   destination,
@@ -23,6 +20,11 @@ function DestinationCard({
   destination: Destination;
   index: number;
 }) {
+  const router = useRouter();
+  const clickBtn = (id: string) => {
+    router.push(`/destinations/${id}`);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -69,7 +71,10 @@ function DestinationCard({
           {destination.description}
         </p>
 
-        <button className="w-full py-3 px-4 border border-amber-200 rounded-lg text-amber-700 font-medium flex items-center justify-center gap-2 group-hover:bg-amber-700 group-hover:text-white group-hover:border-amber-700 transition-colors duration-300">
+        <button
+          onClick={() => clickBtn(destination.id)}
+          className="w-full py-3 px-4 border border-amber-200 rounded-lg text-amber-700 font-medium flex items-center justify-center gap-2 group-hover:bg-amber-700 group-hover:text-white group-hover:border-amber-700 transition-colors duration-300"
+        >
           Explore Destination
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
@@ -78,7 +83,7 @@ function DestinationCard({
   );
 }
 
-// ─── Destinations Section 
+// ─── Destinations Section
 
 export function FullDestinationsSection() {
   return (

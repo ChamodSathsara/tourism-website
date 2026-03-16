@@ -1,50 +1,20 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { MapPinIcon, StarIcon } from 'lucide-react'
-import img1 from '../assest/hotels/1.jpg'
-import img2 from '../assest/hotels/2.jpg'
-import img3 from '../assest/hotels/3.jpg'
-import img4 from '../assest/hotels/4.jpg'
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { MapPinIcon, StarIcon } from "lucide-react";
 
-const hotels = [
-  {
-    id: 1,
-    name: 'Heritance Kandalama',
-    location: 'Dambulla',
-    rating: 5,
-    tagline: 'Eco-luxury masterpiece by Geoffrey Bawa',
-    image: img1,
-  },
-  {
-    id: 2,
-    name: 'Cape Weligama',
-    location: 'Weligama',
-    rating: 5,
-    tagline: 'Cliff-top luxury overlooking the Indian Ocean',
-    image: img2,
-  },
-  {
-    id: 3,
-    name: 'Amangalla',
-    location: 'Galle Fort',
-    rating: 5,
-    tagline: 'Historic grandeur within 17th-century walls',
-    image: img3,
-  },
-  {
-    id: 4,
-    name: '98 Acres Resort',
-    location: 'Ella',
-    rating: 4,
-    tagline: 'Boutique chalets amidst scenic tea estates',
-    image: img4,
-  },
-]
+import { Accommodation } from "../dataConfig/types";
+import { accommodations } from "../dataConfig/dtaConfig";
 
 export function HotelsSection() {
+  const [hotels, setHotels] = useState<Accommodation[]>([]);
+
+  useEffect(() => {
+    // Simulate fetching data from an API or data source
+    setHotels(accommodations.slice(0, 8)); // Get the first 8 hotels for display
+  }, []);
   return (
     <section id="hotels" className="py-20 lg:py-28 bg-sand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,8 +31,8 @@ export function HotelsSection() {
             <div className="w-24 h-1 bg-sand-400 rounded-full mb-4 md:mb-0" />
           </div>
           <p className="text-lg text-gray-600 max-w-md">
-            Rest in unparalleled comfort. We partner with Sri Lanka's finest properties to ensure
-            your stay is as magical as the journey.
+            Rest in unparalleled comfort. We partner with Sri Lanka's finest
+            properties to ensure your stay is as magical as the journey.
           </p>
         </motion.div>
 
@@ -86,7 +56,10 @@ export function HotelsSection() {
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex gap-0.5">
                   {[...Array(hotel.rating)].map((_, i) => (
-                    <StarIcon key={i} className="w-3.5 h-3.5 fill-sand-500 text-sand-500" />
+                    <StarIcon
+                      key={i}
+                      className="w-3.5 h-3.5 fill-sand-500 text-sand-500"
+                    />
                   ))}
                 </div>
               </div>
@@ -96,8 +69,12 @@ export function HotelsSection() {
                   <MapPinIcon className="w-4 h-4" />
                   {hotel.location}
                 </div>
-                <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">{hotel.name}</h3>
-                <p className="text-gray-600 text-sm mb-6 flex-grow">{hotel.tagline}</p>
+                <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">
+                  {hotel.name}
+                </h3>
+                <p className="text-gray-600 text-sm mb-6 flex-grow">
+                  {hotel.tagline}
+                </p>
 
                 <button className="w-full py-2.5 border-2 border-gray-100 rounded-lg text-gray-700 font-semibold hover:border-tropical-600 hover:text-tropical-700 transition-colors">
                   View Hotel
@@ -108,5 +85,5 @@ export function HotelsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
