@@ -391,6 +391,170 @@ export const specialPackages: Package[] = [
     description:
       "Magical Paradise takes pride in carefully selecting the most romantic and charming locations possible for the Magical Romance tour itinerary in Sri Lanka. A day by day itinerary highlight is given below.",
     image: img1,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d2",
@@ -402,6 +566,170 @@ export const specialPackages: Package[] = [
     description:
       "Careful consideration has been given to including the best possible locations for a 13 day tour that will help heighten the ‘Wild and Wooly’ spark for adventurous travelers and provide a wonderful learning experience about what Sri Lanka offers the intrepid traveller.",
     image: img2,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d3",
@@ -413,6 +741,170 @@ export const specialPackages: Package[] = [
     description:
       "A Walk of Life tour package offers a unique opportunity to explore the cultural richness, traditions, and historical beauty of Sri Lanka with a carefully designed day by day itinerary.",
     image: img3,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d4",
@@ -424,6 +916,170 @@ export const specialPackages: Package[] = [
     description:
       "The Shades of Blue tour package is carefully designed to cover many of the must see coastal and natural wonders in Sri Lanka while enjoying the island’s beautiful beaches and ocean views.",
     image: img4,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d5",
@@ -435,6 +1091,170 @@ export const specialPackages: Package[] = [
     description:
       "The Magical Big Five tour package centers around wildlife and the awe inspiring mammals of the open seas encircling Sri Lanka. It highlights observing the Asian Elephant, Leopard, Sloth Bear, Blue Whale, and Sperm Whale in their natural habitat.",
     image: img5,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d6",
@@ -446,6 +1266,170 @@ export const specialPackages: Package[] = [
     description:
       "The Magical Highlights tour package is carefully designed to cover many of the must see historical and natural wonders in Sri Lanka within a short time frame.",
     image: img6,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
   {
     id: "d7",
@@ -457,6 +1441,170 @@ export const specialPackages: Package[] = [
     description:
       "The Magical Sri Lanka tour package is carefully designed to cover many of the must see historical and natural wonders in Sri Lanka with a detailed day by day itinerary.",
     image: img1,
+    highlights: [
+      "Elephant safari at Udawalawe National Park",
+      "Visit the Elephant Transit Home feeding sessions",
+      "Trek through UNESCO Sinharaja Rainforest",
+      "Leopard spotting at Yala National Park",
+      "Whale & dolphin watching at Mirissa harbor",
+      "Optional turtle hatchery & Galle Fort visit",
+    ],
+    includes: [
+      "Airport transfers",
+      "6 nights accommodation",
+      "Daily breakfast",
+      "All safaris & park entry fees",
+      "Expert wildlife guide",
+      "Whale watching boat trip",
+      "Sinharaja forest trek",
+    ],
+    excludes: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Lunch & dinner",
+      "Optional activities",
+    ],
+    // Hero image (original unchanged)
+    images: [img4, img1, img2, img3, img5, img6],
+    // Autoplay gallery section — each slide has its own title + description
+    gallery: [
+      {
+        image: img4,
+        title: "Yala National Park",
+        description:
+          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
+      },
+      {
+        image: img1,
+        title: "Sigiriya Rock Fortress",
+        description:
+          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
+      },
+      {
+        image: img2,
+        title: "Mirissa Beach",
+        description:
+          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
+      },
+      {
+        image: img3,
+        title: "Ella Highlands",
+        description:
+          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
+      },
+      {
+        image: img5,
+        title: "Udawalawe Safari",
+        description:
+          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
+      },
+      {
+        image: img6,
+        title: "Sinharaja Rainforest",
+        description:
+          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
+      },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Airport → Negombo",
+        locations: "Airport | Negombo",
+        description:
+          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
+        highlights: [
+          "Airport welcome & meet-greet",
+          "Transfer to Negombo (10 km)",
+          "Sightseeing & shopping in Negombo town",
+          "Overnight stay in Negombo",
+        ],
+      },
+      {
+        day: 2,
+        title: "Kithulgala → Udawalawe",
+        locations: "Kithulgala | Udawalawe",
+        description:
+          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
+        highlights: [
+          "Thrilling water sports at Kithulgala",
+          "Drive to Udawalawe National Park",
+          "Evening elephant safari",
+          "Wild buffalo, sambar deer & leopard spotting",
+          "Overnight stay in Udawalawe",
+        ],
+      },
+      {
+        day: 3,
+        title: "Udawalawe → Sinharaja",
+        locations: "Udawalawe | Sinharaja",
+        description:
+          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
+        highlights: [
+          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
+          "Watch orphan elephants from viewing platform",
+          "Drive to Sinharaja Rainforest",
+          "UNESCO World Heritage & Biosphere Reserve",
+          "Overnight stay in Sinharaja",
+        ],
+      },
+      {
+        day: 4,
+        title: "Sinharaja → Yala",
+        locations: "Sinharaja | Yala",
+        description:
+          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
+        highlights: [
+          "Morning trek through Sinharaja rainforest",
+          "Drive to Yala National Park",
+          "215 bird species including 6 endemics",
+          "World's highest leopard density spotting",
+          "Overnight stay in Yala",
+        ],
+      },
+      {
+        day: 5,
+        title: "Yala → Mirissa",
+        locations: "Yala | Mirissa",
+        description:
+          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
+        highlights: [
+          "Morning wildlife safari at Yala",
+          "Drive to Mirissa south coast",
+          "Crescent beach relaxation",
+          "Optional surfing, temple & snake farm visits",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 6,
+        title: "Mirissa — Whale Watching",
+        locations: "Mirissa",
+        description:
+          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
+        highlights: [
+          "7am harbor departure for whale watching",
+          "Blue whale & sperm whale sightings",
+          "Bottlenose, spinner & striped dolphins",
+          "Possible turtle & flying fish sightings",
+          "Afternoon beach relaxation",
+          "Overnight stay in Mirissa",
+        ],
+      },
+      {
+        day: 7,
+        title: "Mirissa → Airport",
+        locations: "Mirissa | Airport",
+        description:
+          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
+        highlights: [
+          "Optional turtle hatchery visit & turtle release",
+          "Optional Galle Dutch Fort walk",
+          "Transfer to Bandaranayake International Airport",
+          "Depart with unforgettable memories",
+        ],
+      },
+    ],
   },
 ];
 

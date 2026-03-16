@@ -9,6 +9,21 @@ export interface Package {
   tags: string[];
   description: string;
   image: StaticImageData;
+
+  highlights?: string[];
+  includes?: string[];
+  excludes?: string[];
+  images?: StaticImageData[];
+  gallery?: GallerySlide[];
+  itinerary?: DayItinerary[];
+}
+
+export interface DayItinerary {
+  day: number;
+  title: string;
+  locations: string;
+  description: string;
+  highlights: string[];
 }
 
 export interface GallerySlide {

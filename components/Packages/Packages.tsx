@@ -18,223 +18,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import img1 from "../../assest/Packages/1.jpg";
-import img2 from "../../assest/Packages/2.jpg";
-import img3 from "../../assest/Packages/3.jpg";
-import img4 from "../../assest/Packages/4.jpg";
-import img5 from "../../assest/Packages/5.jpg";
-import img6 from "../../assest/Packages/6.jpg";
+
 import { useRouter } from "next/navigation";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-interface DayItinerary {
-  day: number;
-  title: string;
-  locations: string;
-  description: string;
-  highlights: string[];
-}
-
-interface GallerySlide {
-  image: StaticImageData;
-  title: string;
-  description: string;
-}
-
-interface PackageDetail {
-  id: string;
-  name: string;
-  duration: string;
-  price: string;
-  badge: string | null;
-  tagline: string;
-  description: string;
-  highlights: string[];
-  includes: string[];
-  excludes: string[];
-  images: StaticImageData[];
-  gallery: GallerySlide[];
-  itinerary: DayItinerary[];
-}
-
-// ─── Package Data ─────────────────────────────────────────────────────────────
-
-const packages: PackageDetail[] = [
-  {
-    id: "magical-big-five",
-    name: "Magical Big Five",
-    duration: "7 Days",
-    price: "$899",
-    badge: "Wildlife",
-    tagline: "Asian Elephant · Leopard · Sloth Bear · Blue Whale · Sperm Whale",
-    description:
-      "The Magical Big Five tour package centers around wildlife and the awe inspiring mammals of the open seas encircling Sri Lanka. The Magical Big Five gives prominence to observing the Asian Elephant, Leopard, Sloth Bear, Blue Whale, and Sperm Whale in their natural habitat.",
-    highlights: [
-      "Elephant safari at Udawalawe National Park",
-      "Visit the Elephant Transit Home feeding sessions",
-      "Trek through UNESCO Sinharaja Rainforest",
-      "Leopard spotting at Yala National Park",
-      "Whale & dolphin watching at Mirissa harbor",
-      "Optional turtle hatchery & Galle Fort visit",
-    ],
-    includes: [
-      "Airport transfers",
-      "6 nights accommodation",
-      "Daily breakfast",
-      "All safaris & park entry fees",
-      "Expert wildlife guide",
-      "Whale watching boat trip",
-      "Sinharaja forest trek",
-    ],
-    excludes: [
-      "International flights",
-      "Travel insurance",
-      "Personal expenses",
-      "Lunch & dinner",
-      "Optional activities",
-    ],
-    // Hero image (original unchanged)
-    images: [img4, img1, img2, img3, img5, img6],
-    // Autoplay gallery section — each slide has its own title + description
-    gallery: [
-      {
-        image: img4,
-        title: "Yala National Park",
-        description:
-          "Home to the world's highest leopard density, Yala's coastal lagoons and scrublands make every safari a breathtaking adventure.",
-      },
-      {
-        image: img1,
-        title: "Sigiriya Rock Fortress",
-        description:
-          "Rise to the summit of this 5th-century citadel surrounded by ancient frescoes, water gardens, and panoramic jungle views.",
-      },
-      {
-        image: img2,
-        title: "Mirissa Beach",
-        description:
-          "Sri Lanka's most picturesque crescent bay — the gateway to blue whale watching, dolphins, and unforgettable Indian Ocean sunsets.",
-      },
-      {
-        image: img3,
-        title: "Ella Highlands",
-        description:
-          "Misty mountains, emerald tea estates, and the iconic Nine Arch Bridge — hill country that captures every traveller's heart.",
-      },
-      {
-        image: img5,
-        title: "Udawalawe Safari",
-        description:
-          "Witness herds of wild elephants in open grasslands that rival Africa's great savannah reserves.",
-      },
-      {
-        image: img6,
-        title: "Sinharaja Rainforest",
-        description:
-          "Explore Sri Lanka's UNESCO World Heritage rainforest on foot, guided through trails teeming with rare birds and endemic plants.",
-      },
-    ],
-    itinerary: [
-      {
-        day: 1,
-        title: "Airport → Negombo",
-        locations: "Airport | Negombo",
-        description:
-          "A warm welcome to Sri Lankan hospitality! On arrival at the Bandaranayake International Airport (BIA), you will be met by a Magical Paradise tour coordinator for a quick formality before proceeding to the historically important beach town of Negombo, ten kilometers away from the airport.",
-        highlights: [
-          "Airport welcome & meet-greet",
-          "Transfer to Negombo (10 km)",
-          "Sightseeing & shopping in Negombo town",
-          "Overnight stay in Negombo",
-        ],
-      },
-      {
-        day: 2,
-        title: "Kithulgala → Udawalawe",
-        locations: "Kithulgala | Udawalawe",
-        description:
-          "Engage in thrilling water sports and proceed to the Udawalawe national park. With herds of elephants, wild buffalo, sambar deer, and leopards, Uda Walawe national park is the Sri Lankan national park that best rivals the savannah reserves of Africa.",
-        highlights: [
-          "Thrilling water sports at Kithulgala",
-          "Drive to Udawalawe National Park",
-          "Evening elephant safari",
-          "Wild buffalo, sambar deer & leopard spotting",
-          "Overnight stay in Udawalawe",
-        ],
-      },
-      {
-        day: 3,
-        title: "Udawalawe → Sinharaja",
-        locations: "Udawalawe | Sinharaja",
-        description:
-          "After breakfast, visit the Elephant Transit Home (ETH) at Udawalawe. This provides a wonderful opportunity to see the orphans being fed and cared for while also observing wild elephants in a stunning setting. Afterward, proceed to the Sinharaja rainforest — a UNESCO World Heritage Site.",
-        highlights: [
-          "Elephant Transit Home visit (feeding at 9am, 12pm, 3pm, 6pm)",
-          "Watch orphan elephants from viewing platform",
-          "Drive to Sinharaja Rainforest",
-          "UNESCO World Heritage & Biosphere Reserve",
-          "Overnight stay in Sinharaja",
-        ],
-      },
-      {
-        day: 4,
-        title: "Sinharaja → Yala",
-        locations: "Sinharaja | Yala",
-        description:
-          "After Sinharaja rainforest trekking in the morning, proceed to Yala National Park — the most visited and second largest national park in Sri Lanka. Yala harbours 215 bird species and is home to one of the highest leopard densities in the world.",
-        highlights: [
-          "Morning trek through Sinharaja rainforest",
-          "Drive to Yala National Park",
-          "215 bird species including 6 endemics",
-          "World's highest leopard density spotting",
-          "Overnight stay in Yala",
-        ],
-      },
-      {
-        day: 5,
-        title: "Yala → Mirissa",
-        locations: "Yala | Mirissa",
-        description:
-          "Do the morning safari at Yala and proceed towards Mirissa — one of the most picture-postcard perfect beaches on the south coast. This secluded crescent-shaped beach is perfect for relaxing overlooking the Indian Ocean.",
-        highlights: [
-          "Morning wildlife safari at Yala",
-          "Drive to Mirissa south coast",
-          "Crescent beach relaxation",
-          "Optional surfing, temple & snake farm visits",
-          "Overnight stay in Mirissa",
-        ],
-      },
-      {
-        day: 6,
-        title: "Mirissa — Whale Watching",
-        locations: "Mirissa",
-        description:
-          "Be at the harbor at 7 am to go for whale and dolphin watching. In the warm Indian Ocean you can see Blue whales, Sperm whales, Fin whales, Killer whales (on occasion), and dolphins including Bottlenose, Spinner, and Striped varieties.",
-        highlights: [
-          "7am harbor departure for whale watching",
-          "Blue whale & sperm whale sightings",
-          "Bottlenose, spinner & striped dolphins",
-          "Possible turtle & flying fish sightings",
-          "Afternoon beach relaxation",
-          "Overnight stay in Mirissa",
-        ],
-      },
-      {
-        day: 7,
-        title: "Mirissa → Airport",
-        locations: "Mirissa | Airport",
-        description:
-          "As your holiday in Sri Lanka winds down, proceed with happy memories back to the airport. En-route, optional visits include turtle hatcheries and the historic Galle Dutch Fort — a UNESCO architectural heritage monument.",
-        highlights: [
-          "Optional turtle hatchery visit & turtle release",
-          "Optional Galle Dutch Fort walk",
-          "Transfer to Bandaranayake International Airport",
-          "Depart with unforgettable memories",
-        ],
-      },
-    ],
-  },
-];
+import { specialPackages as packages } from "@/dataConfig/dtaConfig";
+import type { Package as PackageDetail } from "@/dataConfig/types";
+import type { GallerySlide, DayItinerary } from "@/dataConfig/types";
 
 // ─── Cinematic Autoplay Gallery ───────────────────────────────────────────────
 
@@ -511,12 +299,10 @@ function DayCard({ day, index }: { day: DayItinerary; index: number }) {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function PackageDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function PackageDetailPage({ params }: { params: { id: any } }) {
   const pkg = packages.find((p) => p.id === params.id) ?? packages[0];
+  console.log("PackageDetailPage params:", params);
+  console.log(params.id, pkg);
   const router = useRouter();
   const clickBack = () => {
     router.back();
@@ -527,8 +313,8 @@ export default function PackageDetailPage({
       {/* ── Hero — ORIGINAL UNCHANGED ── */}
       <div className="relative h-[60vh] min-h-[440px] overflow-hidden">
         <Image
-          src={pkg.images[0]}
-          alt={pkg.name}
+          src={pkg?.images?.[0] ?? img1}
+          alt={pkg?.title}
           fill
           priority
           className="object-cover scale-105"
@@ -563,10 +349,10 @@ export default function PackageDetailPage({
                 </span>
               )}
               <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-3 drop-shadow-2xl">
-                {pkg.name}
+                {pkg.title}
               </h1>
               <p className="text-amber-300 text-sm font-semibold mb-4 tracking-wide">
-                {pkg.tagline}
+                {pkg.tags}
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
@@ -575,7 +361,7 @@ export default function PackageDetailPage({
                 </div>
                 <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
                   <CalendarIcon className="w-4 h-4 text-amber-400" />
-                  {pkg.itinerary.length} Day Itinerary
+                  {pkg?.itinerary?.length ?? 0} Day Itinerary
                 </div>
                 <div className="bg-amber-500 px-4 py-2 rounded-full text-white text-sm font-bold">
                   From {pkg.price}
@@ -610,7 +396,7 @@ export default function PackageDetailPage({
                 {pkg.description}
               </p>
               <div className="mt-6 grid sm:grid-cols-2 gap-2.5">
-                {pkg.highlights.map((h) => (
+                {pkg?.highlights?.map((h) => (
                   <div
                     key={h}
                     className="flex items-start gap-2 text-sm text-gray-700"
@@ -623,7 +409,7 @@ export default function PackageDetailPage({
             </motion.div>
 
             {/* 2. Cinematic Gallery — NEW SECTION */}
-            <CinematicGallery slides={pkg.gallery} />
+            <CinematicGallery slides={pkg?.gallery ?? []} />
 
             {/* 3. Itinerary */}
             <motion.div
@@ -642,7 +428,7 @@ export default function PackageDetailPage({
                 Day by Day
               </h2>
               <div className="space-y-3">
-                {pkg.itinerary.map((day, i) => (
+                {pkg?.itinerary?.map((day, i) => (
                   <DayCard key={day.day} day={day} index={i} />
                 ))}
               </div>
@@ -670,7 +456,7 @@ export default function PackageDetailPage({
                     ✓ Included
                   </h4>
                   <ul className="space-y-2.5">
-                    {pkg.includes.map((item) => (
+                    {pkg?.includes?.map((item) => (
                       <li
                         key={item}
                         className="flex items-start gap-2 text-sm text-emerald-700"
@@ -686,7 +472,7 @@ export default function PackageDetailPage({
                     ✕ Not Included
                   </h4>
                   <ul className="space-y-2.5">
-                    {pkg.excludes.map((item) => (
+                    {pkg?.excludes?.map((item) => (
                       <li
                         key={item}
                         className="flex items-start gap-2 text-sm text-rose-700"
@@ -724,11 +510,11 @@ export default function PackageDetailPage({
                   </div>
                   <div className="flex items-center gap-3 text-sm text-gray-600 bg-stone-50 rounded-xl px-4 py-3">
                     <CalendarIcon className="w-4 h-4 text-amber-500 shrink-0" />
-                    {pkg.itinerary.length}-day itinerary
+                    {pkg?.itinerary?.length ?? 0}-day itinerary
                   </div>
                   <div className="flex items-center gap-3 text-sm text-gray-600 bg-stone-50 rounded-xl px-4 py-3">
                     <MapPinIcon className="w-4 h-4 text-amber-500 shrink-0" />
-                    {pkg.itinerary.length} destinations
+                    {pkg?.itinerary?.length ?? 0} destinations
                   </div>
                 </div>
                 <Link

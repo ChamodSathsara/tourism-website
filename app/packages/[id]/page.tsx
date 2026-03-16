@@ -1,13 +1,18 @@
+"use client";
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import PackageDetailPage from "@/components/Packages/Packages";
-import React from "react";
+import { useParams } from "next/navigation";
 
-function page({ params }: { params: { id: string } }) {
+function page() {
+  const params = useParams();
+  const id = params?.id;
+
   return (
     <div>
       <Navbar />
-      <PackageDetailPage params={params} />
+      <PackageDetailPage params={{ id }} />
       <Footer />
     </div>
   );
