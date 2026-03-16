@@ -93,7 +93,7 @@ export function DayToursSection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-tropical-950 mb-4">
-              Popular Day Tours
+              Popular Destinations
             </h2>
             <div className="w-24 h-1 bg-sand-400 rounded-full" />
           </motion.div>

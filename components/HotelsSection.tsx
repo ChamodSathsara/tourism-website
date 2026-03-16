@@ -30,10 +30,10 @@ export function HotelsSection() {
             </h2>
             <div className="w-24 h-1 bg-sand-400 rounded-full mb-4 md:mb-0" />
           </div>
-          <p className="text-lg text-gray-600 max-w-md">
+          {/* <p className="text-lg text-gray-600 max-w-md">
             Rest in unparalleled comfort. We partner with Sri Lanka's finest
             properties to ensure your stay is as magical as the journey.
-          </p>
+          </p> */}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
