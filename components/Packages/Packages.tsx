@@ -510,3 +510,5 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
     </div>
   );
 }
+
+// ded
