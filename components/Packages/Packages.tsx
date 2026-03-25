@@ -10,7 +10,6 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronLeftIcon,
-  ArrowLeftIcon,
   PhoneIcon,
   MailIcon,
   CheckIcon,
@@ -18,19 +17,18 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import img1 from "../../assest/Packages/1.jpg";
-
 import { useRouter } from "next/navigation";
 import { specialPackages as packages } from "@/dataConfig/dtaConfig";
-import type { Package as PackageDetail } from "@/dataConfig/types";
-import type { GallerySlide, DayItinerary } from "@/dataConfig/types";
-
-// ─── Cinematic Autoplay Gallery ───────────────────────────────────────────────
+import type {
+  Package as PackageDetail,
+  GallerySlide,
+  DayItinerary,
+} from "@/dataConfig/types";
 
 function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const thumbsRef = useRef<HTMLDivElement>(null);
-  //   const AUTOPLAY_MS = 4000;
 
   const goTo = useCallback(
     (index: number) => {
@@ -40,13 +38,12 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
       setTimeout(() => setAnimating(false), 700);
       if (thumbsRef.current) {
         const thumb = thumbsRef.current.children[index] as HTMLElement;
-        if (thumb) {
+        if (thumb)
           thumb.scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "center",
           });
-        }
       }
     },
     [active, animating],
@@ -60,12 +57,6 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
     () => goTo((active - 1 + slides.length) % slides.length),
     [active, goTo, slides.length],
   );
-
-  //   useEffect(() => {
-  //     const t = setInterval(next, AUTOPLAY_MS);
-  //     return () => clearInterval(t);
-  //   }, [next]);
-
   const current = slides[active];
 
   return (
@@ -75,34 +66,19 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Section label */}
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-6 h-px bg-amber-500" />
-        <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+        <div className="w-6 h-px bg-[#0BAADC]" />
+        <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
           Gallery
         </span>
       </div>
-      <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+      <h2 className="text-3xl font-serif font-bold text-white mb-6">
         Highlights & Scenery
       </h2>
-
-      {/* Cinematic panel */}
       <div
-        className="relative w-full rounded-2xl overflow-hidden bg-black"
+        className="relative w-full rounded-2xl overflow-hidden bg-[#060d1a] border border-white/5"
         style={{ height: "480px" }}
       >
-        {/* Autoplay progress bar */}
-        {/* <div className="absolute top-0 left-0 right-0 h-0.5 bg-white/10 z-20">
-          <motion.div
-            key={active}
-            className="h-full bg-amber-400/80"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-          />
-        </div> */}
-
-        {/* Background image */}
         <AnimatePresence mode="sync">
           <motion.div
             key={active}
@@ -117,33 +93,28 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
               alt={current.title}
               fill
               className="object-cover"
-              style={{ filter: "brightness(1.25) saturate(1.1)" }}
+              style={{ filter: "brightness(1.15) saturate(1.1)" }}
               sizes="100vw"
             />
           </motion.div>
         </AnimatePresence>
-
-        {/* Gradients */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/20 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-        {/* Prev / Next arrows */}
         <button
           onClick={prev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-[#0BAADC]/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
         >
           <ChevronLeftIcon className="w-5 h-5" />
         </button>
         <button
           onClick={next}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-[#0BAADC]/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
         >
           <ChevronRightIcon className="w-5 h-5" />
         </button>
 
-        {/* Bottom: left text + right thumbnails */}
         <div className="absolute bottom-0 left-0 right-0 z-10 flex items-end gap-6 px-6 pb-5">
-          {/* Left — active slide info */}
           <div className="flex-1 min-w-0 max-w-md">
             <AnimatePresence mode="wait">
               <motion.div
@@ -156,29 +127,21 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
                 <h3 className="text-xl font-serif font-bold text-white mb-1.5">
                   {current.title}
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed line-clamp-2">
+                <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
                   {current.description}
                 </p>
               </motion.div>
             </AnimatePresence>
-
-            {/* Progress dots */}
             <div className="flex gap-1.5 mt-3">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
-                  className={`h-1 rounded-full transition-all duration-500 ${
-                    i === active
-                      ? "w-7 bg-amber-400"
-                      : "w-2 bg-white/30 hover:bg-white/50"
-                  }`}
+                  className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-7 bg-[#0BAADC]" : "w-2 bg-white/20 hover:bg-white/40"}`}
                 />
               ))}
             </div>
           </div>
-
-          {/* Right — thumbnail strip */}
           <div
             ref={thumbsRef}
             className="flex gap-2.5 overflow-x-auto scrollbar-hide pb-0.5 max-w-[55%] shrink-0"
@@ -189,11 +152,7 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
                 key={i}
                 onClick={() => goTo(i)}
                 style={{ scrollSnapAlign: "start" }}
-                className={`relative shrink-0 w-32 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                  i === active
-                    ? "border-amber-400 shadow-lg shadow-amber-500/30 opacity-100 scale-100"
-                    : "border-white/10 opacity-60 hover:opacity-90 hover:border-white/30 scale-95 hover:scale-100"
-                }`}
+                className={`relative shrink-0 w-32 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${i === active ? "border-[#0BAADC] shadow-lg shadow-[#0BAADC]/30 opacity-100 scale-100" : "border-white/10 opacity-55 hover:opacity-90 hover:border-white/30 scale-95 hover:scale-100"}`}
               >
                 <Image
                   src={slide.image}
@@ -203,9 +162,7 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
                   sizes="128px"
                 />
                 <div
-                  className={`absolute inset-0 transition-colors duration-300 ${
-                    i === active ? "bg-black/15" : "bg-black/40"
-                  }`}
+                  className={`absolute inset-0 transition-colors duration-300 ${i === active ? "bg-black/10" : "bg-black/50"}`}
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-1.5">
                   <p className="text-white text-[10px] font-semibold leading-tight line-clamp-2 text-left drop-shadow">
@@ -213,7 +170,7 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
                   </p>
                 </div>
                 {i === active && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0BAADC]" />
                 )}
               </button>
             ))}
@@ -224,24 +181,21 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
   );
 }
 
-// ─── Day Card ─────────────────────────────────────────────────────────────────
-
 function DayCard({ day, index }: { day: DayItinerary; index: number }) {
   const [open, setOpen] = useState(index === 0);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.45, delay: index * 0.06 }}
-      className="border border-stone-200 rounded-2xl overflow-hidden bg-white"
+      className="border border-white/8 rounded-2xl overflow-hidden bg-[#0d1424] hover:border-[#0BAADC]/20 transition-colors"
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-4 px-6 py-4 hover:bg-stone-50 transition-colors text-left"
+        className="w-full flex items-center gap-4 px-6 py-4 hover:bg-white/5 transition-colors text-left"
       >
-        <div className="shrink-0 w-12 h-12 bg-amber-500 rounded-xl flex flex-col items-center justify-center">
+        <div className="shrink-0 w-12 h-12 bg-gradient-to-br from-[#1761A0] to-[#0BAADC] rounded-xl flex flex-col items-center justify-center">
           <span className="text-white text-[10px] font-bold uppercase tracking-wider leading-none">
             Day
           </span>
@@ -251,40 +205,39 @@ function DayCard({ day, index }: { day: DayItinerary; index: number }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <MapPinIcon className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-            <span className="text-xs text-amber-600 font-semibold truncate">
+            <MapPinIcon className="w-3.5 h-3.5 text-[#0BAADC] shrink-0" />
+            <span className="text-xs text-[#0BAADC] font-semibold truncate">
               {day.locations}
             </span>
           </div>
-          <h4 className="text-base font-serif font-bold text-gray-900">
+          <h4 className="text-base font-serif font-bold text-white">
             {day.title}
           </h4>
         </div>
         <ChevronDownIcon
-          className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`w-5 h-5 text-white/30 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
-
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+            transition={{ duration: 0.35 }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 pt-0 border-t border-stone-100">
-              <p className="text-gray-600 text-sm leading-relaxed mt-4 mb-4">
+            <div className="px-6 pb-6 pt-0 border-t border-white/5">
+              <p className="text-white/50 text-sm leading-relaxed mt-4 mb-4">
                 {day.description}
               </p>
               <ul className="space-y-2">
                 {day.highlights.map((h) => (
                   <li
                     key={h}
-                    className="flex items-start gap-2 text-sm text-gray-700"
+                    className="flex items-start gap-2 text-sm text-white/60"
                   >
-                    <CheckIcon className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                    <CheckIcon className="w-4 h-4 text-[#0BAADC] mt-0.5 shrink-0" />
                     {h}
                   </li>
                 ))}
@@ -297,20 +250,13 @@ function DayCard({ day, index }: { day: DayItinerary; index: number }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function PackageDetailPage({ params }: { params: { id: any } }) {
   const pkg = packages.find((p) => p.id === params.id) ?? packages[0];
-  console.log("PackageDetailPage params:", params);
-  console.log(params.id, pkg);
   const router = useRouter();
-  const clickBack = () => {
-    router.back();
-  };
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      {/* ── Hero — ORIGINAL UNCHANGED ── */}
+    <div className="min-h-screen bg-[#060d1a]">
+      {/* Hero */}
       <div className="relative h-[60vh] min-h-[440px] overflow-hidden">
         <Image
           src={pkg?.images?.[0] ?? img1}
@@ -318,23 +264,10 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
           fill
           priority
           className="object-cover scale-105"
-          style={{ filter: "brightness(0.45) saturate(1.15)" }}
+          style={{ filter: "brightness(0.35) saturate(1.15)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
-
-        {/* Back button */}
-        {/* <div
-          className="absolute top-6 left-6 z-20"
-          onClick={() => {
-            clickBack();
-          }}
-        >
-          <div className="cursor-pointer flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full">
-            <ArrowLeftIcon className="w-4 h-4" />
-            Back to Packages
-          </div>
-        </div> */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/80 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060d1a] via-transparent to-transparent" />
 
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-14">
@@ -344,26 +277,26 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
               transition={{ duration: 0.8 }}
             >
               {pkg.badge && (
-                <span className="inline-block mb-3 px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                <span className="inline-block mb-3 px-3 py-1 bg-[#0BAADC]/20 border border-[#0BAADC]/30 text-[#0BAADC] text-xs font-bold rounded-full uppercase tracking-wider">
                   {pkg.badge}
                 </span>
               )}
               <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-3 drop-shadow-2xl">
                 {pkg.title}
               </h1>
-              <p className="text-amber-300 text-sm font-semibold mb-4 tracking-wide">
+              <p className="text-[#0BAADC] text-sm font-semibold mb-4 tracking-wide">
                 {pkg.tags}
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
-                  <ClockIcon className="w-4 h-4 text-amber-400" />
+                <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full text-white text-sm font-medium">
+                  <ClockIcon className="w-4 h-4 text-[#0BAADC]" />
                   {pkg.duration}
                 </div>
-                <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
-                  <CalendarIcon className="w-4 h-4 text-amber-400" />
+                <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full text-white text-sm font-medium">
+                  <CalendarIcon className="w-4 h-4 text-[#0BAADC]" />
                   {pkg?.itinerary?.length ?? 0} Day Itinerary
                 </div>
-                <div className="bg-amber-500 px-4 py-2 rounded-full text-white text-sm font-bold">
+                <div className="bg-gradient-to-r from-[#1761A0] to-[#0BAADC] px-4 py-2 rounded-full text-white text-sm font-bold shadow-[0_0_15px_rgba(11,170,220,0.4)]">
                   From {pkg.price}
                 </div>
               </div>
@@ -372,46 +305,44 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
         </div>
       </div>
 
-      {/* ── Main Content ── */}
+      {/* Main */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid lg:grid-cols-3 gap-10">
-          {/* Left — main content */}
           <div className="lg:col-span-2 space-y-12">
-            {/* 1. Overview */}
+            {/* Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Overview
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-serif font-bold text-white mb-4">
                 About This Package
               </h2>
-              <p className="text-gray-600 leading-relaxed text-base">
+              <p className="text-white/50 leading-relaxed text-base">
                 {pkg.description}
               </p>
               <div className="mt-6 grid sm:grid-cols-2 gap-2.5">
                 {pkg?.highlights?.map((h) => (
                   <div
                     key={h}
-                    className="flex items-start gap-2 text-sm text-gray-700"
+                    className="flex items-start gap-2 text-sm text-white/60"
                   >
-                    <CheckIcon className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                    <CheckIcon className="w-4 h-4 text-[#0BAADC] mt-0.5 shrink-0" />
                     {h}
                   </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* 2. Cinematic Gallery — NEW SECTION */}
             <CinematicGallery slides={pkg?.gallery ?? []} />
 
-            {/* 3. Itinerary */}
+            {/* Itinerary */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -419,12 +350,12 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Itinerary
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-white mb-6">
                 Day by Day
               </h2>
               <div className="space-y-3">
@@ -434,7 +365,7 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
               </div>
             </motion.div>
 
-            {/* 4. Includes / Excludes */}
+            {/* Includes/Excludes */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -442,24 +373,24 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   What's Included
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-white mb-6">
                 Includes & Excludes
               </h2>
               <div className="grid sm:grid-cols-2 gap-6">
-                <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-6">
-                  <h4 className="font-serif font-bold text-emerald-800 mb-4 text-lg">
+                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-6">
+                  <h4 className="font-serif font-bold text-emerald-400 mb-4 text-lg">
                     ✓ Included
                   </h4>
                   <ul className="space-y-2.5">
                     {pkg?.includes?.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-2 text-sm text-emerald-700"
+                        className="flex items-start gap-2 text-sm text-emerald-400/80"
                       >
                         <CheckIcon className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                         {item}
@@ -467,17 +398,17 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-rose-50 border border-rose-100 rounded-2xl p-6">
-                  <h4 className="font-serif font-bold text-rose-800 mb-4 text-lg">
+                <div className="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-6">
+                  <h4 className="font-serif font-bold text-rose-400 mb-4 text-lg">
                     ✕ Not Included
                   </h4>
                   <ul className="space-y-2.5">
                     {pkg?.excludes?.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-2 text-sm text-rose-700"
+                        className="flex items-start gap-2 text-sm text-rose-400/80"
                       >
-                        <XIcon className="w-4 h-4 text-rose-400 mt-0.5 shrink-0" />
+                        <XIcon className="w-4 h-4 text-rose-500 mt-0.5 shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -487,46 +418,53 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
             </motion.div>
           </div>
 
-          {/* Right — sticky booking card */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-4">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7 }}
-                className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6"
+                className="bg-[#0d1424] rounded-2xl border border-white/5 p-6"
               >
-                <div className="text-xs text-gray-400 uppercase tracking-wider mb-1">
+                <div className="text-xs text-white/30 uppercase tracking-wider mb-1">
                   Starting from
                 </div>
-                <div className="text-4xl font-bold text-amber-600 mb-1">
+                <div className="text-4xl font-bold text-[#0BAADC] mb-1">
                   {pkg.price}
                 </div>
-                <div className="text-sm text-gray-400 mb-6">per person</div>
+                <div className="text-sm text-white/30 mb-6">per person</div>
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3 text-sm text-gray-600 bg-stone-50 rounded-xl px-4 py-3">
-                    <ClockIcon className="w-4 h-4 text-amber-500 shrink-0" />
-                    {pkg.duration}
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-gray-600 bg-stone-50 rounded-xl px-4 py-3">
-                    <CalendarIcon className="w-4 h-4 text-amber-500 shrink-0" />
-                    {pkg?.itinerary?.length ?? 0}-day itinerary
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-gray-600 bg-stone-50 rounded-xl px-4 py-3">
-                    <MapPinIcon className="w-4 h-4 text-amber-500 shrink-0" />
-                    {pkg?.itinerary?.length ?? 0} destinations
-                  </div>
+                  {[
+                    { icon: ClockIcon, text: pkg.duration },
+                    {
+                      icon: CalendarIcon,
+                      text: `${pkg?.itinerary?.length ?? 0}-day itinerary`,
+                    },
+                    {
+                      icon: MapPinIcon,
+                      text: `${pkg?.itinerary?.length ?? 0} destinations`,
+                    },
+                  ].map(({ icon: Icon, text }) => (
+                    <div
+                      key={text}
+                      className="flex items-center gap-3 text-sm text-white/50 bg-white/5 border border-white/5 rounded-xl px-4 py-3"
+                    >
+                      <Icon className="w-4 h-4 text-[#0BAADC] shrink-0" />
+                      {text}
+                    </div>
+                  ))}
                 </div>
                 <Link
                   href="/contactUs"
-                  className="w-full py-3.5 px-6 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-200/50"
+                  className="w-full py-3.5 px-6 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(11,170,220,0.3)] hover:shadow-[0_0_30px_rgba(11,170,220,0.5)]"
                 >
                   Book This Package
                   <ChevronRightIcon className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/contactUs"
-                  className="w-full mt-3 py-3 px-6 border border-amber-200 text-amber-700 font-medium rounded-xl transition-colors flex items-center justify-center gap-2 hover:bg-amber-700 hover:text-white hover:border-amber-700 duration-300"
+                  className="w-full mt-3 py-3 px-6 border border-white/10 text-white/60 font-medium rounded-xl transition-colors flex items-center justify-center gap-2 hover:border-[#0BAADC]/30 hover:text-[#0BAADC] duration-300"
                 >
                   Enquire Now
                 </Link>
@@ -536,29 +474,34 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6"
+                className="bg-[#0d1424] rounded-2xl border border-white/5 p-6"
               >
-                <h4 className="font-serif font-bold text-gray-900 mb-4">
+                <h4 className="font-serif font-bold text-white mb-4">
                   Need Help?
                 </h4>
-                <a
-                  href="tel:+94000000000"
-                  className="flex items-center gap-3 text-sm text-gray-600 hover:text-amber-700 transition-colors mb-3 group"
-                >
-                  <div className="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-amber-100 transition-colors">
-                    <PhoneIcon className="w-4 h-4 text-amber-600" />
-                  </div>
-                  +94 000 000 000
-                </a>
-                <a
-                  href="mailto:info@magicalparadise.com"
-                  className="flex items-center gap-3 text-sm text-gray-600 hover:text-amber-700 transition-colors group"
-                >
-                  <div className="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-amber-100 transition-colors">
-                    <MailIcon className="w-4 h-4 text-amber-600" />
-                  </div>
-                  info@magicalparadise.com
-                </a>
+                {[
+                  {
+                    icon: PhoneIcon,
+                    href: "tel:+94000000000",
+                    text: "+94 000 000 000",
+                  },
+                  {
+                    icon: MailIcon,
+                    href: "mailto:info@magicalparadise.com",
+                    text: "info@magicalparadise.com",
+                  },
+                ].map(({ icon: Icon, href, text }) => (
+                  <a
+                    key={text}
+                    href={href}
+                    className="flex items-center gap-3 text-sm text-white/50 hover:text-[#0BAADC] transition-colors mb-3 group"
+                  >
+                    <div className="w-9 h-9 bg-[#0BAADC]/10 border border-[#0BAADC]/20 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-[#0BAADC]/20 transition-colors">
+                      <Icon className="w-4 h-4 text-[#0BAADC]" />
+                    </div>
+                    {text}
+                  </a>
+                ))}
               </motion.div>
             </div>
           </div>

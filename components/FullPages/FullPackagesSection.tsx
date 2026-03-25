@@ -16,23 +16,17 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import img1 from "../../assest/Packages/1.jpg";
-import img2 from "../../assest/Packages/2.jpg";
-import img3 from "../../assest/Packages/3.jpg";
-import img4 from "../../assest/Packages/4.jpg";
-import img5 from "../../assest/Packages/5.jpg";
 import img6 from "../../assest/Packages/6.jpg";
-import { useRouter, usePathname } from "next/navigation";
-
-import { dayPackages } from "../../dataConfig/dtaConfig";
-import { couplePackages } from "../../dataConfig/dtaConfig";
-import { morePackages } from "../../dataConfig/dtaConfig";
-import { maldivesPackages } from "../../dataConfig/dtaConfig";
-import { specialPackages } from "../../dataConfig/dtaConfig";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
+import { useRouter } from "next/navigation";
+import {
+  dayPackages,
+  couplePackages,
+  morePackages,
+  maldivesPackages,
+  specialPackages,
+} from "../../dataConfig/dtaConfig";
 
 type AccentColor = "amber" | "rose" | "emerald" | "sky" | "violet";
-
 interface Package {
   id: string;
   title: string;
@@ -43,7 +37,6 @@ interface Package {
   description: string;
   image: StaticImageData;
 }
-
 interface Tab {
   key: string;
   label: string;
@@ -53,12 +46,6 @@ interface Tab {
   heading: string;
 }
 
-interface PackageCardProps {
-  pkg: Package;
-  index: number;
-  accentColor: AccentColor;
-}
-
 const allPackages: Package[] = [
   ...specialPackages,
   ...dayPackages,
@@ -66,8 +53,6 @@ const allPackages: Package[] = [
   ...morePackages,
   ...maldivesPackages,
 ].map((pkg, i) => ({ ...pkg, id: `all-${i}` }));
-
-// ─── Tab Config ───────────────────────────────────────────────────────────────
 
 const tabs: Tab[] = [
   {
@@ -120,8 +105,7 @@ const tabs: Tab[] = [
   },
 ];
 
-// ─── Color Config ─────────────────────────────────────────────────────────────
-
+// Dark-themed color config
 const colorConfig: Record<
   AccentColor,
   {
@@ -133,62 +117,62 @@ const colorConfig: Record<
   }
 > = {
   amber: {
-    tabActive: "bg-amber-600 text-white",
-    tabShadow: "shadow-amber-200",
-    price: "text-amber-700",
-    btn: "border-amber-200 text-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700",
-    badge: "bg-amber-100 text-amber-800",
+    tabActive: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
+    tabShadow: "shadow-amber-500/20",
+    price: "text-amber-400",
+    btn: "border-amber-500/20 text-amber-400 group-hover:bg-amber-500 group-hover:text-white group-hover:border-amber-500",
+    badge: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
   },
   rose: {
-    tabActive: "bg-rose-600 text-white",
-    tabShadow: "shadow-rose-200",
-    price: "text-rose-700",
-    btn: "border-rose-200 text-rose-700 hover:bg-rose-700 hover:text-white hover:border-rose-700",
-    badge: "bg-rose-100 text-rose-800",
+    tabActive: "bg-rose-500/20 text-rose-300 border border-rose-500/30",
+    tabShadow: "shadow-rose-500/20",
+    price: "text-rose-400",
+    btn: "border-rose-500/20 text-rose-400 group-hover:bg-rose-500 group-hover:text-white group-hover:border-rose-500",
+    badge: "bg-rose-500/20 text-rose-300 border border-rose-500/30",
   },
   emerald: {
-    tabActive: "bg-emerald-600 text-white",
-    tabShadow: "shadow-emerald-200",
-    price: "text-emerald-700",
-    btn: "border-emerald-200 text-emerald-700 hover:bg-emerald-700 hover:text-white hover:border-emerald-700",
-    badge: "bg-emerald-100 text-emerald-800",
+    tabActive:
+      "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
+    tabShadow: "shadow-emerald-500/20",
+    price: "text-emerald-400",
+    btn: "border-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500",
+    badge: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
   },
   sky: {
-    tabActive: "bg-sky-600 text-white",
-    tabShadow: "shadow-sky-200",
-    price: "text-sky-700",
-    btn: "border-sky-200 text-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700",
-    badge: "bg-sky-100 text-sky-800",
+    tabActive: "bg-sky-500/20 text-sky-300 border border-sky-500/30",
+    tabShadow: "shadow-sky-500/20",
+    price: "text-sky-400",
+    btn: "border-sky-500/20 text-sky-400 group-hover:bg-sky-500 group-hover:text-white group-hover:border-sky-500",
+    badge: "bg-sky-500/20 text-sky-300 border border-sky-500/30",
   },
   violet: {
-    tabActive: "bg-violet-600 text-white",
-    tabShadow: "shadow-violet-200",
-    price: "text-violet-700",
-    btn: "border-violet-200 text-violet-700 hover:bg-violet-700 hover:text-white hover:border-violet-700",
-    badge: "bg-violet-100 text-violet-800",
+    tabActive: "bg-[#1761A0]/30 text-[#0BAADC] border border-[#0BAADC]/30",
+    tabShadow: "shadow-[#0BAADC]/20",
+    price: "text-[#0BAADC]",
+    btn: "border-[#0BAADC]/20 text-[#0BAADC] group-hover:bg-gradient-to-r group-hover:from-[#1761A0] group-hover:to-[#0BAADC] group-hover:text-white group-hover:border-transparent",
+    badge: "bg-[#0BAADC]/20 text-[#0BAADC] border border-[#0BAADC]/30",
   },
 };
 
-// ─── Package Card ─────────────────────────────────────────────────────────────
-
-function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
+function PackageCard({
+  pkg,
+  index,
+  accentColor,
+}: {
+  pkg: Package;
+  index: number;
+  accentColor: AccentColor;
+}) {
   const c = colorConfig[accentColor];
   const router = useRouter();
-
-  const clickButton = (id: string) => () => {
-    alert(`Clicked on package with id: ${id}`);
-    router.push(`/packages/${id}`);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.07 }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col"
+      className="group bg-[#0d1424] rounded-2xl overflow-hidden border border-white/5 hover:border-[#0BAADC]/20 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(11,170,220,0.12)] flex flex-col"
     >
-      {/* Image */}
       <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
         <Image
@@ -198,12 +182,10 @@ function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
           className="object-cover transform group-hover:scale-110 transition-transform duration-700"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Duration pill */}
-        <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 text-sm font-semibold text-gray-800 shadow-sm">
-          <ClockIcon className="w-4 h-4" />
+        <div className="absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full flex items-center gap-1 text-sm font-semibold text-white shadow-sm">
+          <ClockIcon className="w-4 h-4 text-[#0BAADC]" />
           {pkg.duration}
         </div>
-        {/* Badge */}
         {pkg.badge && (
           <div
             className={`absolute top-4 left-4 z-20 px-2.5 py-0.5 rounded-full text-xs font-bold ${c.badge}`}
@@ -212,28 +194,24 @@ function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
           </div>
         )}
       </div>
-
-      {/* Body */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-serif font-bold text-gray-900 leading-tight pr-4">
+          <h3 className="text-xl font-serif font-bold text-white leading-tight pr-4">
             {pkg.title}
           </h3>
           <div className="text-right shrink-0">
-            <span className="block text-xs text-gray-500 uppercase tracking-wider">
+            <span className="block text-xs text-white/30 uppercase tracking-wider">
               From
             </span>
             <span className={`text-lg font-bold ${c.price}`}>{pkg.price}</span>
           </div>
         </div>
-
-        <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
+        <p className="text-white/40 mb-6 flex-grow leading-relaxed text-sm">
           {pkg.description}
         </p>
-
         <button
-          className={`w-full py-3 px-4 border rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${c.btn}`}
-          onClick={clickButton(pkg.id)}
+          onClick={() => router.push(`/packages/${pkg.id}`)}
+          className={`w-full py-3 px-4 border rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300 ${c.btn}`}
         >
           View Itinerary
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -243,16 +221,13 @@ function PackageCard({ pkg, index, accentColor }: PackageCardProps) {
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
-
 export default function PackagesPage() {
   const [activeTab, setActiveTab] = useState<string>("all");
-
   const currentTab = tabs.find((t) => t.key === activeTab) as Tab;
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      {/* ── Hero ── */}
+    <div className="min-h-screen bg-[#060d1a]">
+      {/* Hero */}
       <div className="relative h-[62vh] min-h-[440px] flex items-center justify-center overflow-hidden">
         <Image
           src={img1}
@@ -260,10 +235,9 @@ export default function PackagesPage() {
           fill
           priority
           className="object-cover scale-105"
-          style={{ filter: "brightness(0.42) saturate(1.2)" }}
+          style={{ filter: "brightness(0.3) saturate(1.2)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-stone-50" />
-
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-[#060d1a]" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -271,19 +245,18 @@ export default function PackagesPage() {
           className="relative z-10 text-center px-4"
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <MapPinIcon className="w-5 h-5 text-amber-400" />
-            <span className="text-amber-300 text-sm font-semibold uppercase tracking-[0.2em]">
+            <MapPinIcon className="w-5 h-5 text-[#0BAADC]" />
+            <span className="text-[#0BAADC] text-sm font-semibold uppercase tracking-[0.2em]">
               Sri Lanka & Maldives
             </span>
           </div>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-4 leading-tight drop-shadow-2xl">
             Travel Packages
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
             Handcrafted itineraries for every kind of traveller — from
             sunrise-to-sunset day trips to grand island escapes.
           </p>
-
           <div className="flex items-center justify-center gap-10 mt-10">
             {(
               [
@@ -294,7 +267,7 @@ export default function PackagesPage() {
             ).map(([val, label]) => (
               <div key={label} className="text-center">
                 <div className="text-2xl font-bold text-white">{val}</div>
-                <div className="text-xs text-white/60 uppercase tracking-wider mt-0.5">
+                <div className="text-xs text-white/40 uppercase tracking-wider mt-0.5">
                   {label}
                 </div>
               </div>
@@ -303,8 +276,8 @@ export default function PackagesPage() {
         </motion.div>
       </div>
 
-      {/* ── Sticky Tab Nav ── */}
-      <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+      {/* Sticky Tab Nav */}
+      <div className="sticky top-0 z-30 bg-[#080e1c]/95 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-1 py-2 overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => {
@@ -318,17 +291,13 @@ export default function PackagesPage() {
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
                     isActive
                       ? `${cc.tabActive} shadow-lg ${cc.tabShadow}`
-                      : "text-gray-500 hover:text-gray-800 hover:bg-stone-100"
+                      : "text-white/40 hover:text-white/80 hover:bg-white/5"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   {tab.label}
                   <span
-                    className={`text-xs px-1.5 py-0.5 rounded-full ${
-                      isActive
-                        ? "bg-white/25 text-white"
-                        : "bg-stone-200 text-gray-600"
-                    }`}
+                    className={`text-xs px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/15 text-white" : "bg-white/8 text-white/40"}`}
                   >
                     {tab.data.length}
                   </span>
@@ -339,9 +308,8 @@ export default function PackagesPage() {
         </div>
       </div>
 
-      {/* ── Grid Section ── */}
+      {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        {/* Section heading */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab + "-heading"}
@@ -355,23 +323,22 @@ export default function PackagesPage() {
               <div className="flex items-center gap-2 mb-1">
                 {(() => {
                   const Icon = currentTab.icon;
-                  return <Icon className="w-5 h-5 text-gray-400" />;
+                  return <Icon className="w-5 h-5 text-white/30" />;
                 })()}
-                <span className="text-xs uppercase tracking-widest text-gray-400 font-semibold">
+                <span className="text-xs uppercase tracking-widest text-white/30 font-semibold">
                   {currentTab.label}
                 </span>
               </div>
-              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white">
                 {currentTab.heading}
               </h2>
             </div>
-            <p className="hidden md:block text-gray-400 text-sm text-right">
+            <p className="hidden md:block text-white/30 text-sm text-right">
               {currentTab.data.length} curated packages
             </p>
           </motion.div>
         </AnimatePresence>
 
-        {/* Cards grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -392,35 +359,36 @@ export default function PackagesPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* ── CTA Banner ── */}
+        {/* CTA Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-24 relative rounded-3xl overflow-hidden min-h-[280px]"
+          className="mt-24 relative rounded-3xl overflow-hidden min-h-[280px] border border-white/5"
         >
           <Image
             src={img6}
             alt="Custom Tour"
             fill
             className="object-cover"
-            style={{ filter: "brightness(0.32) saturate(1.1)" }}
+            style={{ filter: "brightness(0.25) saturate(1.1)" }}
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/60 via-transparent to-transparent" />
           <div className="relative z-10 py-16 px-8 text-center">
-            <StarIcon className="w-8 h-8 text-amber-400 mx-auto mb-4" />
+            <StarIcon className="w-8 h-8 text-[#0BAADC] mx-auto mb-4" />
             <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
               Can't find your perfect trip?
             </h3>
-            <p className="text-white/70 text-lg max-w-lg mx-auto mb-8">
+            <p className="text-white/50 text-lg max-w-lg mx-auto mb-8">
               We craft fully bespoke itineraries tailored to your dates, budget,
               and travel dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-xl transition-colors shadow-lg">
+              <button className="px-8 py-3.5 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(11,170,220,0.3)]">
                 Build a Custom Tour
               </button>
-              <button className="px-8 py-3.5 border border-white/40 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors">
+              <button className="px-8 py-3.5 border border-white/20 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors">
                 Talk to an Expert
               </button>
             </div>

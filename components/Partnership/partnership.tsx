@@ -5,13 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRightIcon, SendIcon, CheckCircleIcon } from "lucide-react";
 
-// ── Replace these with your actual image imports ──────────────────────────────
-// import heroImg from "../../assest/Packages/1.jpg";
-// For demo purposes we use a placeholder string; swap with your Image import.
 const heroImg =
   "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=1600&q=80";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface FormState {
   firstName: string;
@@ -41,9 +36,7 @@ const TRAVEL_NETWORKS = [
   "360 Private Travel",
   "Not Applicable",
 ];
-
 const LANGUAGES = ["English", "French", "Spanish"];
-
 const COMPANY_TYPES = [
   "Tour Operator",
   "Independent Travel Designer",
@@ -52,8 +45,6 @@ const COMPANY_TYPES = [
   "MICE Travel Agent",
   "Other",
 ];
-
-// ─── Why Register perks ───────────────────────────────────────────────────────
 
 const perks = [
   {
@@ -74,15 +65,10 @@ const perks = [
   },
 ];
 
-// ─── Reusable field styles ────────────────────────────────────────────────────
-
 const inputClass =
-  "w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-gray-900 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all duration-200";
-
+  "w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#0BAADC]/50 focus:border-[#0BAADC]/50 focus:bg-white/8 transition-all duration-200 [&>option]:bg-[#0d1424] [&>option]:text-white";
 const labelClass =
-  "block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5";
-
-// ─── Register Form ────────────────────────────────────────────────────────────
+  "block text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-1.5";
 
 function RegisterForm() {
   const [form, setForm] = useState<FormState>({
@@ -131,13 +117,13 @@ function RegisterForm() {
         transition={{ duration: 0.45 }}
         className="flex flex-col items-center justify-center py-20 text-center"
       >
-        <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-6 ring-8 ring-amber-100">
-          <CheckCircleIcon className="w-9 h-9 text-amber-500" />
+        <div className="w-20 h-20 bg-[#0BAADC]/10 border border-[#0BAADC]/30 rounded-full flex items-center justify-center mb-6 ring-4 ring-[#0BAADC]/10">
+          <CheckCircleIcon className="w-9 h-9 text-[#0BAADC]" />
         </div>
-        <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+        <h3 className="text-2xl font-semibold text-white mb-3">
           Registration Submitted!
         </h3>
-        <p className="text-gray-400 text-sm max-w-xs leading-relaxed mb-8">
+        <p className="text-white/40 text-sm max-w-xs leading-relaxed mb-8">
           Thank you for registering. Our partnerships team will review your
           details and be in touch within 24 hours.
         </p>
@@ -157,7 +143,7 @@ function RegisterForm() {
               country: "",
             });
           }}
-          className="inline-flex items-center gap-2 px-6 py-3 border border-amber-200 text-amber-600 text-sm font-semibold rounded-xl hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-6 py-3 border border-[#0BAADC]/30 text-[#0BAADC] text-sm font-semibold rounded-xl hover:bg-[#0BAADC] hover:text-white hover:border-[#0BAADC] transition-all duration-300"
         >
           Register Another
           <ArrowRightIcon className="w-4 h-4" />
@@ -168,11 +154,10 @@ function RegisterForm() {
 
   return (
     <div className="space-y-5">
-      {/* Row 1 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className={labelClass}>
-            First Name <span className="text-amber-500">*</span>
+            First Name <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="text"
@@ -185,7 +170,7 @@ function RegisterForm() {
         </div>
         <div>
           <label className={labelClass}>
-            Last Name <span className="text-amber-500">*</span>
+            Last Name <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="text"
@@ -197,11 +182,9 @@ function RegisterForm() {
           />
         </div>
       </div>
-
-      {/* Email */}
       <div>
         <label className={labelClass}>
-          Email Address <span className="text-amber-500">*</span>
+          Email Address <span className="text-[#0BAADC]">*</span>
         </label>
         <input
           type="email"
@@ -212,8 +195,6 @@ function RegisterForm() {
           className={inputClass}
         />
       </div>
-
-      {/* Travel Network */}
       <div>
         <label className={labelClass}>Travel Network</label>
         <select
@@ -232,12 +213,10 @@ function RegisterForm() {
           ))}
         </select>
       </div>
-
-      {/* Row: Company + Language */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className={labelClass}>
-            Company Name <span className="text-amber-500">*</span>
+            Company Name <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="text"
@@ -267,8 +246,6 @@ function RegisterForm() {
           </select>
         </div>
       </div>
-
-      {/* Website */}
       <div>
         <label className={labelClass}>Website</label>
         <input
@@ -280,12 +257,10 @@ function RegisterForm() {
           className={inputClass}
         />
       </div>
-
-      {/* Row: Company Type + Telephone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className={labelClass}>
-            Company Type <span className="text-amber-500">*</span>
+            Company Type <span className="text-[#0BAADC]">*</span>
           </label>
           <select
             name="companyType"
@@ -315,11 +290,9 @@ function RegisterForm() {
           />
         </div>
       </div>
-
-      {/* Country */}
       <div>
         <label className={labelClass}>
-          Country <span className="text-amber-500">*</span>
+          Country <span className="text-[#0BAADC]">*</span>
         </label>
         <input
           type="text"
@@ -330,12 +303,10 @@ function RegisterForm() {
           className={inputClass}
         />
       </div>
-
-      {/* Submit */}
       <button
         onClick={handleSubmit}
         disabled={loading || !isValid}
-        className="w-full py-4 px-6 bg-amber-500 hover:bg-amber-400 disabled:bg-stone-200 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-amber-200/60 hover:shadow-amber-300/70 mt-2"
+        className="w-full py-4 px-6 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] disabled:from-white/10 disabled:to-white/10 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(11,170,220,0.3)] hover:shadow-[0_0_30px_rgba(11,170,220,0.5)] mt-2"
       >
         {loading ? (
           <>
@@ -357,35 +328,29 @@ function RegisterForm() {
   );
 }
 
-// ─── Register With Us Page ────────────────────────────────────────────────────
-
 export default function RegisterWithUsPage() {
   return (
-    <div className="min-h-screen bg-amber-50/30">
-      {/* ── Hero ── */}
+    <div className="min-h-screen bg-[#060d1a]">
+      {/* Hero */}
       <div className="relative h-[56vh] min-h-[400px] overflow-hidden">
-        {/* Swap `src={heroImg}` for your imported image: src={img1} */}
         <Image
           src={heroImg}
           alt="Register with Magical Paradise"
           fill
           priority
           className="object-cover scale-105"
-          style={{ filter: "brightness(0.38) saturate(1.1)" }}
-          unoptimized // remove if using local imports
+          style={{ filter: "brightness(0.3) saturate(1.1)" }}
+          unoptimized
         />
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-amber-50/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/85 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060d1a] via-transparent to-transparent" />
 
-        {/* Decorative rings */}
         <div className="absolute top-1/2 right-16 -translate-y-1/2 hidden lg:flex items-center justify-center pointer-events-none">
-          <div className="w-52 h-52 rounded-full border border-white/10 flex items-center justify-center">
-            <div className="w-36 h-36 rounded-full border border-white/10 flex items-center justify-center">
-              <div className="w-24 h-24 rounded-full border border-white/15 flex items-center justify-center">
-                {/* User group icon */}
+          <div className="w-52 h-52 rounded-full border border-white/8 flex items-center justify-center">
+            <div className="w-36 h-36 rounded-full border border-white/8 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full border border-[#0BAADC]/15 flex items-center justify-center">
                 <svg
-                  className="w-10 h-10 text-white/25"
+                  className="w-10 h-10 text-[#0BAADC]/30"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -403,7 +368,6 @@ export default function RegisterWithUsPage() {
           </div>
         </div>
 
-        {/* Hero text */}
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-6 lg:px-10 w-full">
             <motion.div
@@ -413,17 +377,17 @@ export default function RegisterWithUsPage() {
               className="max-w-2xl"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-amber-400" />
-                <span className="text-amber-400 text-[11px] font-semibold uppercase tracking-[0.26em]">
+                <div className="w-8 h-px bg-[#0BAADC]" />
+                <span className="text-[#0BAADC] text-[11px] font-semibold uppercase tracking-[0.26em]">
                   Join Our Partner Network
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-[68px] font-bold text-white leading-[1.04] mb-5 drop-shadow-xl">
                 Register
                 <br />
-                <span className="text-amber-400">with Us</span>
+                <span className="text-[#0BAADC]">with Us</span>
               </h1>
-              <p className="text-white/70 text-lg leading-relaxed max-w-lg">
+              <p className="text-white/50 text-lg leading-relaxed max-w-lg">
                 Become an exclusive travel partner and unlock curated Sri Lanka
                 experiences, priority rates, and a dedicated support team.
               </p>
@@ -432,48 +396,45 @@ export default function RegisterWithUsPage() {
         </div>
       </div>
 
-      {/* ── Main content ── */}
+      {/* Main */}
       <div className="max-w-6xl mx-auto px-6 lg:px-10 py-16">
         <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
-          {/* ── Left: Form ── */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65 }}
-            className="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 lg:p-10"
+            className="bg-[#0d1424] rounded-3xl border border-white/5 p-8 lg:p-10"
           >
-            {/* Section header */}
             <div className="flex items-center gap-3 mb-1.5">
-              <div className="w-5 h-px bg-amber-500" />
-              <span className="text-[10px] uppercase tracking-widest text-amber-500 font-bold">
+              <div className="w-5 h-px bg-[#0BAADC]" />
+              <span className="text-[10px] uppercase tracking-widest text-[#0BAADC] font-bold">
                 Partner Registration
               </span>
             </div>
-            <h2 className="text-[28px] font-bold text-gray-900 mb-1.5">
+            <h2 className="text-[28px] font-bold text-white mb-1.5">
               Create Your Account
             </h2>
-            <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+            <p className="text-white/40 text-sm mb-8 leading-relaxed">
               Fill in the details below and our team will complete your
               onboarding within 24 hours.
             </p>
-
             <RegisterForm />
           </motion.div>
 
-          {/* ── Right: Perks + info ── */}
+          {/* Right */}
           <div className="space-y-6">
-            {/* Why Register card */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
-              className="bg-white rounded-3xl border border-stone-100 shadow-sm p-7"
+              className="bg-[#0d1424] rounded-3xl border border-white/5 p-7"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-5 h-px bg-amber-500" />
-                <span className="text-[10px] uppercase tracking-widest text-amber-500 font-bold">
+                <div className="w-5 h-px bg-[#0BAADC]" />
+                <span className="text-[10px] uppercase tracking-widest text-[#0BAADC] font-bold">
                   Why Register?
                 </span>
               </div>
@@ -487,9 +448,9 @@ export default function RegisterWithUsPage() {
                     transition={{ duration: 0.4, delay: i * 0.07 }}
                     className="flex items-start gap-3.5"
                   >
-                    <div className="w-8 h-8 bg-amber-50 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-8 h-8 bg-[#0BAADC]/10 border border-[#0BAADC]/20 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
                       <svg
-                        className="w-3.5 h-3.5 text-amber-500"
+                        className="w-3.5 h-3.5 text-[#0BAADC]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -501,10 +462,10 @@ export default function RegisterWithUsPage() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-gray-800 mb-0.5">
+                      <p className="text-sm font-semibold text-white mb-0.5">
                         {perk.title}
                       </p>
-                      <p className="text-xs text-gray-400 leading-relaxed">
+                      <p className="text-xs text-white/40 leading-relaxed">
                         {perk.desc}
                       </p>
                     </div>
@@ -513,91 +474,84 @@ export default function RegisterWithUsPage() {
               </div>
             </motion.div>
 
-            {/* Quick contact strip */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="bg-amber-500 rounded-3xl p-7 text-white"
+              className="bg-gradient-to-br from-[#1761A0] to-[#0BAADC] rounded-3xl p-7 text-white"
             >
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-amber-100 mb-2">
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2">
                 Need help registering?
               </p>
               <h3 className="text-xl font-bold mb-3 leading-snug">
                 Our partnerships team is ready to help
               </h3>
-              <p className="text-amber-100 text-sm leading-relaxed mb-5">
+              <p className="text-white/70 text-sm leading-relaxed mb-5">
                 If you have any questions about the registration process or our
                 partner programme, don't hesitate to get in touch.
               </p>
               <div className="flex flex-col gap-2.5">
-                <a
-                  href="tel:+94000000000"
-                  className="flex items-center gap-3 text-sm font-semibold text-white hover:text-amber-100 transition-colors"
-                >
-                  <span className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.06-1.06a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                    </svg>
-                  </span>
-                  +94 000 000 000
-                </a>
-                <a
-                  href="mailto:info@magicalparadise.com"
-                  className="flex items-center gap-3 text-sm font-semibold text-white hover:text-amber-100 transition-colors"
-                >
-                  <span className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                  </span>
-                  info@magicalparadise.com
-                </a>
+                {[
+                  {
+                    href: "tel:+94000000000",
+                    text: "+94 000 000 000",
+                    d: "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.06-1.06a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z",
+                  },
+                  {
+                    href: "mailto:info@magicalparadise.com",
+                    text: "info@magicalparadise.com",
+                    d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22,6 12,13 2,6",
+                  },
+                ].map(({ href, text, d }) => (
+                  <a
+                    key={text}
+                    href={href}
+                    className="flex items-center gap-3 text-sm font-semibold text-white hover:text-white/80 transition-colors"
+                  >
+                    <span className="w-8 h-8 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+                      <svg
+                        className="w-3.5 h-3.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d={d} />
+                      </svg>
+                    </span>
+                    {text}
+                  </a>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* ── Bottom CTA bar ── */}
-      <div className="bg-stone-900 py-10">
+      {/* Bottom CTA */}
+      <div className="bg-[#040912] border-t border-white/5 py-10">
         <div className="max-w-6xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl font-bold text-white">
               Ready to start your Sri Lanka partnership?
             </h3>
-            <p className="text-stone-400 text-sm mt-1">
+            <p className="text-white/30 text-sm mt-1">
               Already a partner? Log in to your partner portal.
             </p>
           </div>
           <div className="flex gap-3 shrink-0">
             <a
               href="tel:+94000000000"
-              className="flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-white font-semibold text-sm rounded-xl transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-semibold text-sm rounded-xl transition-colors"
             >
               Call Now
             </a>
             <a
               href="mailto:info@magicalparadise.com"
-              className="flex items-center gap-2 px-5 py-2.5 border border-stone-600 text-stone-300 hover:text-white hover:border-stone-400 font-semibold text-sm rounded-xl transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 border border-white/10 text-white/50 hover:text-white hover:border-white/20 font-semibold text-sm rounded-xl transition-colors"
             >
               Email Us
             </a>

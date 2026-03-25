@@ -27,7 +27,7 @@ export function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* Fallback image (shown before video loads) */}
+      {/* Fallback image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -36,12 +36,23 @@ export function HeroSection() {
         }}
       />
 
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 z-10 bg-black/35" />
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      {/* Dark Gradient Overlays */}
+      <div className="absolute inset-0 z-10 bg-black/55" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060d1a] via-black/20 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#060d1a]/40 via-transparent to-[#060d1a]/40" />
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white/80 text-sm font-medium mb-6"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#0BAADC] animate-pulse" />
+          Sri Lanka's Premier Luxury Tour Operator
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +66,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-lg md:text-2xl text-sand-50 mb-10 max-w-3xl mx-auto font-light drop-shadow-md"
+          className="text-lg md:text-2xl text-white/70 mb-10 max-w-3xl mx-auto font-light drop-shadow-md"
         >
           Luxury journeys through ancient kingdoms, pristine beaches, and misty
           highlands.
@@ -69,7 +80,7 @@ export function HeroSection() {
         >
           <a
             href="#packages"
-            className="group flex items-center gap-2 bg-tropical-600 hover:bg-tropical-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(21,128,61,0.4)] hover:shadow-[0_0_30px_rgba(21,128,61,0.6)] hover:-translate-y-1"
+            className="group flex items-center gap-2 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_0_30px_rgba(11,170,220,0.4)] hover:shadow-[0_0_50px_rgba(11,170,220,0.6)] hover:-translate-y-1"
           >
             <SearchIcon className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
             Start Planning
@@ -78,7 +89,7 @@ export function HeroSection() {
             href="https://wa.me/1234567890"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:-translate-y-1"
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:-translate-y-1"
           >
             <MessageCircleIcon className="w-5 h-5" />
             WhatsApp Us
@@ -91,45 +102,27 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-        className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-black/90 to-transparent hidden lg:block pt-20 pb-8"
+        className="absolute bottom-0 left-0 right-0 z-30 hidden lg:block"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 divide-x divide-white/20">
-            <div className="text-center px-4">
-              <AwardIcon className="w-8 h-8 text-sand-400 mx-auto mb-2" />
-              <p className="text-3xl font-serif font-bold text-white mb-1">
-                15+
-              </p>
-              <p className="text-sm text-sand-100 uppercase tracking-wider">
-                Years Experience
-              </p>
-            </div>
-            <div className="text-center px-4">
-              <UsersIcon className="w-8 h-8 text-sand-400 mx-auto mb-2" />
-              <p className="text-3xl font-serif font-bold text-white mb-1">
-                5000+
-              </p>
-              <p className="text-sm text-sand-100 uppercase tracking-wider">
-                Happy Travelers
-              </p>
-            </div>
-            <div className="text-center px-4">
-              <MapIcon className="w-8 h-8 text-sand-400 mx-auto mb-2" />
-              <p className="text-3xl font-serif font-bold text-white mb-1">
-                200+
-              </p>
-              <p className="text-sm text-sand-100 uppercase tracking-wider">
-                Curated Tours
-              </p>
-            </div>
-            <div className="text-center px-4">
-              <StarIcon className="w-8 h-8 text-sand-400 mx-auto mb-2 fill-current" />
-              <p className="text-3xl font-serif font-bold text-white mb-1">
-                4.9
-              </p>
-              <p className="text-sm text-sand-100 uppercase tracking-wider">
-                TripAdvisor Rating
-              </p>
+        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="grid grid-cols-4 gap-6 divide-x divide-white/10">
+              {[
+                { icon: AwardIcon, value: "15+", label: "Years Experience" },
+                { icon: UsersIcon, value: "5000+", label: "Happy Travelers" },
+                { icon: MapIcon, value: "200+", label: "Curated Tours" },
+                { icon: StarIcon, value: "4.9", label: "TripAdvisor Rating" },
+              ].map(({ icon: Icon, value, label }) => (
+                <div key={label} className="text-center px-4">
+                  <Icon className="w-7 h-7 text-[#0BAADC] mx-auto mb-2" />
+                  <p className="text-2xl font-serif font-bold text-white mb-0.5">
+                    {value}
+                  </p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider">
+                    {label}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

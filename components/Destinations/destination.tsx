@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPinIcon,
@@ -17,19 +17,16 @@ import {
   CameraIcon,
 } from "lucide-react";
 import Link from "next/link";
-
-import type { Destination as DestinationDetail } from "../../dataConfig/types";
+import type {
+  Destination as DestinationDetail,
+  GallerySlide,
+} from "../../dataConfig/types";
 import { destinations as listofDestinations } from "@/dataConfig/dtaConfig";
-import { GallerySlide } from "../../dataConfig/types";
-import { li } from "framer-motion/client";
-
-// ─── Cinematic Autoplay Gallery ───────────────────────────────────────────────
 
 function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const thumbsRef = useRef<HTMLDivElement>(null);
-  //   const AUTOPLAY_MS = 4500;
 
   const goTo = useCallback(
     (index: number) => {
@@ -58,31 +55,13 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
     () => goTo((active - 1 + slides.length) % slides.length),
     [active, goTo, slides.length],
   );
-
-  //   useEffect(() => {
-  //     const t = setInterval(next, AUTOPLAY_MS);
-  //     return () => clearInterval(t);
-  //   }, [next]);
-
   const current = slides[active];
 
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden bg-black"
+      className="relative w-full rounded-2xl overflow-hidden bg-[#060d1a] border border-white/5"
       style={{ height: "500px" }}
     >
-      {/* Progress bar */}
-      {/* <div className="absolute top-0 left-0 right-0 h-0.5 bg-white/10 z-20">
-        <motion.div
-          key={active}
-          className="h-full bg-amber-400/80"
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-        />
-      </div> */}
-
-      {/* Background image */}
       <AnimatePresence mode="sync">
         <motion.div
           key={active}
@@ -97,33 +76,28 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
             alt={current?.title}
             fill
             className="object-cover"
-            style={{ filter: "brightness(1.25) saturate(1.1)" }}
+            style={{ filter: "brightness(1.15) saturate(1.1)" }}
             sizes="100vw"
           />
         </motion.div>
       </AnimatePresence>
-
-      {/* Gradients */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/25 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
 
-      {/* Arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-[#0BAADC]/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all border border-white/15"
       >
         <ChevronLeftIcon className="w-5 h-5" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 border border-white/15"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-[#0BAADC]/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all border border-white/15"
       >
         <ChevronRightIcon className="w-5 h-5" />
       </button>
 
-      {/* Bottom layout */}
       <div className="absolute bottom-0 left-0 right-0 z-10 flex items-end gap-6 px-6 pb-5">
-        {/* Left — slide info */}
         <div className="flex-1 min-w-0 max-w-md">
           <AnimatePresence mode="wait">
             <motion.div
@@ -134,32 +108,29 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
               transition={{ duration: 0.4 }}
             >
               <div className="flex items-center gap-2 mb-1.5">
-                <CameraIcon className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">
+                <CameraIcon className="w-3.5 h-3.5 text-[#0BAADC]" />
+                <span className="text-[#0BAADC] text-xs font-semibold uppercase tracking-widest">
                   {active + 1} / {slides.length}
                 </span>
               </div>
               <h3 className="text-xl font-serif font-bold text-white mb-1.5">
                 {current?.title}
               </h3>
-              <p className="text-white/65 text-sm leading-relaxed line-clamp-2">
+              <p className="text-white/55 text-sm leading-relaxed line-clamp-2">
                 {current?.description}
               </p>
             </motion.div>
           </AnimatePresence>
-          {/* Dots */}
           <div className="flex gap-1.5 mt-3">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-7 bg-amber-400" : "w-2 bg-white/30 hover:bg-white/50"}`}
+                className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-7 bg-[#0BAADC]" : "w-2 bg-white/20 hover:bg-white/40"}`}
               />
             ))}
           </div>
         </div>
-
-        {/* Right — thumbnails */}
         <div
           ref={thumbsRef}
           className="flex gap-2.5 overflow-x-auto pb-0.5 max-w-[52%] shrink-0"
@@ -170,11 +141,7 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
               key={i}
               onClick={() => goTo(i)}
               style={{ scrollSnapAlign: "start" }}
-              className={`relative shrink-0 w-32 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                i === active
-                  ? "border-amber-400 shadow-lg shadow-amber-500/30 opacity-100 scale-100"
-                  : "border-white/10 opacity-55 hover:opacity-90 hover:border-white/30 scale-95 hover:scale-100"
-              }`}
+              className={`relative shrink-0 w-32 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${i === active ? "border-[#0BAADC] shadow-lg shadow-[#0BAADC]/30 opacity-100 scale-100" : "border-white/10 opacity-55 hover:opacity-90 hover:border-white/30 scale-95 hover:scale-100"}`}
             >
               <Image
                 src={slide.image}
@@ -184,15 +151,15 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
                 sizes="128px"
               />
               <div
-                className={`absolute inset-0 transition-colors duration-300 ${i === active ? "bg-black/10" : "bg-black/45"}`}
+                className={`absolute inset-0 transition-colors ${i === active ? "bg-black/10" : "bg-black/50"}`}
               />
               <div className="absolute bottom-0 left-0 right-0 p-1.5">
-                <p className="text-white text-[10px] font-semibold leading-tight line-clamp-2 text-left drop-shadow">
+                <p className="text-white text-[10px] font-semibold leading-tight line-clamp-2 drop-shadow">
                   {slide.title}
                 </p>
               </div>
               {i === active && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0BAADC]" />
               )}
             </button>
           ))}
@@ -202,39 +169,20 @@ function CinematicGallery({ slides }: { slides: GallerySlide[] }) {
   );
 }
 
-// ─── Destination Detail Page ──────────────────────────────────────────────────
-
 export default function DestinationDetailPage({
   params,
 }: {
   params: { id: any };
 }) {
-  console.log("DestinationDetailPage params:", params);
   const [destinations, setDestinations] = useState<DestinationDetail[]>([]);
-
-  // useEffect(() => {
-  //   console.log("Fetching destinations data...");
-  //   listofDestinations.forEach((d) => {
-  //     if (d.id === params.id) {
-  //       console.log("Found destination:", d.name);
-  //       setDestinations([d]);
-  //     }
-  //   });
-
-  //   // Simulate fetching data (replace with actual fetch if needed)
-  //   setDestinations(listofDestinations);
-  // }, []);
-
   useEffect(() => {
-    console.log("Fetching destinations data...");
-    // Simulate fetching data (replace with actual fetch if needed)
     setDestinations(listofDestinations);
   }, []);
   const dest = destinations.find((d) => d.id === params.id) ?? destinations[0];
-  console.log(dest, params.id);
+
   return (
-    <div className="min-h-screen bg-stone-50">
-      {/* ── Hero — same pattern as other pages ── */}
+    <div className="min-h-screen bg-[#060d1a]">
+      {/* Hero */}
       <div className="relative h-[60vh] min-h-[440px] overflow-hidden">
         <Image
           src={
@@ -246,16 +194,15 @@ export default function DestinationDetailPage({
           fill
           priority
           className="object-cover scale-105"
-          style={{ filter: "brightness(0.45) saturate(1.15)" }}
+          style={{ filter: "brightness(0.35) saturate(1.15)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/80 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060d1a] via-transparent to-transparent" />
 
-        {/* Back */}
         <div className="absolute top-6 left-6 z-20">
           <Link
             href="/destinations"
-            className="flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full"
+            className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors bg-white/8 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full"
           >
             <ArrowLeftIcon className="w-4 h-4" />
             Back to Destinations
@@ -273,7 +220,7 @@ export default function DestinationDetailPage({
                 {dest?.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider"
+                    className="px-3 py-1 bg-[#0BAADC]/20 border border-[#0BAADC]/30 text-[#0BAADC] text-xs font-bold rounded-full uppercase tracking-wider"
                   >
                     {tag}
                   </span>
@@ -282,32 +229,32 @@ export default function DestinationDetailPage({
               <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-3 drop-shadow-2xl">
                 {dest?.name}
               </h1>
-              <p className="text-amber-300 text-sm font-semibold mb-4 tracking-wide">
+              <p className="text-[#0BAADC] text-sm font-semibold mb-4 tracking-wide">
                 {dest?.region}
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
-                  <MapPinIcon className="w-4 h-4 text-amber-400" />
-                  {dest?.region}
-                </div>
-                <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
-                  <SunIcon className="w-4 h-4 text-amber-400" />
-                  Best: {dest?.bestTime}
-                </div>
-                <div className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium">
-                  <CloudIcon className="w-4 h-4 text-amber-400" />
-                  {dest?.climate}
-                </div>
+                {[
+                  { icon: MapPinIcon, text: dest?.region },
+                  { icon: SunIcon, text: `Best: ${dest?.bestTime}` },
+                  { icon: CloudIcon, text: dest?.climate },
+                ].map(({ icon: Icon, text }) => (
+                  <div
+                    key={text}
+                    className="flex items-center gap-1.5 bg-white/8 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full text-white text-sm font-medium"
+                  >
+                    <Icon className="w-4 h-4 text-[#0BAADC]" />
+                    {text}
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* ── Main Content ── */}
+      {/* Main */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid lg:grid-cols-3 gap-10">
-          {/* Left — main */}
           <div className="lg:col-span-2 space-y-12">
             {/* Overview */}
             <motion.div
@@ -316,20 +263,20 @@ export default function DestinationDetailPage({
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Overview
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-serif font-bold text-white mb-4">
                 About {dest?.name}
               </h2>
-              <p className="text-gray-600 leading-relaxed text-base">
+              <p className="text-white/50 leading-relaxed text-base">
                 {dest?.longDescription}
               </p>
             </motion.div>
 
-            {/* Cinematic Gallery */}
+            {/* Gallery */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -337,12 +284,12 @@ export default function DestinationDetailPage({
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Gallery
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-white mb-6">
                 Highlights & Scenery
               </h2>
               <CinematicGallery slides={dest?.gallery ?? []} />
@@ -356,12 +303,12 @@ export default function DestinationDetailPage({
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Top Experiences
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-white mb-6">
                 Must-Do Highlights
               </h2>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -372,12 +319,12 @@ export default function DestinationDetailPage({
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.07 }}
-                    className="flex items-start gap-3 bg-white border border-stone-100 rounded-xl p-4"
+                    className="flex items-start gap-3 bg-[#0d1424] border border-white/5 rounded-xl p-4 hover:border-[#0BAADC]/20 transition-colors"
                   >
-                    <div className="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckIcon className="w-3.5 h-3.5 text-amber-600" />
+                    <div className="w-6 h-6 bg-[#0BAADC]/10 border border-[#0BAADC]/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckIcon className="w-3.5 h-3.5 text-[#0BAADC]" />
                     </div>
-                    <span className="text-sm text-gray-700 leading-relaxed">
+                    <span className="text-sm text-white/60 leading-relaxed">
                       {h}
                     </span>
                   </motion.div>
@@ -393,21 +340,21 @@ export default function DestinationDetailPage({
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-px bg-amber-500" />
-                <span className="text-xs uppercase tracking-widest text-amber-600 font-bold">
+                <div className="w-6 h-px bg-[#0BAADC]" />
+                <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
                   Insider Tips
                 </span>
               </div>
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-white mb-6">
                 Travel Tips
               </h2>
-              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6 space-y-3">
+              <div className="bg-[#0BAADC]/5 border border-[#0BAADC]/15 rounded-2xl p-6 space-y-3">
                 {dest?.travelTips?.map((tip, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 text-sm text-amber-900"
+                    className="flex items-start gap-3 text-sm text-white/60"
                   >
-                    <span className="shrink-0 w-5 h-5 bg-amber-500 text-white text-xs font-bold rounded-full flex items-center justify-center mt-0.5">
+                    <span className="shrink-0 w-5 h-5 bg-gradient-to-br from-[#1761A0] to-[#0BAADC] text-white text-xs font-bold rounded-full flex items-center justify-center mt-0.5">
                       {i + 1}
                     </span>
                     {tip}
@@ -417,61 +364,45 @@ export default function DestinationDetailPage({
             </motion.div>
           </div>
 
-          {/* Right — sticky sidebar */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-4">
-              {/* Quick info card */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7 }}
-                className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6"
+                className="bg-[#0d1424] rounded-2xl border border-white/5 p-6"
               >
-                <h4 className="font-serif font-bold text-gray-900 mb-4 text-lg">
+                <h4 className="font-serif font-bold text-white mb-4 text-lg">
                   Quick Info
                 </h4>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 text-sm">
-                    <MapPinIcon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">
-                        Region
-                      </div>
-                      <div className="text-gray-700 font-medium">
-                        {dest?.region}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm">
-                    <CalendarIcon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">
-                        Best Time to Visit
-                      </div>
-                      <div className="text-gray-700 font-medium">
-                        {dest?.bestTime}
+                  {[
+                    { icon: MapPinIcon, label: "Region", value: dest?.region },
+                    {
+                      icon: CalendarIcon,
+                      label: "Best Time to Visit",
+                      value: dest?.bestTime,
+                    },
+                    { icon: SunIcon, label: "Climate", value: dest?.climate },
+                  ].map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="flex items-start gap-3 text-sm">
+                      <Icon className="w-4 h-4 text-[#0BAADC] shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-white/30 text-xs uppercase tracking-wider mb-0.5">
+                          {label}
+                        </div>
+                        <div className="text-white/70 font-medium">{value}</div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm">
-                    <SunIcon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">
-                        Climate
-                      </div>
-                      <div className="text-gray-700 font-medium">
-                        {dest?.climate}
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-
-                <div className="mt-5 pt-4 border-t border-stone-100">
+                <div className="mt-5 pt-4 border-t border-white/5">
                   <div className="flex flex-wrap gap-1.5">
                     {dest?.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-1 bg-stone-100 text-stone-600 text-xs font-semibold rounded-full"
+                        className="px-2.5 py-1 bg-white/5 border border-white/10 text-white/50 text-xs font-semibold rounded-full"
                       >
                         {tag}
                       </span>
@@ -480,63 +411,66 @@ export default function DestinationDetailPage({
                 </div>
               </motion.div>
 
-              {/* Book CTA */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6"
+                className="bg-[#0d1424] rounded-2xl border border-white/5 p-6"
               >
-                <h4 className="font-serif font-bold text-gray-900 mb-2">
+                <h4 className="font-serif font-bold text-white mb-2">
                   Visit {dest?.name}?
                 </h4>
-                <p className="text-sm text-gray-500 mb-5 leading-relaxed">
+                <p className="text-sm text-white/40 mb-5 leading-relaxed">
                   Let us build a personalised tour that includes {dest?.name}{" "}
                   and other Sri Lanka highlights.
                 </p>
                 <Link
                   href="/packages"
-                  className="w-full py-3.5 px-6 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-200/50 mb-3"
+                  className="w-full py-3.5 px-6 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(11,170,220,0.3)] mb-3"
                 >
                   See Packages
                   <ChevronRightIcon className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="w-full py-3 px-6 border border-amber-200 text-amber-700 font-medium rounded-xl transition-colors flex items-center justify-center gap-2 hover:bg-amber-700 hover:text-white hover:border-amber-700 duration-300"
+                  className="w-full py-3 px-6 border border-white/10 text-white/50 font-medium rounded-xl flex items-center justify-center gap-2 hover:border-[#0BAADC]/30 hover:text-[#0BAADC] transition-colors duration-300"
                 >
                   Plan Custom Tour
                 </Link>
               </motion.div>
 
-              {/* Contact */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6"
+                className="bg-[#0d1424] rounded-2xl border border-white/5 p-6"
               >
-                <h4 className="font-serif font-bold text-gray-900 mb-4">
+                <h4 className="font-serif font-bold text-white mb-4">
                   Need Help?
                 </h4>
-                <a
-                  href="tel:+94000000000"
-                  className="flex items-center gap-3 text-sm text-gray-600 hover:text-amber-700 transition-colors mb-3 group"
-                >
-                  <div className="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-amber-100 transition-colors">
-                    <PhoneIcon className="w-4 h-4 text-amber-600" />
-                  </div>
-                  +94 000 000 000
-                </a>
-                <a
-                  href="mailto:info@magicalparadise.com"
-                  className="flex items-center gap-3 text-sm text-gray-600 hover:text-amber-700 transition-colors group"
-                >
-                  <div className="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-amber-100 transition-colors">
-                    <MailIcon className="w-4 h-4 text-amber-600" />
-                  </div>
-                  info@magicalparadise.com
-                </a>
+                {[
+                  {
+                    icon: PhoneIcon,
+                    href: "tel:+94000000000",
+                    text: "+94 000 000 000",
+                  },
+                  {
+                    icon: MailIcon,
+                    href: "mailto:info@magicalparadise.com",
+                    text: "info@magicalparadise.com",
+                  },
+                ].map(({ icon: Icon, href, text }) => (
+                  <a
+                    key={text}
+                    href={href}
+                    className="flex items-center gap-3 text-sm text-white/40 hover:text-[#0BAADC] transition-colors mb-3 group"
+                  >
+                    <div className="w-9 h-9 bg-[#0BAADC]/10 border border-[#0BAADC]/20 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-[#0BAADC]/20 transition-colors">
+                      <Icon className="w-4 h-4 text-[#0BAADC]" />
+                    </div>
+                    {text}
+                  </a>
+                ))}
               </motion.div>
             </div>
           </div>
