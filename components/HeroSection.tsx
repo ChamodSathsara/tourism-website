@@ -43,7 +43,7 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -51,7 +51,7 @@ export function HeroSection() {
         >
           <span className="w-2 h-2 rounded-full bg-[#0BAADC] animate-pulse" />
           Sri Lanka's Premier Luxury Tour Operator
-        </motion.div>
+        </motion.div> */}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
