@@ -22,6 +22,7 @@ export function AboutSection() {
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
               {t("title")}
             </h2>
+
             <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] mb-8 rounded-full" />
             <div className="space-y-6 text-lg text-white/50 leading-relaxed">
               <p>{t("p1")}</p>
@@ -30,7 +31,7 @@ export function AboutSection() {
             </div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 0 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
