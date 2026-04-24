@@ -1,14 +1,17 @@
-// ── HotelsSection.tsx (dark theme) ──────────────────────────────────────────
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { MapPinIcon, StarIcon } from "lucide-react";
 import { Accommodation } from "../dataConfig/types";
 import { accommodations } from "../dataConfig/dtaConfig";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export function HotelsSection() {
   const [hotels, setHotels] = useState<Accommodation[]>([]);
+  const t = useTranslations("hotels");
+
   useEffect(() => {
     setHotels(accommodations.slice(0, 8));
   }, []);
@@ -24,11 +27,12 @@ export function HotelsSection() {
         >
           <div>
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-              Handpicked Luxury Hotels
+              {t("homeTitle")}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] rounded-full" />
           </div>
         </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {hotels.map((hotel, index) => (
             <motion.div
@@ -68,7 +72,7 @@ export function HotelsSection() {
                   {hotel.tagline}
                 </p>
                 <button className="w-full py-2.5 border border-white/10 rounded-lg text-white/50 font-semibold hover:border-[#0BAADC]/50 hover:text-[#0BAADC] transition-colors">
-                  View Hotel
+                  {t("viewHotel")}
                 </button>
               </div>
             </motion.div>

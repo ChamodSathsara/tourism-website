@@ -7,6 +7,7 @@ import { SparklesIcon, ChevronRightIcon } from "lucide-react";
 import img6 from "../../assest/Packages/6.jpg";
 import { Experience } from "@/dataConfig/types";
 import { experiencesList as experiences } from "@/dataConfig/dtaConfig";
+import { useTranslations } from "next-intl";
 
 function ExperienceCard({
   experience,
@@ -15,6 +16,7 @@ function ExperienceCard({
   experience: Experience;
   index: number;
 }) {
+  const t = useTranslations("experiences");
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -44,7 +46,7 @@ function ExperienceCard({
         </div>
         <div className="absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full flex items-center gap-1 text-xs font-semibold text-white shadow-sm">
           <SparklesIcon className="w-3.5 h-3.5 text-[#0BAADC]" />
-          Experience
+          {t("badge")}
         </div>
       </div>
       <div className="p-6 flex flex-col flex-grow">
@@ -55,7 +57,7 @@ function ExperienceCard({
           {experience.description}
         </p>
         <button className="w-full py-3 px-4 border border-white/10 rounded-lg text-white/60 font-medium flex items-center justify-center gap-2 group-hover:bg-gradient-to-r group-hover:from-[#1761A0] group-hover:to-[#0BAADC] group-hover:text-white group-hover:border-transparent transition-all duration-300">
-          Discover More
+          {t("explore")}
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
@@ -64,6 +66,8 @@ function ExperienceCard({
 }
 
 export function FullExperienceSection() {
+  const t = useTranslations("experiences");
+
   return (
     <section className="bg-[#060d1a]">
       {/* Hero */}
@@ -98,30 +102,29 @@ export function FullExperienceSection() {
               className="max-w-2xl"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.05] mb-6 drop-shadow-2xl">
-                Experiences
+                {t("heroTitle")}
               </h1>
               <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-xl">
-                Discover the soul of Sri Lanka through curated encounters — home
-                to{" "}
+                {t("heroSubtitle")}{" "}
                 <span className="text-[#0BAADC] font-semibold">
-                  8 UNESCO World Heritage Sites
+                  {t("heroUNESCO")}
                 </span>
                 ,{" "}
                 <span className="text-[#0BAADC] font-semibold">
-                  15 national parks
+                  {t("heroParks")}
                 </span>{" "}
-                and nearly{" "}
+                {t("heroAnd")}{" "}
                 <span className="text-[#0BAADC] font-semibold">
-                  500,000 acres
+                  {t("heroTea")}
                 </span>{" "}
-                of lush tea estates.
+                {t("heroTeaSuffix")}
               </p>
               <div className="flex gap-10 mt-8">
                 {(
                   [
-                    ["9+", "Experiences"],
-                    ["4.9★", "Rating"],
-                    ["2,000+", "Happy Guests"],
+                    [t("stat1Value"), t("stat1Label")],
+                    [t("stat2Value"), t("stat2Label")],
+                    [t("stat3Value"), t("stat3Label")],
                   ] as [string, string][]
                 ).map(([val, label]) => (
                   <div key={label}>
@@ -149,17 +152,18 @@ export function FullExperienceSection() {
             <div className="flex items-center gap-3 mb-2">
               <div className="w-6 h-px bg-[#0BAADC]" />
               <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
-                All Experiences
+                {t("sectionLabel")}
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white">
-              What Will You Experience?
+              {t("title")}
             </h2>
           </div>
           <p className="hidden md:block text-white/30 text-sm">
-            {experiences.length} unique experiences
+            {experiences.length} {t("count")}
           </p>
         </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {experiences.map((experience, index) => (
             <ExperienceCard

@@ -1,14 +1,16 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Experience } from "@/dataConfig/types";
 import { experiencesList } from "@/dataConfig/dtaConfig";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function ExperiencesSection() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
-  const router = useRouter();
+  const t = useTranslations("experiences");
+
   useEffect(() => {
     setExperiences(experiencesList);
   }, []);
@@ -23,14 +25,14 @@ export function ExperiencesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-            Magical Experiences
+            {t("homeTitle")}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] mx-auto mb-6 rounded-full" />
           <p className="text-lg text-white/40 max-w-2xl mx-auto">
-            Beyond standard tours, we curate unique moments that connect you
-            deeply with the soul of Sri Lanka.
+            {t("homeSubtitle")}
           </p>
         </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp, index) => (
             <motion.div

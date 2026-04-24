@@ -4,30 +4,36 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { MenuIcon, XIcon, ChevronDownIcon, GlobeIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useLanguage, type Locale } from "../contexts/LanguageContext";
 import logo from "../assest/logo.png";
 
-const navLinks = [
-  { name: "Home", href: "/home" },
-  { name: "Packages", href: "/packages" },
-  { name: "Destinations", href: "/destinations" },
-  { name: "Experiences", href: "/experiences" },
-  { name: "Hotels", href: "/hotels" },
-  { name: "About", href: "/about" },
-];
-
-const languages = [
-  { code: "EN", flag: "🇬🇧", name: "English" },
-  { code: "FR", flag: "🇫🇷", name: "Français" },
-  { code: "DE", flag: "🇩🇪", name: "Deutsch" },
-  { code: "JP", flag: "🇯🇵", name: "日本語" },
+const languages: { code: Locale; flag: string; name: string }[] = [
+  { code: "en", flag: "🇬🇧", name: "English" },
+  { code: "fr", flag: "🇫🇷", name: "Français" },
+  { code: "de", flag: "🇩🇪", name: "Deutsch" },
+  { code: "ja", flag: "🇯🇵", name: "日本語" },
 ];
 
 export function Navbar() {
+  const t = useTranslations("nav");
+  const { locale, setLocale, isPending } = useLanguage();
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [activeLang, setActiveLang] = useState(languages[0]);
   const [activePath, setActivePath] = useState("/home");
+
+  const activeLang = languages.find((l) => l.code === locale) ?? languages[0];
+
+  const navLinks = [
+    { name: t("home"), href: "/home" },
+    { name: t("packages"), href: "/packages" },
+    { name: t("destinations"), href: "/destinations" },
+    { name: t("experiences"), href: "/experiences" },
+    { name: t("hotels"), href: "/hotels" },
+    { name: t("about"), href: "/about" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -37,7 +43,7 @@ export function Navbar() {
   }, []);
 
   const handleLangSelect = (lang: (typeof languages)[0]) => {
-    setActiveLang(lang);
+    setLocale(lang.code);
     setLangOpen(false);
   };
 
@@ -74,7 +80,7 @@ export function Navbar() {
                 const isActive = activePath === link.href;
                 return (
                   <a
-                    key={link.name}
+                    key={link.href}
                     href={link.href}
                     className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 group ${
                       isActive
@@ -83,7 +89,6 @@ export function Navbar() {
                     }`}
                   >
                     {link.name}
-                    {/* Active / hover underline */}
                     <span
                       className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full bg-gradient-to-r from-[#1761A0] to-[#0BAADC] transition-all duration-300 ${
                         isActive ? "w-4/5" : "w-0 group-hover:w-4/5"
@@ -101,16 +106,19 @@ export function Navbar() {
                 <button
                   onClick={() => setLangOpen(!langOpen)}
                   onBlur={() => setTimeout(() => setLangOpen(false), 150)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-200 text-sm text-white/80 hover:text-white"
+                  disabled={isPending}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-200 text-sm text-white/80 hover:text-white disabled:opacity-50"
                 >
                   <span className="text-base leading-none">
                     {activeLang.flag}
                   </span>
-                  <span className="font-medium tracking-wide">
+                  <span className="font-medium tracking-wide uppercase">
                     {activeLang.code}
                   </span>
                   <ChevronDownIcon
-                    className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
+                    className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${
+                      langOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
 
@@ -128,14 +136,14 @@ export function Navbar() {
                           key={lang.code}
                           onClick={() => handleLangSelect(lang)}
                           className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
-                            activeLang.code === lang.code
+                            locale === lang.code
                               ? "bg-[#0BAADC]/15 text-[#0BAADC]"
                               : "text-white/60 hover:text-white hover:bg-white/8"
                           }`}
                         >
                           <span className="text-base">{lang.flag}</span>
                           <span className="font-medium">{lang.name}</span>
-                          {activeLang.code === lang.code && (
+                          {locale === lang.code && (
                             <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#0BAADC]" />
                           )}
                         </button>
@@ -152,7 +160,7 @@ export function Navbar() {
                 rel="noreferrer"
                 className="px-5 py-2.5 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(11,170,220,0.3)] hover:shadow-[0_0_30px_rgba(11,170,220,0.5)] hover:-translate-y-0.5"
               >
-                Plan My Trip
+                {t("planTrip")}
               </a>
             </div>
 
@@ -187,7 +195,7 @@ export function Navbar() {
                 const isActive = activePath === link.href;
                 return (
                   <motion.a
-                    key={link.name}
+                    key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
                     initial={{ opacity: 0, x: 20 }}
@@ -217,15 +225,16 @@ export function Navbar() {
             >
               <p className="text-white/30 text-xs uppercase tracking-widest font-semibold mb-3 flex items-center gap-2">
                 <GlobeIcon className="w-3.5 h-3.5" />
-                Language
+                {t("language")}
               </p>
               <div className="grid grid-cols-2 gap-2">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
-                    onClick={() => setActiveLang(lang)}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${
-                      activeLang.code === lang.code
+                    onClick={() => handleLangSelect(lang)}
+                    disabled={isPending}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 disabled:opacity-50 ${
+                      locale === lang.code
                         ? "bg-[#0BAADC]/15 border-[#0BAADC]/30 text-[#0BAADC]"
                         : "bg-white/5 border-white/8 text-white/50 hover:text-white hover:bg-white/10"
                     }`}
@@ -247,7 +256,7 @@ export function Navbar() {
               transition={{ delay: 0.5 }}
               className="w-full text-center px-6 py-4 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-full text-lg shadow-[0_0_30px_rgba(11,170,220,0.3)]"
             >
-              Plan My Trip
+              {t("planTrip")}
             </motion.a>
           </motion.div>
         )}

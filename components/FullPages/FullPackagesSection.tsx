@@ -6,18 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ClockIcon,
   ChevronRightIcon,
-  SunIcon,
-  HeartIcon,
   MapPinIcon,
   StarIcon,
   SparklesIcon,
   LayoutGridIcon,
   WavesIcon,
+  SunIcon,
+  HeartIcon,
   type LucideIcon,
 } from "lucide-react";
 import img1 from "../../assest/Packages/1.jpg";
 import img6 from "../../assest/Packages/6.jpg";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   dayPackages,
   couplePackages,
@@ -27,6 +28,7 @@ import {
 } from "../../dataConfig/dtaConfig";
 
 type AccentColor = "amber" | "rose" | "emerald" | "sky" | "violet";
+
 interface Package {
   id: string;
   title: string;
@@ -37,14 +39,6 @@ interface Package {
   description: string;
   image: StaticImageData;
 }
-interface Tab {
-  key: string;
-  label: string;
-  icon: LucideIcon;
-  data: Package[];
-  color: AccentColor;
-  heading: string;
-}
 
 const allPackages: Package[] = [
   ...specialPackages,
@@ -54,58 +48,6 @@ const allPackages: Package[] = [
   ...maldivesPackages,
 ].map((pkg, i) => ({ ...pkg, id: `all-${i}` }));
 
-const tabs: Tab[] = [
-  {
-    key: "all",
-    label: "All Packages",
-    icon: LayoutGridIcon,
-    data: allPackages,
-    color: "violet",
-    heading: "Every Experience We Offer",
-  },
-  {
-    key: "special",
-    label: "Special Offers",
-    icon: StarIcon,
-    data: specialPackages,
-    color: "violet",
-    heading: "Every Experience We Offer",
-  },
-  {
-    key: "day",
-    label: "Day Packages",
-    icon: SunIcon,
-    data: dayPackages,
-    color: "amber",
-    heading: "Perfect Single-Day Adventures",
-  },
-  {
-    key: "couple",
-    label: "Couple Packages",
-    icon: HeartIcon,
-    data: couplePackages,
-    color: "rose",
-    heading: "Romantic Escapes for Two",
-  },
-  {
-    key: "more",
-    label: "More Packages",
-    icon: SparklesIcon,
-    data: morePackages,
-    color: "emerald",
-    heading: "Extended Island Experiences",
-  },
-  {
-    key: "maldives",
-    label: "Maldives",
-    icon: WavesIcon,
-    data: maldivesPackages,
-    color: "sky",
-    heading: "Maldives Paradise Escapes",
-  },
-];
-
-// Dark-themed color config
 const colorConfig: Record<
   AccentColor,
   {
@@ -163,6 +105,7 @@ function PackageCard({
   index: number;
   accentColor: AccentColor;
 }) {
+  const t = useTranslations("packages");
   const c = colorConfig[accentColor];
   const router = useRouter();
   return (
@@ -201,7 +144,7 @@ function PackageCard({
           </h3>
           <div className="text-right shrink-0">
             <span className="block text-xs text-white/30 uppercase tracking-wider">
-              From
+              {t("from")}
             </span>
             <span className={`text-lg font-bold ${c.price}`}>{pkg.price}</span>
           </div>
@@ -213,7 +156,7 @@ function PackageCard({
           onClick={() => router.push(`/packages/${pkg.id}`)}
           className={`w-full py-3 px-4 border rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300 ${c.btn}`}
         >
-          View Itinerary
+          {t("viewItinerary")}
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
@@ -222,12 +165,74 @@ function PackageCard({
 }
 
 export default function PackagesPage() {
+  const t = useTranslations("packages");
   const [activeTab, setActiveTab] = useState<string>("all");
-  const currentTab = tabs.find((t) => t.key === activeTab) as Tab;
+
+  interface Tab {
+    key: string;
+    labelKey: string;
+    headingKey: string;
+    icon: LucideIcon;
+    data: Package[];
+    color: AccentColor;
+  }
+
+  const tabs: Tab[] = [
+    {
+      key: "all",
+      labelKey: "tabAll",
+      headingKey: "headingAll",
+      icon: LayoutGridIcon,
+      data: allPackages,
+      color: "violet",
+    },
+    {
+      key: "special",
+      labelKey: "tabSpecial",
+      headingKey: "headingSpecial",
+      icon: StarIcon,
+      data: specialPackages,
+      color: "violet",
+    },
+    {
+      key: "day",
+      labelKey: "tabDay",
+      headingKey: "headingDay",
+      icon: SunIcon,
+      data: dayPackages,
+      color: "amber",
+    },
+    {
+      key: "couple",
+      labelKey: "tabCouple",
+      headingKey: "headingCouple",
+      icon: HeartIcon,
+      data: couplePackages,
+      color: "rose",
+    },
+    {
+      key: "more",
+      labelKey: "tabMore",
+      headingKey: "headingMore",
+      icon: SparklesIcon,
+      data: morePackages,
+      color: "emerald",
+    },
+    {
+      key: "maldives",
+      labelKey: "tabMaldives",
+      headingKey: "headingMaldives",
+      icon: WavesIcon,
+      data: maldivesPackages,
+      color: "sky",
+    },
+  ];
+
+  const currentTab = tabs.find((tab) => tab.key === activeTab) as Tab;
 
   return (
     <div className="min-h-screen bg-[#060d1a]">
-      {/* Hero */}
+      {/* ── Hero ── */}
       <div className="relative h-[62vh] min-h-[440px] flex items-center justify-center overflow-hidden">
         <Image
           src={img1}
@@ -247,22 +252,21 @@ export default function PackagesPage() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <MapPinIcon className="w-5 h-5 text-[#0BAADC]" />
             <span className="text-[#0BAADC] text-sm font-semibold uppercase tracking-[0.2em]">
-              Sri Lanka & Maldives
+              {t("heroLocation")}
             </span>
           </div>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-4 leading-tight drop-shadow-2xl">
-            Travel Packages
+            {t("heroTitle")}
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-            Handcrafted itineraries for every kind of traveller — from
-            sunrise-to-sunset day trips to grand island escapes.
+            {t("heroSubtitle")}
           </p>
           <div className="flex items-center justify-center gap-10 mt-10">
             {(
               [
-                ["50+", "Packages"],
-                ["4.9★", "Rating"],
-                ["2,000+", "Happy Guests"],
+                [t("stat1Value"), t("stat1Label")],
+                [t("stat2Value"), t("stat2Label")],
+                [t("stat3Value"), t("stat3Label")],
               ] as [string, string][]
             ).map(([val, label]) => (
               <div key={label} className="text-center">
@@ -276,7 +280,7 @@ export default function PackagesPage() {
         </motion.div>
       </div>
 
-      {/* Sticky Tab Nav */}
+      {/* ── Sticky Tab Nav ── */}
       <div className="sticky top-0 z-30 bg-[#080e1c]/95 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-1 py-2 overflow-x-auto scrollbar-hide">
@@ -288,14 +292,10 @@ export default function PackagesPage() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
-                    isActive
-                      ? `${cc.tabActive} shadow-lg ${cc.tabShadow}`
-                      : "text-white/40 hover:text-white/80 hover:bg-white/5"
-                  }`}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 ${isActive ? `${cc.tabActive} shadow-lg ${cc.tabShadow}` : "text-white/40 hover:text-white/80 hover:bg-white/5"}`}
                 >
                   <Icon className="w-4 h-4" />
-                  {tab.label}
+                  {t(tab.labelKey as any)}
                   <span
                     className={`text-xs px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/15 text-white" : "bg-white/8 text-white/40"}`}
                   >
@@ -308,7 +308,7 @@ export default function PackagesPage() {
         </div>
       </div>
 
-      {/* Grid */}
+      {/* ── Grid ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <AnimatePresence mode="wait">
           <motion.div
@@ -326,15 +326,15 @@ export default function PackagesPage() {
                   return <Icon className="w-5 h-5 text-white/30" />;
                 })()}
                 <span className="text-xs uppercase tracking-widest text-white/30 font-semibold">
-                  {currentTab.label}
+                  {t(currentTab.labelKey as any)}
                 </span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white">
-                {currentTab.heading}
+                {t(currentTab.headingKey as any)}
               </h2>
             </div>
             <p className="hidden md:block text-white/30 text-sm text-right">
-              {currentTab.data.length} curated packages
+              {currentTab.data.length} {t("count")}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -359,7 +359,7 @@ export default function PackagesPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* CTA Banner */}
+        {/* ── CTA Banner ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -378,18 +378,17 @@ export default function PackagesPage() {
           <div className="relative z-10 py-16 px-8 text-center">
             <StarIcon className="w-8 h-8 text-[#0BAADC] mx-auto mb-4" />
             <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-              Can't find your perfect trip?
+              {t("ctaTitle")}
             </h3>
             <p className="text-white/50 text-lg max-w-lg mx-auto mb-8">
-              We craft fully bespoke itineraries tailored to your dates, budget,
-              and travel dreams.
+              {t("ctaDesc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button className="px-8 py-3.5 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(11,170,220,0.3)]">
-                Build a Custom Tour
+                {t("ctaCustom")}
               </button>
               <button className="px-8 py-3.5 border border-white/20 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors">
-                Talk to an Expert
+                {t("ctaExpert")}
               </button>
             </div>
           </div>

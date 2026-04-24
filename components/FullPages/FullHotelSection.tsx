@@ -7,6 +7,7 @@ import { MapPinIcon, ChevronRightIcon, BedDoubleIcon } from "lucide-react";
 import img5 from "../../assest/Packages/5.jpg";
 import type { Accommodation } from "@/dataConfig/types";
 import { accommodations } from "@/dataConfig/dtaConfig";
+import { useTranslations } from "next-intl";
 
 function AccommodationCard({
   accommodation,
@@ -15,6 +16,7 @@ function AccommodationCard({
   accommodation: Accommodation;
   index: number;
 }) {
+  const t = useTranslations("hotels");
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -38,7 +40,7 @@ function AccommodationCard({
         </div>
         <div className="absolute top-4 left-4 z-20">
           <span className="px-2.5 py-0.5 bg-black/50 backdrop-blur-sm border border-white/10 text-white text-xs font-medium rounded-full">
-            Accommodation
+            {t("accommodation")}
           </span>
         </div>
       </div>
@@ -50,7 +52,7 @@ function AccommodationCard({
           {accommodation.description}
         </p>
         <button className="w-full py-3 px-4 border border-white/10 rounded-lg text-white/60 font-medium flex items-center justify-center gap-2 group-hover:bg-gradient-to-r group-hover:from-[#1761A0] group-hover:to-[#0BAADC] group-hover:text-white group-hover:border-transparent transition-all duration-300">
-          Read More
+          {t("readMore")}
           <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
@@ -59,6 +61,8 @@ function AccommodationCard({
 }
 
 export function FullHotelSection() {
+  const t = useTranslations("hotels");
+
   return (
     <section className="bg-[#060d1a]">
       {/* Hero */}
@@ -93,17 +97,16 @@ export function FullHotelSection() {
               className="max-w-2xl"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.05] mb-6 drop-shadow-2xl">
-                Accommodations
+                {t("heroTitle")}
               </h1>
               <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-xl">
-                From colonial-era grand hotels to beachfront boutique villas —
-                every property is{" "}
+                {t("heroSubtitle1")}{" "}
                 <span className="text-[#0BAADC] font-semibold">
-                  handpicked for quality
+                  {t("heroHighlight1")}
                 </span>
                 ,{" "}
                 <span className="text-[#0BAADC] font-semibold">
-                  character, and location
+                  {t("heroHighlight2")}
                 </span>
                 .
               </p>
@@ -124,17 +127,18 @@ export function FullHotelSection() {
             <div className="flex items-center gap-3 mb-2">
               <div className="w-6 h-px bg-[#0BAADC]" />
               <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
-                All Properties
+                {t("sectionLabel")}
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white">
-              Your Perfect Stay Awaits
+              {t("title")}
             </h2>
           </div>
           <p className="hidden md:block text-white/30 text-sm">
-            {accommodations.length} handpicked properties
+            {accommodations.length} {t("count")}
           </p>
         </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {accommodations.map((accommodation, index) => (
             <AccommodationCard

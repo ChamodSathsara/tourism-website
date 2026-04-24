@@ -1,4 +1,6 @@
-// ── Footer.tsx (dark theme) ──────────────────────────────────────────────────
+// components/Footer.tsx
+"use client";
+
 import Image from "next/image";
 import {
   FacebookIcon,
@@ -9,10 +11,30 @@ import {
   PhoneIcon,
   MailIcon,
 } from "lucide-react";
-
 import logo from "../assest/logo.png";
+import { useTranslations } from "next-intl"; // ← from "next-intl", NOT "/server"
 
-export function Footer() {
+export function Footer() { // ← no async, no await
+  const t = useTranslations("footer"); // ← hook, not await
+
+  const destinations = [
+    t("dest1"),
+    t("dest2"),
+    t("dest3"),
+    t("dest4"),
+    t("dest5"),
+    t("dest6"),
+  ];
+
+  const services = [
+    t("svc1"),
+    t("svc2"),
+    t("svc3"),
+    t("svc4"),
+    t("svc5"),
+    t("svc6"),
+  ];
+
   return (
     <footer
       id="contact"
@@ -20,6 +42,7 @@ export function Footer() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand */}
           <div>
             <div className="relative h-12 w-40 mb-6">
               <Image
@@ -30,8 +53,7 @@ export function Footer() {
               />
             </div>
             <p className="text-white/40 mb-6 leading-relaxed text-sm">
-              Crafting luxury travel experiences and unforgettable memories
-              across the beautiful island of Sri Lanka and the Maldives.
+              {t("tagline")}
             </p>
             <div className="flex space-x-3">
               {[FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon].map(
@@ -47,57 +69,43 @@ export function Footer() {
               )}
             </div>
           </div>
+
+          {/* Destinations */}
           <div>
             <h4 className="font-bold text-white text-sm mb-6 tracking-widest uppercase">
-              Destinations
+              {t("destinationsCol")}
             </h4>
             <ul className="space-y-3 text-white/40 text-sm">
-              {[
-                "Sigiriya & Cultural Triangle",
-                "Kandy & Hill Country",
-                "Ella & Nuwara Eliya",
-                "Galle & South Coast",
-                "Yala National Park",
-                "Maldives Extensions",
-              ].map((item) => (
+              {destinations.map((item) => (
                 <li key={item}>
-                  <a
-                    href="#"
-                    className="hover:text-[#0BAADC] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#0BAADC] transition-colors">
                     {item}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Services */}
           <div>
             <h4 className="font-bold text-white text-sm mb-6 tracking-widest uppercase">
-              Services
+              {t("servicesCol")}
             </h4>
             <ul className="space-y-3 text-white/40 text-sm">
-              {[
-                "Luxury Tour Packages",
-                "Popular Day Tours",
-                "Boutique Hotels",
-                "Corporate Events",
-                "Airport Transfers",
-                "Travel Insurance",
-              ].map((item) => (
+              {services.map((item) => (
                 <li key={item}>
-                  <a
-                    href="#"
-                    className="hover:text-[#0BAADC] transition-colors"
-                  >
+                  <a href="#" className="hover:text-[#0BAADC] transition-colors">
                     {item}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Contact */}
           <div>
             <h4 className="font-bold text-white text-sm mb-6 tracking-widest uppercase">
-              Contact Us
+              {t("contactCol")}
             </h4>
             <ul className="space-y-4 text-white/40 text-sm">
               <li className="flex items-start gap-3">
@@ -119,13 +127,12 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-white/20 text-center md:text-left">
-            &copy; {new Date().getFullYear()} Magical Paradise. All rights
-            reserved.{" "}
+            &copy; {new Date().getFullYear()} Magical Paradise. {t("rights")}{" "}
             <span className="text-white/15 mt-1 block md:inline">
-              Licensed by Sri Lanka Tourism Development Authority — License No:
-              SLTDA/2024/0847
+              {t("license")}
             </span>
           </p>
           <div className="flex gap-3">

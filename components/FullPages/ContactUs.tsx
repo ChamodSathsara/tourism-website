@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import img1 from "../../assest/Packages/1.jpg";
 import img2 from "../../assest/Packages/5.jpg";
+import { useTranslations } from "next-intl";
 
 interface FormState {
   name: string;
@@ -26,50 +27,8 @@ interface FormState {
   message: string;
 }
 
-const contactInfo = [
-  {
-    icon: PhoneIcon,
-    label: "Call Us",
-    value: "+94 000 000 000",
-    sub: "Mon – Sat, 8am – 8pm",
-    href: "tel:+94000000000",
-    bg: "bg-[#0BAADC]/10",
-    iconColor: "text-[#0BAADC]",
-    border: "border-[#0BAADC]/20",
-  },
-  {
-    icon: MailIcon,
-    label: "Email Us",
-    value: "info@magicalparadise.com",
-    sub: "We reply within 24 hours",
-    href: "mailto:info@magicalparadise.com",
-    bg: "bg-[#1761A0]/10",
-    iconColor: "text-[#1761A0]",
-    border: "border-[#1761A0]/20",
-  },
-  {
-    icon: MapPinIcon,
-    label: "Visit Us",
-    value: "Colombo 03, Sri Lanka",
-    sub: "Open for walk-ins by appointment",
-    href: "https://maps.google.com",
-    bg: "bg-emerald-500/10",
-    iconColor: "text-emerald-400",
-    border: "border-emerald-500/20",
-  },
-  {
-    icon: ClockIcon,
-    label: "Office Hours",
-    value: "Mon – Sat: 8am – 8pm",
-    sub: "Sunday: 9am – 5pm",
-    href: "#",
-    bg: "bg-violet-500/10",
-    iconColor: "text-violet-400",
-    border: "border-violet-500/20",
-  },
-];
-
 function ContactForm() {
+  const t = useTranslations("contact");
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -108,11 +67,10 @@ function ContactForm() {
           <CheckCircleIcon className="w-10 h-10 text-[#0BAADC]" />
         </div>
         <h3 className="text-2xl font-serif font-bold text-white mb-3">
-          Message Sent!
+          {t("successTitle")}
         </h3>
         <p className="text-white/50 max-w-sm leading-relaxed mb-8">
-          Thank you for reaching out. One of our travel specialists will get
-          back to you within 24 hours.
+          {t("successDesc")}
         </p>
         <button
           onClick={() => {
@@ -127,8 +85,7 @@ function ContactForm() {
           }}
           className="px-6 py-3 border border-[#0BAADC]/30 rounded-xl text-[#0BAADC] font-medium hover:bg-[#0BAADC] hover:text-white hover:border-[#0BAADC] transition-colors duration-300 flex items-center gap-2"
         >
-          Send Another Message
-          <ArrowRightIcon className="w-4 h-4" />
+          {t("sendAnother")} <ArrowRightIcon className="w-4 h-4" />
         </button>
       </motion.div>
     );
@@ -142,27 +99,27 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            Full Name <span className="text-[#0BAADC]">*</span>
+            {t("fullName")} <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
-            placeholder="Your full name"
+            placeholder={t("fullNamePlaceholder")}
             className={inputClass}
           />
         </div>
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            Email Address <span className="text-[#0BAADC]">*</span>
+            {t("emailAddress")} <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
-            placeholder="your@email.com"
+            placeholder={t("emailPlaceholder")}
             className={inputClass}
           />
         </div>
@@ -170,20 +127,20 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            Phone Number
+            {t("phone")}
           </label>
           <input
             type="tel"
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            placeholder="+1 000 000 0000"
+            placeholder={t("phonePlaceholder")}
             className={inputClass}
           />
         </div>
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            Subject <span className="text-[#0BAADC]">*</span>
+            {t("subject")} <span className="text-[#0BAADC]">*</span>
           </label>
           <select
             name="subject"
@@ -194,27 +151,27 @@ function ContactForm() {
             }
           >
             <option value="" disabled>
-              Select a subject
+              {t("subjectPlaceholder")}
             </option>
-            <option value="package">Package Enquiry</option>
-            <option value="custom">Custom Tour</option>
-            <option value="honeymoon">Honeymoon / Couples</option>
-            <option value="maldives">Maldives Package</option>
-            <option value="accommodation">Accommodation</option>
-            <option value="other">Other</option>
+            <option value="package">{t("subjectPackage")}</option>
+            <option value="custom">{t("subjectCustom")}</option>
+            <option value="honeymoon">{t("subjectHoneymoon")}</option>
+            <option value="maldives">{t("subjectMaldives")}</option>
+            <option value="accommodation">{t("subjectAccommodation")}</option>
+            <option value="other">{t("subjectOther")}</option>
           </select>
         </div>
       </div>
       <div>
         <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-          Message <span className="text-[#0BAADC]">*</span>
+          {t("message")} <span className="text-[#0BAADC]">*</span>
         </label>
         <textarea
           name="message"
           value={form.message}
           onChange={handleChange}
           rows={5}
-          placeholder="Tell us about your dream trip — travel dates, group size, interests…"
+          placeholder={t("messagePlaceholder")}
           className={`${inputClass} resize-none`}
         />
       </div>
@@ -230,11 +187,11 @@ function ContactForm() {
               animate={{ rotate: 360 }}
               transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             />
-            Sending…
+            {t("sending")}
           </>
         ) : (
           <>
-            Send Message
+            {t("send")}
             <SendIcon className="w-4 h-4" />
           </>
         )}
@@ -244,9 +201,54 @@ function ContactForm() {
 }
 
 export default function ContactUsPage() {
+  const t = useTranslations("contact");
+
+  const contactCards = [
+    {
+      icon: PhoneIcon,
+      label: t("callLabel"),
+      value: "+94 000 000 000",
+      sub: t("callSub"),
+      href: "tel:+94000000000",
+      bg: "bg-[#0BAADC]/10",
+      iconColor: "text-[#0BAADC]",
+      border: "border-[#0BAADC]/20",
+    },
+    {
+      icon: MailIcon,
+      label: t("emailLabel"),
+      value: "info@magicalparadise.com",
+      sub: t("emailSub"),
+      href: "mailto:info@magicalparadise.com",
+      bg: "bg-[#1761A0]/10",
+      iconColor: "text-[#1761A0]",
+      border: "border-[#1761A0]/20",
+    },
+    {
+      icon: MapPinIcon,
+      label: t("visitLabel"),
+      value: t("visitValue"),
+      sub: t("visitSub"),
+      href: "https://maps.google.com",
+      bg: "bg-emerald-500/10",
+      iconColor: "text-emerald-400",
+      border: "border-emerald-500/20",
+    },
+    {
+      icon: ClockIcon,
+      label: t("hoursLabel"),
+      value: t("hoursValue"),
+      sub: t("hoursSub"),
+      href: "#",
+      bg: "bg-violet-500/10",
+      iconColor: "text-violet-400",
+      border: "border-violet-500/20",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#060d1a]">
-      {/* Hero */}
+      {/* ── Hero ── */}
       <div className="relative h-[58vh] min-h-[420px] overflow-hidden">
         <Image
           src={img1}
@@ -280,26 +282,24 @@ export default function ContactUsPage() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px bg-[#0BAADC]" />
                 <span className="text-[#0BAADC] text-sm font-semibold uppercase tracking-[0.25em]">
-                  We'd Love to Hear From You
+                  {t("heroLabel")}
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.05] mb-6 drop-shadow-2xl">
-                Contact Us
+                {t("heroTitle")}
               </h1>
               <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-xl">
-                Have a question, a dream trip in mind, or simply want to say
-                hello? Our team is always happy to help you plan the perfect Sri
-                Lanka experience.
+                {t("heroDesc")}
               </p>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Info Cards */}
+      {/* ── Info Cards ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {contactInfo.map((info, index) => {
+          {contactCards.map((info, index) => {
             const Icon = info.icon;
             return (
               <motion.a
@@ -330,7 +330,7 @@ export default function ContactUsPage() {
         </div>
       </div>
 
-      {/* Form + Map */}
+      {/* ── Form + Map ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
@@ -343,15 +343,14 @@ export default function ContactUsPage() {
             <div className="flex items-center gap-3 mb-2">
               <div className="w-6 h-px bg-[#0BAADC]" />
               <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
-                Send a Message
+                {t("formLabel")}
               </span>
             </div>
             <h2 className="text-3xl font-serif font-bold text-white mb-2">
-              Plan Your Journey
+              {t("formTitle")}
             </h2>
             <p className="text-white/40 text-sm mb-8 leading-relaxed">
-              Fill in the form below and one of our Sri Lanka travel specialists
-              will get back to you within 24 hours.
+              {t("formDesc")}
             </p>
             <ContactForm />
           </motion.div>
@@ -386,17 +385,13 @@ export default function ContactUsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="text-white/50 text-sm mb-3">Follow our journey</p>
+                <p className="text-white/50 text-sm mb-3">{t("follow")}</p>
                 <div className="flex gap-3">
-                  {[
-                    { icon: FacebookIcon, label: "Facebook", href: "#" },
-                    { icon: InstagramIcon, label: "Instagram", href: "#" },
-                    { icon: TwitterIcon, label: "Twitter", href: "#" },
-                  ].map(({ icon: Icon, label, href }) => (
+                  {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
                     <a
-                      key={label}
-                      href={href}
-                      aria-label={label}
+                      key={i}
+                      href="#"
+                      aria-label="social"
                       className="w-10 h-10 bg-white/10 hover:bg-[#0BAADC] backdrop-blur-sm border border-white/10 hover:border-[#0BAADC] rounded-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5"
                     >
                       <Icon className="w-4 h-4 text-white" />
@@ -409,16 +404,14 @@ export default function ContactUsPage() {
         </div>
       </div>
 
-      {/* Bottom CTA */}
+      {/* ── Bottom CTA ── */}
       <div className="bg-gradient-to-r from-[#1761A0] to-[#0BAADC] py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-2xl font-serif font-bold text-white">
-              Ready to start your Sri Lanka adventure?
+              {t("ctaTitle")}
             </h3>
-            <p className="text-white/70 text-sm mt-1">
-              Our travel specialists are standing by to help.
-            </p>
+            <p className="text-white/70 text-sm mt-1">{t("ctaDesc")}</p>
           </div>
           <div className="flex gap-3 shrink-0">
             <a
@@ -426,14 +419,14 @@ export default function ContactUsPage() {
               className="flex items-center gap-2 px-6 py-3 bg-white text-[#1761A0] font-bold rounded-xl hover:bg-white/90 transition-colors shadow"
             >
               <PhoneIcon className="w-4 h-4" />
-              Call Now
+              {t("callNow")}
             </a>
             <a
               href="mailto:info@magicalparadise.com"
               className="flex items-center gap-2 px-6 py-3 border border-white/40 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
             >
               <MailIcon className="w-4 h-4" />
-              Email Us
+              {t("emailUs")}
             </a>
           </div>
         </div>

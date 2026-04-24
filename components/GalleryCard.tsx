@@ -1,6 +1,3 @@
-// ────────────────────────────────────────────────────────────────────────────
-// GallerySection.tsx  (dark theme)
-// ────────────────────────────────────────────────────────────────────────────
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -12,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { XIcon, ZoomInIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import img1 from "../assest/gallery/1.jpg";
 import img2 from "../assest/gallery/2.jpg";
 import img3 from "../assest/gallery/3.jpg";
@@ -118,9 +116,11 @@ function ScrollColumn({
 function Lightbox({
   img,
   onClose,
+  credit,
 }: {
   img: (typeof galleryImages)[0];
   onClose: () => void;
+  credit: string;
 }) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -129,6 +129,7 @@ function Lightbox({
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -157,9 +158,7 @@ function Lightbox({
           />
           <div className="absolute bottom-0 left-0 right-0 px-6 py-4 bg-gradient-to-t from-black/90 to-transparent">
             <p className="text-white font-serif text-xl font-bold">{img.alt}</p>
-            <p className="text-white/40 text-sm mt-0.5">
-              Sri Lanka · Magical Paradise
-            </p>
+            <p className="text-white/40 text-sm mt-0.5">{credit}</p>
           </div>
         </div>
         <button
@@ -174,9 +173,11 @@ function Lightbox({
 }
 
 export function GallerySection() {
+  const t = useTranslations("gallery");
   const [lightbox, setLightbox] = useState<(typeof galleryImages)[0] | null>(
     null,
   );
+
   return (
     <section
       id="gallery"
@@ -191,14 +192,14 @@ export function GallerySection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-            Life Through Our Lens
+            {t("title")}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] mx-auto mb-6 rounded-full" />
           <p className="text-lg text-white/40 max-w-2xl mx-auto">
-            Every frame tells a story. A glimpse into the breathtaking moments
-            that await you across Sri Lanka and beyond.
+            {t("subtitle")}
           </p>
         </motion.div>
+
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start"
           style={{ minHeight: 900 }}
@@ -222,6 +223,7 @@ export function GallerySection() {
             onOpen={setLightbox}
           />
         </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -234,13 +236,18 @@ export function GallerySection() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_0_30px_rgba(11,170,220,0.3)] hover:shadow-[0_0_50px_rgba(11,170,220,0.5)] hover:-translate-y-1"
           >
-            View Full Gallery on Instagram
+            {t("viewInstagram")}
           </a>
         </motion.div>
       </div>
+
       <AnimatePresence>
         {lightbox && (
-          <Lightbox img={lightbox} onClose={() => setLightbox(null)} />
+          <Lightbox
+            img={lightbox}
+            onClose={() => setLightbox(null)}
+            credit={t("credit")}
+          />
         )}
       </AnimatePresence>
     </section>

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { LanguageProvider } from "../contexts/LanguageContext";
 
 export const metadata: Metadata = {
   title: "Magical Paradise | Luxury Sri Lanka Travel",
@@ -7,12 +10,19 @@ export const metadata: Metadata = {
     "Luxury journeys through ancient kingdoms, pristine beaches, and misty highlands of Sri Lanka.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Fetch messages for current locale (determined by cookie in i18n/request.ts)
+  const messages = await getMessages();
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <LanguageProvider>{children}</LanguageProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

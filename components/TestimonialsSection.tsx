@@ -1,31 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 import { QuoteIcon, StarIcon } from "lucide-react";
-
-const testimonials = [
-  {
-    id: 1,
-    text: "An absolutely flawless experience from start to finish. Our driver was incredibly knowledgeable, the hotels were breathtaking, and the itinerary was perfectly paced. Magical Paradise truly lives up to its name.",
-    name: "Sarah & James",
-    country: "United Kingdom 🇬🇧",
-  },
-  {
-    id: 2,
-    text: "We booked our honeymoon through them and it exceeded all expectations. The private dinner in Ella and the seamless transfer to the Maldives made it the trip of a lifetime. Highly recommend their services!",
-    name: "Michael Chen",
-    country: "Singapore 🇸🇬",
-  },
-  {
-    id: 3,
-    text: "As a solo female traveler, safety and comfort were my top priorities. The team ensured I felt secure while still experiencing the authentic culture of Sri Lanka. The tea country tour was my absolute favorite.",
-    name: "Emma Schmidt",
-    country: "Germany 🇩🇪",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function TestimonialsSection() {
+  const t = useTranslations("testimonials");
+
+  const testimonials = [
+    { id: 1, textKey: "t1Text", nameKey: "t1Name", countryKey: "t1Country" },
+    { id: 2, textKey: "t2Text", nameKey: "t2Name", countryKey: "t2Country" },
+    { id: 3, textKey: "t3Text", nameKey: "t3Name", countryKey: "t3Country" },
+  ];
+
   return (
     <section className="py-20 lg:py-28 bg-[#060d1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,10 +23,11 @@ export function TestimonialsSection() {
             viewport={{ once: true }}
             className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4"
           >
-            What Our Travelers Say
+            {t("title")}
           </motion.h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] mx-auto mb-6 rounded-full" />
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -60,27 +48,32 @@ export function TestimonialsSection() {
                 ))}
               </div>
               <p className="text-white/50 italic mb-8 relative z-10 leading-relaxed text-sm">
-                &ldquo;{testimonial.text}&rdquo;
+                &ldquo;{t(testimonial.textKey as any)}&rdquo;
               </p>
               <div className="mt-auto border-t border-white/5 pt-4">
                 <p className="font-bold text-white font-serif text-lg">
-                  {testimonial.name}
+                  {t(testimonial.nameKey as any)}
                 </p>
-                <p className="text-sm text-white/30">{testimonial.country}</p>
+                <p className="text-sm text-white/30">
+                  {t(testimonial.countryKey as any)}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
+
         <div className="text-center">
           <p className="text-white/40 mb-4 flex items-center justify-center gap-2 text-sm">
-            Rated <span className="font-bold text-white">Excellent</span> on{" "}
+            {t("rated")}{" "}
+            <span className="font-bold text-white">{t("excellent")}</span>{" "}
+            {t("on")}{" "}
             <span className="font-bold text-[#0BAADC]">TripAdvisor</span>
           </p>
           <a
             href="#"
             className="inline-block text-[#0BAADC] font-semibold hover:text-[#2EDCF4] underline underline-offset-4 transition-colors text-sm"
           >
-            Read More Reviews
+            {t("readMore")}
           </a>
         </div>
       </div>

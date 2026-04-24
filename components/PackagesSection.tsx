@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 import { specialPackages } from "../dataConfig/dtaConfig";
 import type { Package } from "../dataConfig/types";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export function PackagesSection() {
   const route = useRouter();
+  const t = useTranslations("packages");
   const [packages, setPackages] = useState<Package[]>([]);
 
   useEffect(() => {
@@ -32,12 +34,11 @@ export function PackagesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-            Curated Travel Packages
+            {t("homeTitle")}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] mx-auto mb-6 rounded-full" />
           <p className="text-lg text-white/50 max-w-2xl mx-auto">
-            Handcrafted itineraries designed to showcase the very best of Sri
-            Lanka, tailored for unforgettable memories.
+            {t("homeSubtitle")}
           </p>
         </motion.div>
 
@@ -73,7 +74,7 @@ export function PackagesSection() {
                   </h3>
                   <div className="text-right shrink-0">
                     <span className="block text-xs text-white/40 uppercase tracking-wider">
-                      From
+                      {t("from")}
                     </span>
                     <span className="text-lg font-bold text-[#0BAADC]">
                       {pkg.price}
@@ -89,7 +90,7 @@ export function PackagesSection() {
                   onClick={clickbtn(pkg.id)}
                   className="w-full py-3 px-4 border border-white/10 rounded-lg text-white/70 font-medium flex items-center justify-center gap-2 group-hover:bg-gradient-to-r group-hover:from-[#1761A0] group-hover:to-[#0BAADC] group-hover:text-white group-hover:border-transparent transition-all duration-300"
                 >
-                  View Itinerary
+                  {t("viewItinerary")}
                   <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>

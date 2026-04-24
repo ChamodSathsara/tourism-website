@@ -7,16 +7,17 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { destinations } from "@/dataConfig/dtaConfig";
 import type { Destination } from "@/dataConfig/types";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function DayToursSection() {
   const router = useRouter();
+  const t = useTranslations("dayTours");
   const scrollRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [dayTours, setDayTours] = useState<Destination[]>();
-  const TOURS: Destination[] = [...(dayTours ?? []), ...(dayTours ?? [])];
+  const [dayTours, setDayTours] = useState<Destination[]>([]);
   const CARD_WIDTH = 340;
   const GAP = 24;
   const SCROLL_SPEED = 0.6;
@@ -25,6 +26,8 @@ export function DayToursSection() {
     setDayTours(destinations);
   }, []);
 
+  const TOURS: Destination[] = [...dayTours, ...dayTours];
+
   const clickCard = (id: string) => {
     router.push(`/destinations/${id}`);
   };
@@ -32,7 +35,7 @@ export function DayToursSection() {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const singleSetWidth = (dayTours?.length ?? 0) * (CARD_WIDTH + GAP);
+    const singleSetWidth = dayTours.length * (CARD_WIDTH + GAP);
     const tick = () => {
       if (!pausedRef.current && el) {
         el.scrollLeft += SCROLL_SPEED;
@@ -44,7 +47,7 @@ export function DayToursSection() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [dayTours]);
 
   const updateArrows = () => {
     const el = scrollRef.current;
@@ -73,7 +76,7 @@ export function DayToursSection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-              Popular Destinations
+              {t("title")}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] rounded-full" />
           </motion.div>
@@ -134,7 +137,6 @@ export function DayToursSection() {
                     sizes="340px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-
                   <div className="absolute bottom-0 left-0 right-0 p-5">
                     <h3 className="text-xl font-serif font-bold text-white mb-3 group-hover:text-[#0BAADC] transition-colors">
                       {tour.name}
