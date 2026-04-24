@@ -11,9 +11,9 @@ import {
   AwardIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import hero1 from "../assets/hero/1.jpg";
-import hero2 from "../assets/hero/2.jpg";
-import hero3 from "../assets/hero/3.jpg";
+import hero1 from "../assest/hero/1.jpg";
+import hero2 from "../assest/hero/2.jpg";
+import hero3 from "../assest/hero/3.jpg";
 
 export function HeroSection() {
   const t = useTranslations("hero");
@@ -36,7 +36,7 @@ export function HeroSection() {
       {/* Auto-rotating background images */}
       {/* Auto-rotating background images - slide from left */}
       {/* Auto-rotating background images - slide from left WITHOUT blank */}
-
+      
       <AnimatePresence initial={false}>
         <motion.div
           key={currentImage}
