@@ -11,9 +11,9 @@ import {
   AwardIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import hero1 from "../assest/hero/1.jpg";
-import hero2 from "../assest/hero/2.jpg";
-import hero3 from "../assest/hero/3.jpg";
+import hero1 from "../assest/Hero/1.jpg";
+import hero2 from "../assest/Hero/2.jpg";
+import hero3 from "../assest/Hero/3.jpg";
 
 export function HeroSection() {
   const t = useTranslations("hero");
