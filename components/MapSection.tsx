@@ -1,65 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPinIcon, ArrowRightIcon, CompassIcon } from "lucide-react";
-import dynamic from "next/dynamic";
-import { useMap } from "react-leaflet";
-
-const MapContainer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
-  { ssr: false },
-);
-const TileLayer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.TileLayer),
-  { ssr: false },
-);
-const Marker = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Marker),
-  { ssr: false },
-);
-const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
-  ssr: false,
-});
-
-import "leaflet/dist/leaflet.css";
-
-const createCustomIcon = (isActive: boolean, color: string) => {
-  if (typeof window === "undefined") return null;
-  const L = require("leaflet");
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="width:${isActive ? "32px" : "24px"};height:${isActive ? "32px" : "24px"};background:${color};border:3px solid rgba(255,255,255,0.9);border-radius:50%;box-shadow:0 4px 20px rgba(0,0,0,0.5),0 0 0 4px ${color}33;transition:all 0.2s ease;cursor:pointer;${isActive ? "transform:scale(1.1);" : ""}"></div>`,
-    iconSize: [isActive ? 32 : 24, isActive ? 32 : 24],
-    iconAnchor: [isActive ? 16 : 12, isActive ? 16 : 12],
-    popupAnchor: [0, -16],
-  });
-};
-
-function LockMapToSriLanka() {
-  const map = useMap();
-  useEffect(() => {
-    if (typeof window === "undefined" || !map) return;
-    const L = require("leaflet");
-    const southWest = L.latLng(5.7, 79.5);
-    const northEast = L.latLng(9.9, 81.9);
-    const bounds = L.latLngBounds(southWest, northEast);
-    map.setMaxBounds(bounds);
-    map.fitBounds(bounds, { padding: [50, 50] });
-    map.setMinZoom(6.5);
-    map.setMaxZoom(6.5);
-    if (map.zoomControl) map.zoomControl.remove();
-    map.scrollWheelZoom.disable();
-    map.doubleClickZoom.disable();
-    map.boxZoom.disable();
-    map.keyboard.disable();
-    map.on("drag", () => {
-      if (!bounds.contains(map.getCenter()))
-        map.panInsideBounds(bounds, { animate: true });
-    });
-  }, [map]);
-  return null;
-}
 
 const destinations = [
   {
@@ -201,41 +144,141 @@ const TAG_COLORS: Record<string, { pill: string; dot: string }> = {
   },
 };
 
-const MapSection = () => {
-  const [activePin, setActivePin] = useState<string>(destinations[2].id);
-  const [isClient, setIsClient] = useState(false);
-  const active = destinations.find((d) => d.id === activePin)!;
+// ─── Imperative Leaflet map (no react-leaflet, no SSR issues) ───────────────
+function LeafletMap({
+  activePin,
+  onPinClick,
+}: {
+  activePin: string;
+  onPinClick: (id: string) => void;
+}) {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const markersRef = useRef<Record<string, any>>({});
 
+  // ① Build map once
   useEffect(() => {
-    setIsClient(true);
-    if (typeof window !== "undefined") {
-      const L = require("leaflet");
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-        iconUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-        shadowUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-      });
+    if (!mapRef.current || mapInstanceRef.current) return;
+
+    // Dynamically load Leaflet CSS
+    if (!document.getElementById("leaflet-css")) {
+      const link = document.createElement("link");
+      link.id = "leaflet-css";
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      document.head.appendChild(link);
     }
+
+    // Dynamically load Leaflet JS
+    const loadLeaflet = async () => {
+      if ((window as any).L) return (window as any).L;
+      return new Promise<any>((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+        script.onload = () => resolve((window as any).L);
+        document.head.appendChild(script);
+      });
+    };
+
+    loadLeaflet().then((L) => {
+      if (!mapRef.current || mapInstanceRef.current) return;
+
+      const map = L.map(mapRef.current, {
+        center: [7.8731, 80.7718],
+        zoom: 7,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        dragging: false,
+        touchZoom: false,
+        attributionControl: false,
+      });
+
+      mapInstanceRef.current = map;
+
+      // Dark CartoDB tile layer (real OpenStreetMap tiles)
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        { attribution: "© OpenStreetMap © CARTO", maxZoom: 19 },
+      ).addTo(map);
+
+      // Restrict to Sri Lanka bounds — tighter box = more zoom
+      const bounds = L.latLngBounds([5.85, 79.65], [9.85, 81.95]);
+      map.setMaxBounds(bounds);
+      map.fitBounds(bounds, { padding: [10, 10] });
+
+      // Add markers
+      destinations.forEach((dest) => {
+        const color = TAG_COLORS[dest.tag]?.dot ?? "#0BAADC";
+        const isActive = dest.id === activePin;
+
+        const icon = L.divIcon({
+          className: "",
+          html: buildMarkerHtml(color, isActive),
+          iconSize: [isActive ? 32 : 24, isActive ? 32 : 24],
+          iconAnchor: [isActive ? 16 : 12, isActive ? 16 : 12],
+        });
+
+        const marker = L.marker(dest.position, { icon })
+          .addTo(map)
+          .on("click", () => onPinClick(dest.id));
+
+        markersRef.current[dest.id] = { marker, color };
+      });
+    });
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!isClient) {
-    return (
-      <section id="destinations" className="py-20 lg:py-28 bg-[#060d1a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-4 text-white">
-              Explore Sri Lanka
-            </h2>
-            <p className="text-lg text-white/40">Loading map...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // ② Update marker sizes when activePin changes
+  useEffect(() => {
+    const L = (window as any).L;
+    if (!L) return;
+
+    Object.entries(markersRef.current).forEach(([id, { marker, color }]) => {
+      const isActive = id === activePin;
+      const icon = L.divIcon({
+        className: "",
+        html: buildMarkerHtml(color, isActive),
+        iconSize: [isActive ? 32 : 24, isActive ? 32 : 24],
+        iconAnchor: [isActive ? 16 : 12, isActive ? 16 : 12],
+      });
+      marker.setIcon(icon);
+    });
+  }, [activePin]);
+
+  return <div ref={mapRef} style={{ height: "100%", width: "100%" }} />;
+}
+
+function buildMarkerHtml(color: string, isActive: boolean) {
+  const size = isActive ? 32 : 24;
+  return `<div style="
+    width:${size}px;height:${size}px;
+    background:${color};
+    border:3px solid rgba(255,255,255,0.9);
+    border-radius:50%;
+    box-shadow:0 4px 20px rgba(0,0,0,0.5),0 0 0 4px ${color}44;
+    transition:all 0.2s ease;
+    cursor:pointer;
+    ${isActive ? "transform:scale(1.15);" : ""}
+  "></div>`;
+}
+
+// ─── Main Section ────────────────────────────────────────────────────────────
+const MapSection = () => {
+  const [activePin, setActivePin] = useState<string>(destinations[2].id);
+  const [mounted, setMounted] = useState(false);
+  const active = destinations.find((d) => d.id === activePin)!;
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <section
@@ -246,6 +289,7 @@ const MapSection = () => {
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#0BAADC]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Heading */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -286,7 +330,9 @@ const MapSection = () => {
           </motion.p>
         </div>
 
+        {/* Map + Card */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-16">
+          {/* Map container */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -294,60 +340,16 @@ const MapSection = () => {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-[400px] h-[500px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/5 relative"
           >
-            <MapContainer
-              center={[7.8731, 80.7718]}
-              zoom={5.5}
-              style={{ height: "100%", width: "100%", borderRadius: "16px" }}
-              scrollWheelZoom={false}
-              zoomControl={false}
-              doubleClickZoom={false}
-              boxZoom={false}
-              keyboard={false}
-              dragging={true}
-              attributionControl={false}
-              touchZoom={false}
-            >
-              <LockMapToSriLanka />
-              <TileLayer
-                attribution="&copy; OpenStreetMap"
-                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-              />
-              {destinations.map((dest) => {
-                const isActive = activePin === dest.id;
-                const color = TAG_COLORS[dest.tag]?.dot ?? "#0BAADC";
-                const icon = createCustomIcon(isActive, color);
-                return (
-                  <Marker
-                    key={dest.id}
-                    position={dest.position}
-                    icon={icon}
-                    eventHandlers={{ click: () => setActivePin(dest.id) }}
-                  >
-                    <Popup className="custom-popup-dark" closeButton={false}>
-                      <div className="text-white min-w-[200px]">
-                        <h4 className="font-bold text-base mb-1">
-                          {dest.name}
-                        </h4>
-                        <p className="text-xs text-white/60 mb-2">
-                          {dest.highlights.slice(0, 3).join(" · ")}
-                        </p>
-                        <button
-                          onClick={() => setActivePin(dest.id)}
-                          className="text-xs font-medium text-[#0BAADC] hover:text-[#2EDCF4] transition-colors"
-                        >
-                          View details →
-                        </button>
-                      </div>
-                    </Popup>
-                  </Marker>
-                );
-              })}
-            </MapContainer>
+            {mounted && (
+              <LeafletMap activePin={activePin} onPinClick={setActivePin} />
+            )}
             <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 text-xs text-white/50 flex items-center gap-1.5 z-[1000]">
               <CompassIcon className="w-3.5 h-3.5 text-[#0BAADC]" />
+              <span>Real Map · OpenStreetMap</span>
             </div>
           </motion.div>
 
+          {/* Info card */}
           <div className="w-full max-w-md lg:flex-1 flex items-start">
             <AnimatePresence mode="wait">
               <motion.div
@@ -404,6 +406,7 @@ const MapSection = () => {
           </div>
         </div>
 
+        {/* Legend */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -426,34 +429,6 @@ const MapSection = () => {
           ))}
         </motion.div>
       </div>
-
-      <style jsx global>{`
-        .custom-popup-dark .leaflet-popup-content-wrapper {
-          background: #0d1424;
-          color: white;
-          border-radius: 12px;
-          padding: 4px;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .custom-popup-dark .leaflet-popup-tip {
-          background: #0d1424;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .custom-popup-dark .leaflet-popup-close-button {
-          color: rgba(255, 255, 255, 0.4);
-        }
-        .leaflet-control-zoom {
-          display: none !important;
-        }
-        .leaflet-container {
-          cursor: default !important;
-          background: #0a0f1a !important;
-        }
-        .leaflet-marker-icon {
-          cursor: pointer !important;
-        }
-      `}</style>
     </section>
   );
 };

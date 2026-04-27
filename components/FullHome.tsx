@@ -20,10 +20,11 @@ export default function FullHome() {
       <Navbar />
       <main>
         <HeroSection />
+        <MapSection />
         <PackagesSection />
         <DayToursSection />
         <MaldivesSection />
-        <MapSection />
+
         <ExperiencesSection />
         <HotelsSection />
         <GallerySection />
