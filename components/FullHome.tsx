@@ -16,7 +16,7 @@ import { GallerySection } from "@/components/GalleryCard";
 export default function FullHome() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar overlay />
       <main>
         <HeroSection />
         <MapSection />
