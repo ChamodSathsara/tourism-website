@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import img1 from "../../assest/Packages/1.jpg";
+import routeMap1 from "../../assest/package map images/map1.png";
 import { useRouter } from "next/navigation";
 import { specialPackages as packages } from "@/dataConfig/dtaConfig";
 import type {
@@ -339,6 +340,37 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
                 ))}
               </div>
             </motion.div>
+
+            {params.id === "all-1" && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                aria-labelledby="package-route-map-title"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-6 h-px bg-[#0BAADC]" />
+                  <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">
+                    Journey Map
+                  </span>
+                </div>
+                <h2
+                  id="package-route-map-title"
+                  className="text-3xl font-serif font-bold text-white mb-6"
+                >
+                  Your Route Through Sri Lanka
+                </h2>
+                <div className="overflow-hidden rounded-2xl border border-[#0BAADC]/20 bg-[#07111f] shadow-[0_24px_80px_rgba(0,0,0,0.3)]">
+                  <Image
+                    src={routeMap1}
+                    alt="Sri Lanka tour route from the airport through Negombo, Kithulgala, Udawalawe, Sinharaja, Yala and Mirissa"
+                    className="h-auto w-full"
+                    sizes="(min-width: 1024px) 768px, 100vw"
+                  />
+                </div>
+              </motion.section>
+            )}
 
             <CinematicGallery slides={pkg?.gallery ?? []} />
 
