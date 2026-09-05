@@ -514,13 +514,13 @@ export default function PackageDetailPage({ params }: { params: { id: any } }) {
                 {[
                   {
                     icon: PhoneIcon,
-                    href: "tel:+94000000000",
-                    text: "+94 000 000 000",
+                    href: "tel:+94774365214",
+                    text: "+94 77 436 5214",
                   },
                   {
                     icon: MailIcon,
-                    href: "mailto:info@magicalparadise.com",
-                    text: "info@magicalparadise.com",
+                    href: "mailto:travel@magicalparadise.lk",
+                    text: "travel@magicalparadise.lk",
                   },
                 ].map(({ icon: Icon, href, text }) => (
                   <a

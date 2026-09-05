@@ -232,8 +232,8 @@ export function FullAboutUsSection() {
 
                 <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="space-y-4">
                   {[
-                    { icon: PhoneIcon, label: t("ctaCall"),  value: "+94 000 000 000",         href: "tel:+94000000000" },
-                    { icon: MailIcon,  label: t("ctaEmail"), value: "info@magicalparadise.com", href: "mailto:info@magicalparadise.com" },
+                    { icon: PhoneIcon, label: t("ctaCall"),  value: "+94 77 436 5214",         href: "tel:+94774365214" },
+                    { icon: MailIcon,  label: t("ctaEmail"), value: "travel@magicalparadise.lk", href: "mailto:travel@magicalparadise.lk" },
                   ].map(({ icon: Icon, label, value, href }) => (
                     <a key={label} href={href} className="flex items-center gap-4 bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-[#0BAADC]/30 rounded-2xl px-6 py-4 transition-all duration-300 group">
                       <div className="w-12 h-12 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] rounded-xl flex items-center justify-center shrink-0">

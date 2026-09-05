@@ -70,7 +70,9 @@ export function TestimonialsSection() {
             <span className="font-bold text-[#0BAADC]">TripAdvisor</span>
           </p>
           <a
-            href="#"
+            href="https://www.tripadvisor.com/Attraction_Review-g12901287-d17721017-Reviews-Magical_Paradise-Kandana_Western_Province.html"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block text-[#0BAADC] font-semibold hover:text-[#2EDCF4] underline underline-offset-4 transition-colors text-sm"
           >
             {t("readMore")}

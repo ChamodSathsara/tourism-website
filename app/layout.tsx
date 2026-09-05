@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import SmoothScroll from "../components/SmoothScroll";
+import { PlanTripButton } from "../components/PlanTripButton";
 
 export const metadata: Metadata = {
   title: "Magical Paradise | Luxury Sri Lanka Travel",
@@ -22,7 +23,10 @@ export default async function RootLayout({
       <body>
         <SmoothScroll />
         <NextIntlClientProvider messages={messages}>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            {children}
+            <PlanTripButton />
+          </LanguageProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -20,20 +20,36 @@ import img2 from "../../assest/Packages/5.jpg";
 import { useTranslations } from "next-intl";
 
 interface FormState {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
-  subject: string;
+  country: string;
+  contactPreference: string;
+  destination: string;
+  arrivalDate: string;
+  departureDate: string;
+  travelers: string;
+  accommodation: string;
+  budget: string;
   message: string;
 }
 
 function ContactForm() {
   const t = useTranslations("contact");
   const [form, setForm] = useState<FormState>({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
-    subject: "",
+    country: "",
+    contactPreference: "WhatsApp",
+    destination: "Sri Lanka",
+    arrivalDate: "",
+    departureDate: "",
+    travelers: "",
+    accommodation: "",
+    budget: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -47,10 +63,31 @@ function ContactForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
+
+    const enquiry = [
+      `Name: ${form.firstName} ${form.lastName}`,
+      `Email: ${form.email}`,
+      `Phone: ${form.phone || "Not provided"}`,
+      `Country: ${form.country || "Not provided"}`,
+      `Destination: ${form.destination}`,
+      `Dates: ${form.arrivalDate || "Flexible"} to ${form.departureDate || "Flexible"}`,
+      `Travelers: ${form.travelers || "Not provided"}`,
+      `Accommodation: ${form.accommodation || "Not selected"}`,
+      `Budget: ${form.budget || "Not selected"}`,
+      `Notes: ${form.message}`,
+    ].join("\n");
+
+    if (form.contactPreference === "WhatsApp") {
+      window.open(`https://wa.me/94774365214?text=${encodeURIComponent(enquiry)}`, "_blank", "noopener,noreferrer");
+    } else if (form.contactPreference === "Call") {
+      window.location.href = "tel:+94774365214";
+    } else {
+      window.location.href = `mailto:travel@magicalparadise.lk?subject=${encodeURIComponent("Tailor-made trip enquiry")}&body=${encodeURIComponent(enquiry)}`;
+    }
+
     setLoading(false);
     setSubmitted(true);
   };
@@ -76,10 +113,18 @@ function ContactForm() {
           onClick={() => {
             setSubmitted(false);
             setForm({
-              name: "",
+              firstName: "",
+              lastName: "",
               email: "",
               phone: "",
-              subject: "",
+              country: "",
+              contactPreference: "WhatsApp",
+              destination: "Sri Lanka",
+              arrivalDate: "",
+              departureDate: "",
+              travelers: "",
+              accommodation: "",
+              budget: "",
               message: "",
             });
           }}
@@ -99,17 +144,32 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            {t("fullName")} <span className="text-[#0BAADC]">*</span>
+            First name <span className="text-[#0BAADC]">*</span>
           </label>
           <input
             type="text"
-            name="name"
-            value={form.name}
+            name="firstName"
+            value={form.firstName}
             onChange={handleChange}
-            placeholder={t("fullNamePlaceholder")}
+            placeholder="Your first name"
             className={inputClass}
           />
         </div>
+        <div>
+          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
+            Last name <span className="text-[#0BAADC]">*</span>
+          </label>
+          <input
+            type="text"
+            name="lastName"
+            value={form.lastName}
+            onChange={handleChange}
+            placeholder="Your last name"
+            className={inputClass}
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
             {t("emailAddress")} <span className="text-[#0BAADC]">*</span>
@@ -123,61 +183,95 @@ function ContactForm() {
             className={inputClass}
           />
         </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            {t("phone")}
+            Country
           </label>
           <input
-            type="tel"
-            name="phone"
-            value={form.phone}
+            type="text"
+            name="country"
+            value={form.country}
             onChange={handleChange}
-            placeholder={t("phonePlaceholder")}
+            placeholder="Your country"
             className={inputClass}
           />
         </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-            {t("subject")} <span className="text-[#0BAADC]">*</span>
-          </label>
-          <select
-            name="subject"
-            value={form.subject}
-            onChange={handleChange}
-            className={
-              inputClass + " [&>option]:bg-[#0d1424] [&>option]:text-white"
-            }
-          >
-            <option value="" disabled>
-              {t("subjectPlaceholder")}
-            </option>
-            <option value="package">{t("subjectPackage")}</option>
-            <option value="custom">{t("subjectCustom")}</option>
-            <option value="honeymoon">{t("subjectHoneymoon")}</option>
-            <option value="maldives">{t("subjectMaldives")}</option>
-            <option value="accommodation">{t("subjectAccommodation")}</option>
-            <option value="other">{t("subjectOther")}</option>
+          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Phone number (WhatsApp preferred)</label>
+          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder={t("phonePlaceholder")} className={inputClass} />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">How should we connect?</label>
+          <select name="contactPreference" value={form.contactPreference} onChange={handleChange} className={inputClass + " [&>option]:bg-[#0d1424]"}>
+            <option>WhatsApp</option><option>Email</option><option>Call</option>
           </select>
         </div>
       </div>
+      <div className="border-t border-white/10 pt-6 mt-6">
+        <h3 className="text-lg font-serif font-bold text-white mb-4">Travel information</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Destination</label>
+            <select name="destination" value={form.destination} onChange={handleChange} className={inputClass + " [&>option]:bg-[#0d1424]"}>
+              <option>Sri Lanka</option><option>Maldives</option><option>Sri Lanka & Maldives</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Number of travelers</label>
+            <input type="text" name="travelers" value={form.travelers} onChange={handleChange} placeholder="Adults and children with ages" className={inputClass} />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Arrival date</label>
+            <input type="date" name="arrivalDate" value={form.arrivalDate} onChange={handleChange} className={inputClass + " scheme-dark"} />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Departure date</label>
+            <input type="date" name="departureDate" value={form.departureDate} onChange={handleChange} className={inputClass + " scheme-dark"} />
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Accommodation style</label>
+          <select name="accommodation" value={form.accommodation} onChange={handleChange} className={inputClass + " [&>option]:bg-[#0d1424]"}>
+            <option value="">Select a style</option><option>Budget / 2–3 star</option><option>4 star hotels</option><option>5 star hotels</option><option>Luxury boutique hotels</option><option>Villas and wellness hotels</option><option>Mix of hotels</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">Budget per person (excluding flights)</label>
+          <select name="budget" value={form.budget} onChange={handleChange} className={inputClass + " [&>option]:bg-[#0d1424]"}>
+            <option value="">Select a range</option><option>USD 500–999</option><option>USD 1,000–1,499</option><option>USD 1,500–1,999</option><option>USD 2,000–2,999</option><option>USD 3,000+</option>
+          </select>
+        </div>
+      </div>
+      <fieldset>
+        <legend className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Your interests</legend>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {["Luxury", "History & culture", "UNESCO heritage", "Wildlife & nature", "Hiking & trekking", "Beach escapes", "Wellness", "Honeymoon", "Adventure", "Food & drinks", "Cycling", "Meet the locals"].map((interest) => (
+            <label key={interest} className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/60">
+              <input type="checkbox" name="interests" value={interest} className="accent-[#0BAADC]" /> {interest}
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <div>
         <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-1.5">
-          {t("message")} <span className="text-[#0BAADC]">*</span>
+          Special requests and additional notes <span className="text-[#0BAADC]">*</span>
         </label>
         <textarea
           name="message"
           value={form.message}
           onChange={handleChange}
           rows={5}
-          placeholder={t("messagePlaceholder")}
+          placeholder="Tell us about your dream trip, dietary needs, celebrations, baby seats or guide preferences..."
           className={`${inputClass} resize-none`}
         />
       </div>
       <button
         onClick={handleSubmit}
-        disabled={loading || !form.name || !form.email || !form.message}
+        disabled={loading || !form.firstName || !form.lastName || !form.email || !form.message}
         className="w-full py-3.5 px-6 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] disabled:from-white/10 disabled:to-white/10 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(11,170,220,0.3)] hover:shadow-[0_0_50px_rgba(11,170,220,0.5)]"
       >
         {loading ? (
@@ -191,7 +285,7 @@ function ContactForm() {
           </>
         ) : (
           <>
-            {t("send")}
+            Start Planning My Trip
             <SendIcon className="w-4 h-4" />
           </>
         )}
@@ -207,9 +301,9 @@ export default function ContactUsPage() {
     {
       icon: PhoneIcon,
       label: t("callLabel"),
-      value: "+94 000 000 000",
+      value: "+94 77 436 5214",
       sub: t("callSub"),
-      href: "tel:+94000000000",
+      href: "tel:+94774365214",
       bg: "bg-[#0BAADC]/10",
       iconColor: "text-[#0BAADC]",
       border: "border-[#0BAADC]/20",
@@ -217,9 +311,9 @@ export default function ContactUsPage() {
     {
       icon: MailIcon,
       label: t("emailLabel"),
-      value: "info@magicalparadise.com",
+      value: "travel@magicalparadise.lk",
       sub: t("emailSub"),
-      href: "mailto:info@magicalparadise.com",
+      href: "mailto:travel@magicalparadise.lk",
       bg: "bg-[#1761A0]/10",
       iconColor: "text-[#1761A0]",
       border: "border-[#1761A0]/20",
@@ -331,7 +425,33 @@ export default function ContactUsPage() {
       </div>
 
       {/* ── Form + Map ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div id="plan-trip" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-32">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-xs uppercase tracking-widest text-[#0BAADC] font-bold">Tailor-made travel</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mt-3 mb-4">Design your perfect escape</h2>
+            <p className="text-white/50 leading-relaxed">Share your ideas for Sri Lanka, the Maldives, or both. Our local experts will craft a personal journey around your style, pace and budget.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              ["01", "Tell us your plan", "Share your travel preferences."],
+              ["02", "Get connected", "We will reach you by WhatsApp, email or call."],
+              ["03", "Receive your quote", "Get an itinerary crafted for you."],
+              ["04", "Book with confidence", "Secure your trip and we handle the rest."],
+            ].map(([number, title, description]) => (
+              <div key={number} className="rounded-2xl border border-white/10 bg-[#0d1424] p-5">
+                <span className="text-2xl font-bold text-[#0BAADC]">{number}</span>
+                <h3 className="font-serif font-bold text-white mt-3 mb-2">{title}</h3>
+                <p className="text-sm text-white/40 leading-relaxed">{description}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -364,7 +484,7 @@ export default function ContactUsPage() {
           >
             <div className="rounded-3xl overflow-hidden border border-white/5 h-80 opacity-80">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58299879888!2d79.77865!3d6.921833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2s!4v1700000000000"
+                src="https://www.google.com/maps?q=No%20109%2FG%2C%20St%20Theresa%20Mawatha%2C%20Kandana%2C%20Sri%20Lanka&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
@@ -387,11 +507,17 @@ export default function ContactUsPage() {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-white/50 text-sm mb-3">{t("follow")}</p>
                 <div className="flex gap-3">
-                  {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
+                  {[
+                    { Icon: FacebookIcon, label: "Facebook", href: "https://www.facebook.com/magicalparadise.lk?mibextid=ZbWKwL" },
+                    { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/magicalparadise.srilanka?igsh=MWhyZXdydDFhNHc5aA==" },
+                    { Icon: TwitterIcon, label: "TikTok", href: "https://www.tiktok.com/@magicalparadisesrilanka" },
+                  ].map(({ Icon, label, href }) => (
                     <a
-                      key={i}
-                      href="#"
-                      aria-label="social"
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-10 h-10 bg-white/10 hover:bg-[#0BAADC] backdrop-blur-sm border border-white/10 hover:border-[#0BAADC] rounded-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5"
                     >
                       <Icon className="w-4 h-4 text-white" />
@@ -415,14 +541,14 @@ export default function ContactUsPage() {
           </div>
           <div className="flex gap-3 shrink-0">
             <a
-              href="tel:+94000000000"
+              href="tel:+94774365214"
               className="flex items-center gap-2 px-6 py-3 bg-white text-[#1761A0] font-bold rounded-xl hover:bg-white/90 transition-colors shadow"
             >
               <PhoneIcon className="w-4 h-4" />
               {t("callNow")}
             </a>
             <a
-              href="mailto:info@magicalparadise.com"
+              href="mailto:travel@magicalparadise.lk"
               className="flex items-center gap-2 px-6 py-3 border border-white/40 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
             >
               <MailIcon className="w-4 h-4" />

@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
   FacebookIcon,
   InstagramIcon,
-  TwitterIcon,
   YoutubeIcon,
   MapPinIcon,
   PhoneIcon,
@@ -56,11 +55,18 @@ export function Footer() { // ← no async, no await
               {t("tagline")}
             </p>
             <div className="flex space-x-3">
-              {[FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon].map(
-                (Icon, i) => (
+              {[
+                { Icon: FacebookIcon, label: "Facebook", href: "https://www.facebook.com/magicalparadise.lk?mibextid=ZbWKwL" },
+                { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/magicalparadise.srilanka?igsh=MWhyZXdydDFhNHc5aA==" },
+                { Icon: YoutubeIcon, label: "TikTok", href: "https://www.tiktok.com/@magicalparadisesrilanka" },
+              ].map(
+                ({ Icon, label, href }) => (
                   <a
-                    key={i}
-                    href="#"
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0BAADC]/20 hover:border-[#0BAADC]/30 transition-colors"
                   >
                     <Icon className="w-4 h-4" />
@@ -111,18 +117,18 @@ export function Footer() { // ← no async, no await
               <li className="flex items-start gap-3">
                 <MapPinIcon className="w-5 h-5 text-[#0BAADC] shrink-0 mt-0.5" />
                 <span>
-                  123 Galle Road, Colombo 03,
+                  No 109/G, St Theresa Mawatha,
                   <br />
-                  Sri Lanka
+                  Kandana, Sri Lanka
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <PhoneIcon className="w-5 h-5 text-[#0BAADC] shrink-0" />
-                <span>+94 11 234 5678</span>
+                <a href="tel:+94774365214" className="hover:text-[#0BAADC] transition-colors">+94 77 436 5214</a>
               </li>
               <li className="flex items-center gap-3">
                 <MailIcon className="w-5 h-5 text-[#0BAADC] shrink-0" />
-                <span>hello@magicalparadise.com</span>
+                <a href="mailto:travel@magicalparadise.lk" className="hover:text-[#0BAADC] transition-colors">travel@magicalparadise.lk</a>
               </li>
             </ul>
           </div>

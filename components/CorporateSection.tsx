@@ -63,7 +63,7 @@ export function CorporateSection() {
             </div>
 
             <button
-              onClick={() => router.push("/partnership")}
+              onClick={() => router.push("/corporate")}
               className="bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_0_30px_rgba(11,170,220,0.3)] hover:shadow-[0_0_50px_rgba(11,170,220,0.5)]"
             >
               {t("cta")}

@@ -39,7 +39,7 @@ export function WhatsAppButton() {
       </AnimatePresence>
 
       <a
-        href="https://wa.me/1234567890"
+        href="https://wa.me/94774365214"
         target="_blank"
         rel="noreferrer"
         onMouseEnter={() => setIsHovered(true)}

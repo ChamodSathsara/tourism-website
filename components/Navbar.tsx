@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MenuIcon, XIcon, ChevronDownIcon, GlobeIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useLanguage, type Locale } from "../contexts/LanguageContext";
+import { usePathname } from "next/navigation";
 import logo from "../assest/logo.png";
 
 const languages: { code: Locale; flag: string; name: string }[] = [
@@ -22,7 +23,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [activePath, setActivePath] = useState("/home");
+  const activePath = usePathname();
 
   const activeLang = languages.find((l) => l.code === locale) ?? languages[0];
 
@@ -33,12 +34,14 @@ export function Navbar() {
     { name: t("experiences"), href: "/experiences" },
     { name: t("hotels"), href: "/hotels" },
     { name: t("about"), href: "/about" },
+    { name: "Corporate", href: "/corporate" },
+    { name: "Partner", href: "/partnership" },
+    { name: "Contact", href: "/contactUs" },
   ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
-    setActivePath(window.location.pathname);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -50,7 +53,7 @@ export function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
+        initial={{ y: -112, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -60,29 +63,33 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="relative h-20 lg:h-28">
             {/* Logo */}
-            <a href="/home" className="flex items-center shrink-0">
+            <a
+              href="/home"
+              aria-label="Magical Paradise home"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-2 lg:translate-y-0 z-10"
+            >
               <div className="relative h-12 w-40">
                 <Image
                   src={logo}
                   alt="Magical Paradise"
                   fill
-                  className="object-contain object-left"
+                  className="object-contain object-center"
                   priority
                 />
               </div>
             </a>
 
             {/* Desktop Nav Links */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center gap-0.5 whitespace-nowrap">
               {navLinks.map((link) => {
                 const isActive = activePath === link.href;
                 return (
                   <a
                     key={link.href}
                     href={link.href}
-                    className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 group ${
+                    className={`relative px-3 py-2 text-[13px] font-medium rounded-lg transition-all duration-200 group ${
                       isActive
                         ? "text-white"
                         : "text-white/70 hover:text-white hover:bg-white/8"
@@ -100,7 +107,7 @@ export function Navbar() {
             </div>
 
             {/* Right Controls */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex absolute right-0 top-3 items-center gap-3">
               {/* Language Switcher */}
               <div className="relative">
                 <button
@@ -153,21 +160,13 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* CTA */}
-              <a
-                href="https://wa.me/1234567890"
-                target="_blank"
-                rel="noreferrer"
-                className="px-5 py-2.5 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] hover:from-[#0d4f8a] hover:to-[#099bbf] text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(11,170,220,0.3)] hover:shadow-[0_0_30px_rgba(11,170,220,0.5)] hover:-translate-y-0.5"
-              >
-                {t("planTrip")}
-              </a>
             </div>
 
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-white rounded-lg hover:bg-white/10 transition-colors"
+              aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+              className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 p-2 text-white rounded-lg hover:bg-white/10 transition-colors"
             >
               {mobileOpen ? (
                 <XIcon className="w-6 h-6" />
@@ -246,18 +245,6 @@ export function Navbar() {
               </div>
             </motion.div>
 
-            {/* Mobile CTA */}
-            <motion.a
-              href="https://wa.me/1234567890"
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="w-full text-center px-6 py-4 bg-gradient-to-r from-[#1761A0] to-[#0BAADC] text-white font-bold rounded-full text-lg shadow-[0_0_30px_rgba(11,170,220,0.3)]"
-            >
-              {t("planTrip")}
-            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>

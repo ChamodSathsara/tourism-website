@@ -494,13 +494,13 @@ export default function RegisterWithUsPage() {
               <div className="flex flex-col gap-2.5">
                 {[
                   {
-                    href: "tel:+94000000000",
-                    text: "+94 000 000 000",
+                    href: "tel:+94774365214",
+                    text: "+94 77 436 5214",
                     d: "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.06-1.06a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z",
                   },
                   {
-                    href: "mailto:info@magicalparadise.com",
-                    text: "info@magicalparadise.com",
+                    href: "mailto:travel@magicalparadise.lk",
+                    text: "travel@magicalparadise.lk",
                     d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22,6 12,13 2,6",
                   },
                 ].map(({ href, text, d }) => (
@@ -550,7 +550,7 @@ export default function RegisterWithUsPage() {
               Call Now
             </a>
             <a
-              href="mailto:info@magicalparadise.com"
+              href="mailto:travel@magicalparadise.lk"
               className="flex items-center gap-2 px-5 py-2.5 border border-white/10 text-white/50 hover:text-white hover:border-white/20 font-semibold text-sm rounded-xl transition-colors"
             >
               Email Us
