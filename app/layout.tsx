@@ -3,6 +3,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { LanguageProvider } from "../contexts/LanguageContext";
+import SmoothScroll from "../components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Magical Paradise | Luxury Sri Lanka Travel",
@@ -19,6 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SmoothScroll />
         <NextIntlClientProvider messages={messages}>
           <LanguageProvider>{children}</LanguageProvider>
         </NextIntlClientProvider>
