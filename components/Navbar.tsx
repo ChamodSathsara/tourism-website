@@ -24,6 +24,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const activePath = usePathname();
+  const isHomePage = activePath === "/" || activePath === "/home";
 
   const activeLang = languages.find((l) => l.code === locale) ?? languages[0];
 
@@ -57,7 +58,7 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          scrolled || !isHomePage
             ? "bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
             : "bg-transparent"
         }`}
@@ -177,6 +178,13 @@ export function Navbar() {
           </div>
         </div>
       </motion.nav>
+
+      {!isHomePage && (
+        <div
+          aria-hidden="true"
+          className="h-20 lg:h-28 bg-[#060d1a]"
+        />
+      )}
 
       {/* Mobile Drawer */}
       <AnimatePresence>
